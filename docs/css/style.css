@@ -80,9 +80,12 @@ html {
 body {
     background: var(--bg-secondary);
     background-image:
-        radial-gradient(ellipse 600px 400px at 10% 20%, rgba(0, 161, 214, 0.04) 0%, transparent 70%),
-        radial-gradient(ellipse 500px 350px at 85% 60%, rgba(251, 114, 153, 0.03) 0%, transparent 70%),
-        radial-gradient(ellipse 700px 500px at 50% 90%, rgba(0, 161, 214, 0.03) 0%, transparent 70%);
+        radial-gradient(ellipse 800px 120px at 5% 15%, rgba(180, 190, 200, 0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 100px at 80% 25%, rgba(175, 185, 195, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 900px 130px at 30% 45%, rgba(185, 195, 205, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 700px 110px at 70% 60%, rgba(180, 190, 200, 0.14) 0%, transparent 70%),
+        radial-gradient(ellipse 850px 120px at 15% 75%, rgba(175, 185, 195, 0.16) 0%, transparent 70%),
+        radial-gradient(ellipse 650px 90px at 90% 85%, rgba(185, 195, 205, 0.12) 0%, transparent 70%);
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
@@ -394,9 +397,20 @@ section {
 .section-divider {
     height: 80px;
     position: relative;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    opacity: 0.35;
+    max-width: none;
+    margin: 0;
+}
+
+/* Hero-to-content transition gradient */
+.hero + .section-divider {
+    height: 120px;
+    background: linear-gradient(180deg, rgba(50, 70, 100, 0.25) 0%, rgba(100, 120, 150, 0.1) 30%, var(--bg-secondary) 100%);
+    max-width: none;
+    opacity: 1;
+}
+
+.hero + .section-divider::before {
+    display: none;
 }
 
 .section-divider::before {
@@ -433,7 +447,7 @@ section {
     left: 0;
     right: 0;
     height: 55%;
-    background: linear-gradient(180deg, rgba(100, 120, 150, 0.06) 0%, rgba(80, 100, 130, 0.18) 40%, rgba(60, 80, 110, 0.28) 100%);
+    background: linear-gradient(180deg, rgba(60, 80, 110, 0.15) 0%, rgba(40, 60, 90, 0.4) 50%, rgba(30, 50, 80, 0.55) 100%);
     clip-path: polygon(
         0% 100%,
         0% 65%, 1% 65%, 1% 30%, 2.5% 30%, 2.5% 28%, 3.5% 28%, 3.5% 55%, 4.5% 55%, 4.5% 40%, 5.5% 40%, 5.5% 20%, 7% 20%, 7% 18%, 8% 18%, 8% 45%, 9% 45%, 9% 60%,
@@ -462,7 +476,7 @@ section {
     left: 0;
     right: 0;
     height: 40%;
-    background: linear-gradient(180deg, rgba(140, 155, 175, 0.04) 0%, rgba(120, 140, 165, 0.12) 100%);
+    background: linear-gradient(180deg, rgba(80, 100, 130, 0.08) 0%, rgba(50, 70, 100, 0.25) 100%);
     clip-path: polygon(
         0% 100%,
         0% 50%, 3% 50%, 3% 35%, 6% 35%, 6% 25%, 8% 25%, 8% 40%, 11% 40%, 11% 30%, 14% 30%, 14% 20%, 16% 20%, 16% 38%,
@@ -743,7 +757,7 @@ section {
     left: 0;
     right: 0;
     height: 200px;
-    background: linear-gradient(180deg, rgba(160, 150, 135, 0.1) 0%, rgba(140, 130, 115, 0.25) 100%);
+    background: linear-gradient(180deg, rgba(120, 110, 95, 0.15) 0%, rgba(90, 80, 65, 0.4) 100%);
     clip-path: polygon(
         0% 100%,
         0% 60%, 5% 45%, 10% 55%, 15% 30%, 20% 50%, 22% 48%, 25% 20%, 30% 45%, 35% 55%,
@@ -762,13 +776,13 @@ section {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 400px 60px at 8% 20%, rgba(220, 215, 205, 0.4) 0%, transparent 70%),
-        radial-gradient(ellipse 350px 50px at 85% 15%, rgba(215, 210, 198, 0.35) 0%, transparent 70%),
-        radial-gradient(ellipse 500px 70px at 40% 45%, rgba(210, 205, 192, 0.3) 0%, transparent 70%),
-        radial-gradient(ellipse 300px 45px at 70% 55%, rgba(218, 212, 200, 0.28) 0%, transparent 70%),
-        radial-gradient(ellipse 450px 55px at 20% 70%, rgba(212, 208, 195, 0.32) 0%, transparent 70%),
-        radial-gradient(ellipse 380px 50px at 60% 80%, rgba(205, 200, 188, 0.25) 0%, transparent 70%),
-        radial-gradient(ellipse 280px 40px at 92% 65%, rgba(220, 215, 202, 0.3) 0%, transparent 70%);
+        radial-gradient(ellipse 400px 60px at 8% 20%, rgba(200, 195, 180, 0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 350px 50px at 85% 15%, rgba(195, 190, 175, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 70px at 40% 45%, rgba(190, 185, 170, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 300px 45px at 70% 55%, rgba(198, 192, 178, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 450px 55px at 20% 70%, rgba(192, 188, 172, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 380px 50px at 60% 80%, rgba(185, 180, 165, 0.38) 0%, transparent 70%),
+        radial-gradient(ellipse 280px 40px at 92% 65%, rgba(200, 195, 180, 0.42) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
     animation: mistDrift 25s ease-in-out infinite alternate;
