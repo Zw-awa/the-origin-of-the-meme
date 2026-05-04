@@ -416,7 +416,7 @@ section {
     position: relative;
     padding: var(--space-4xl) var(--space-lg);
     max-width: none;
-    background: linear-gradient(180deg, #f0f4f8 0%, var(--bg-primary) 40%, var(--bg-primary) 70%, #e8edf2 100%);
+    background: linear-gradient(180deg, #f0f4f8 0%, var(--bg-primary) 40%, var(--bg-primary) 65%, var(--bg-secondary) 100%);
     overflow: hidden;
 }
 
@@ -751,22 +751,22 @@ section {
     opacity: 0.8;
 }
 
-/* Drifting mist layers */
+/* Drifting mist layers — full area */
 #tier-system::after {
     content: '';
     position: absolute;
-    bottom: 40px;
-    left: -10%;
-    width: 120%;
-    height: 80px;
+    inset: 0;
     background:
-        radial-gradient(ellipse 300px 40px at 15% 50%, rgba(210, 205, 190, 0.5) 0%, transparent 70%),
-        radial-gradient(ellipse 250px 35px at 45% 60%, rgba(205, 200, 185, 0.4) 0%, transparent 70%),
-        radial-gradient(ellipse 350px 45px at 75% 40%, rgba(215, 208, 195, 0.45) 0%, transparent 70%),
-        radial-gradient(ellipse 200px 30px at 90% 55%, rgba(200, 195, 180, 0.35) 0%, transparent 70%);
+        radial-gradient(ellipse 400px 60px at 8% 20%, rgba(220, 215, 205, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 350px 50px at 85% 15%, rgba(215, 210, 198, 0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 70px at 40% 45%, rgba(210, 205, 192, 0.3) 0%, transparent 70%),
+        radial-gradient(ellipse 300px 45px at 70% 55%, rgba(218, 212, 200, 0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 450px 55px at 20% 70%, rgba(212, 208, 195, 0.32) 0%, transparent 70%),
+        radial-gradient(ellipse 380px 50px at 60% 80%, rgba(205, 200, 188, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 280px 40px at 92% 65%, rgba(220, 215, 202, 0.3) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
-    animation: mistDrift 20s ease-in-out infinite alternate;
+    animation: mistDrift 25s ease-in-out infinite alternate;
 }
 
 #tier-system .section-title {
