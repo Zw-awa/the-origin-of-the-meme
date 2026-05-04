@@ -11,7 +11,6 @@
 
     initNavScroll();
     initHamburger();
-    init3DTilt();
     highlightCurrentNav();
 
     function initNavScroll() {
@@ -95,36 +94,6 @@
         requestAnimationFrame(tick);
     }
 
-    function init3DTilt() {
-        var cards = document.querySelectorAll('.stat-card');
-        if (!cards.length || prefersReduced || isTouchDevice()) return;
-
-        cards.forEach(function (card) {
-            card.addEventListener('mousemove', function (e) {
-                var rect = card.getBoundingClientRect();
-                var x = (e.clientX - rect.left) / rect.width;
-                var y = (e.clientY - rect.top) / rect.height;
-                var rotateY = (x - 0.5) * 20;
-                var rotateX = (0.5 - y) * 20;
-
-                card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.05)';
-                card.style.setProperty('--mx', (x * 100) + '%');
-                card.style.setProperty('--my', (y * 100) + '%');
-            });
-
-            card.addEventListener('mouseleave', function () {
-                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
-                card.style.transition = 'transform 0.5s var(--ease-spring)';
-                card.style.setProperty('--mx', '50%');
-                card.style.setProperty('--my', '50%');
-            });
-
-            card.addEventListener('mouseenter', function () {
-                card.style.transition = 'transform 0.1s';
-            });
-        });
-    }
-
     function initTierSystem() {
         var entries = document.querySelectorAll('.tier-entry');
         if (!entries.length) return;
@@ -192,19 +161,6 @@
                 avatar.classList.add('spring-back');
                 avatar.style.transform = 'translate(0, 0)';
             });
-
-            card.addEventListener('mouseenter', function (e) {
-                card.classList.add('ripple-active');
-                var rect = card.getBoundingClientRect();
-                if (e && rect) {
-                    card.style.setProperty('--ripple-x', (e.clientX - rect.left) + 'px');
-                    card.style.setProperty('--ripple-y', (e.clientY - rect.top) + 'px');
-                }
-            });
-
-            card.addEventListener('mouseleave', function () {
-                card.classList.remove('ripple-active');
-            });
         });
     }
 
@@ -248,7 +204,6 @@
     Object.assign(window, {
         initNavScroll: initNavScroll,
         initStatCounters: initStatCounters,
-        init3DTilt: init3DTilt,
         initTierSystem: initTierSystem,
         initContributorMagnetics: initContributorMagnetics,
         initRankingHover: initRankingHover

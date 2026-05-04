@@ -12,6 +12,9 @@ CLAUDE.md
 # Project design docs (internal only, not published)
 design/
 
+# Local tools (not for git)
+tools/
+
 # Python
 __pycache__/
 *.pyc
