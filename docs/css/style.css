@@ -428,8 +428,7 @@ section {
     left: 0;
     right: 0;
     height: 220px;
-    background:
-        linear-gradient(180deg, transparent 0%, rgba(200, 210, 220, 0.15) 100%);
+    background: linear-gradient(180deg, rgba(160, 175, 195, 0.2) 0%, rgba(130, 150, 175, 0.35) 100%);
     clip-path: polygon(
         0% 100%,
         0% 85%, 2% 85%, 2% 60%, 4% 60%, 4% 70%, 5% 70%, 5% 45%, 7% 45%, 7% 70%, 8% 70%, 8% 55%, 10% 55%, 10% 75%, 11% 75%, 11% 50%, 12% 50%, 12% 35%, 14% 35%, 14% 50%, 15% 50%, 15% 65%, 17% 65%, 17% 80%,
@@ -443,7 +442,7 @@ section {
     );
     pointer-events: none;
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 /* Distant buildings layer */
@@ -454,7 +453,7 @@ section {
     left: 0;
     right: 0;
     height: 160px;
-    background: linear-gradient(180deg, transparent 0%, rgba(180, 195, 210, 0.1) 100%);
+    background: linear-gradient(180deg, rgba(180, 195, 210, 0.12) 0%, rgba(160, 175, 195, 0.25) 100%);
     clip-path: polygon(
         0% 100%,
         0% 70%, 3% 70%, 3% 55%, 6% 55%, 6% 65%, 10% 65%, 10% 50%, 13% 50%, 13% 60%, 16% 60%, 16% 75%,
@@ -467,7 +466,7 @@ section {
     );
     pointer-events: none;
     z-index: 0;
-    opacity: 0.35;
+    opacity: 0.6;
 }
 
 .hero-content {
@@ -737,7 +736,7 @@ section {
     left: 0;
     right: 0;
     height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(160, 150, 135, 0.08) 100%);
+    background: linear-gradient(180deg, rgba(160, 150, 135, 0.1) 0%, rgba(140, 130, 115, 0.25) 100%);
     clip-path: polygon(
         0% 100%,
         0% 60%, 5% 45%, 10% 55%, 15% 30%, 20% 50%, 22% 48%, 25% 20%, 30% 45%, 35% 55%,
@@ -747,7 +746,7 @@ section {
     );
     pointer-events: none;
     z-index: 0;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 /* Drifting mist layers */
@@ -759,10 +758,10 @@ section {
     width: 120%;
     height: 80px;
     background:
-        radial-gradient(ellipse 300px 40px at 15% 50%, rgba(220, 215, 200, 0.4) 0%, transparent 70%),
-        radial-gradient(ellipse 250px 35px at 45% 60%, rgba(215, 210, 195, 0.3) 0%, transparent 70%),
-        radial-gradient(ellipse 350px 45px at 75% 40%, rgba(225, 218, 205, 0.35) 0%, transparent 70%),
-        radial-gradient(ellipse 200px 30px at 90% 55%, rgba(210, 205, 190, 0.25) 0%, transparent 70%);
+        radial-gradient(ellipse 300px 40px at 15% 50%, rgba(210, 205, 190, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 250px 35px at 45% 60%, rgba(205, 200, 185, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 350px 45px at 75% 40%, rgba(215, 208, 195, 0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 200px 30px at 90% 55%, rgba(200, 195, 180, 0.35) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
     animation: mistDrift 20s ease-in-out infinite alternate;
