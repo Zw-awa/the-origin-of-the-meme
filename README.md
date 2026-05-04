@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-[English](README.en.md) | [日本語](README.ja.md) | 更多语言即将到来...
+[中文](README.md) | [English](README_EN.md) | [日本語](README_JA.md)
 
 </div>
 
@@ -108,11 +108,19 @@ the-origin-of-the-meme/
 ├── _data/
 │   ├── tiers.yaml                  # 等级阈值配置
 │   └── computed.json               # [自动生成] 排行榜、等级、贡献者数据
+├── scripts/
+│   ├── validate.py                 # PR 校验脚本
+│   ├── compute.py                  # 排行榜计算脚本
+│   └── tiers.py                    # 等级查找共享模块
 ├── docs/                           # GitHub Pages 源文件（开发中）
 ├── .github/
-│   ├── workflows/                  # GitHub Actions（开发中）
+│   ├── workflows/
+│   │   ├── validate.yml            # PR 自动校验
+│   │   └── compute.yml             # 合并后自动计算
 │   └── PULL_REQUEST_TEMPLATE.md    # PR 模板
 ├── README.md                       # 你正在看的这个
+├── README_EN.md                    # English version
+├── README_JA.md                    # 日本語版
 ├── CONTRIBUTING.md                 # 贡献指南
 └── LICENSE                         # MIT 许可证
 ```
@@ -122,10 +130,11 @@ the-origin-of-the-meme/
 - **修仙等级体系** — 用收录数量自动给梗分级，从杂役弟子到渡劫飞升
 - **贡献者称号** — 贡献越多称号越高，社区激励
 - **源数据与展示分离** — YAML 只存原始数据，排行榜和等级由 Actions 自动计算
-- **PR 自动检查** — 格式校验、查重、等级变化预览（开发中）
+- **PR 自动检查** — 格式校验、查重、等级变化预览 ✅
 - **荣誉殿堂** — 渡劫飞升级别的梗获得专属展示（开发中）
 - **GitHub Pages** — 精美的在线浏览页面（开发中）
-- **贡献者排行榜** — 自动生成，展示每位贡献者的称号和贡献数（开发中）
+- **贡献者排行榜** — 自动生成，展示每位贡献者的称号和贡献数 ✅
+- **多语言支持** — 中文 / English / 日本語
 
 ## 参与贡献
 

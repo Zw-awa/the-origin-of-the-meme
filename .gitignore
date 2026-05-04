@@ -5,12 +5,16 @@
 *.swo
 *~
 
-# Claude Code
+# AI assistants
 .claude/
 CLAUDE.md
 
 # Project design docs (internal only, not published)
 design/
+
+# Python
+__pycache__/
+*.pyc
 
 # OS
 .DS_Store

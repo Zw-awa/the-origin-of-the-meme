@@ -1,0 +1,188 @@
+#!/usr/bin/env python3
+import datetime
+import json
+import sys
+from pathlib import Path
+
+import yaml
+
+from tiers import load_tiers, lookup_tier
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+MEMES_DIR = PROJECT_ROOT / "memes"
+DATA_DIR = PROJECT_ROOT / "_data"
+TIERS_FILE = DATA_DIR / "tiers.yaml"
+OUTPUT_FILE = DATA_DIR / "computed.json"
+
+
+# Step 1: Load tiers (imported)
+
+# Step 2: Iterate all memes
+
+def parse_all_memes(memes_dir, meme_tiers):
+    """Read memes/*.yaml. Returns list of {id, submissions, tier, hall_of_fame}."""
+    yaml_files = sorted(memes_dir.glob("*.yaml"))
+    if not yaml_files:
+        print("WARNING: No .yaml files found in memes/ directory", file=sys.stderr)
+
+    top_tier_name = meme_tiers[-1]["name"]
+    memes = []
+
+    for yf in yaml_files:
+        try:
+            with open(yf, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+        except Exception as e:
+            print(f"WARNING: Skipping {yf.name} — YAML parse error: {e}", file=sys.stderr)
+            continue
+
+        if not isinstance(data, dict):
+            print(f"WARNING: Skipping {yf.name} — not a mapping", file=sys.stderr)
+            continue
+
+        meme_id = data.get("name", yf.stem)
+        videos = data.get("videos")
+        submissions = len(videos) if isinstance(videos, list) else 0
+        tier_name = lookup_tier(submissions, meme_tiers)
+
+        memes.append({
+            "id": str(meme_id),
+            "submissions": submissions,
+            "tier": tier_name,
+            "hall_of_fame": tier_name == top_tier_name,
+        })
+
+    return memes
+
+
+# ============================================================================
+# Step 3: Aggregate contributors
+# ============================================================================
+
+def aggregate_contributors(memes_dir):
+    """Count contributor occurrences across all meme videos. Returns {username: count}."""
+    yaml_files = sorted(memes_dir.glob("*.yaml"))
+    counts = {}
+
+    for yf in yaml_files:
+        try:
+            with open(yf, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+        except Exception:
+            continue
+
+        if not isinstance(data, dict):
+            continue
+
+        videos = data.get("videos")
+        if not isinstance(videos, list):
+            continue
+
+        for video in videos:
+            if isinstance(video, dict):
+                contributor = video.get("contributor")
+                if contributor is not None:
+                    username = str(contributor).strip()
+                    if username:
+                        counts[username] = counts.get(username, 0) + 1
+
+    return counts
+
+
+# ============================================================================
+# Step 4: Rankings
+# ============================================================================
+
+def compute_meme_rankings(memes):
+    """Sort by submissions desc, tiebreak by id. Assign rank 1..N in-place."""
+    memes.sort(key=lambda m: (-m["submissions"], m["id"]))
+    for i, meme in enumerate(memes):
+        meme["rank"] = i + 1
+    return memes
+
+
+def compute_contributor_rankings(counts, contributor_tiers):
+    """Sort by count desc, tiebreak by github. Assign rank and calculated title."""
+    contributors = [{"github": user, "count": cnt} for user, cnt in counts.items()]
+    contributors.sort(key=lambda c: (-c["count"], c["github"]))
+    for i, contributor in enumerate(contributors):
+        contributor["rank"] = i + 1
+        contributor["title"] = lookup_tier(contributor["count"], contributor_tiers)
+    return contributors
+
+
+# ============================================================================
+# Step 5: Compute stats
+# ============================================================================
+
+def compute_stats(memes, contributors):
+    return {
+        "total_memes": len(memes),
+        "total_videos": sum(m["submissions"] for m in memes),
+        "total_contributors": len(contributors),
+        "hall_of_fame_count": sum(1 for m in memes if m["hall_of_fame"]),
+    }
+
+
+# ============================================================================
+# Step 6: Write computed.json
+# ============================================================================
+
+def write_output(memes, contributors, stats):
+    """Serialize and write _data/computed.json."""
+    now = datetime.datetime.now(datetime.timezone.utc).strftime(
+        "%Y-%m-%dT%H:%M:%SZ"
+    )
+
+    output = {
+        "generated_at": now,
+        "memes": [
+            {"id": m["id"], "submissions": m["submissions"],
+             "tier": m["tier"], "hall_of_fame": m["hall_of_fame"],
+             "rank": m["rank"]}
+            for m in memes
+        ],
+        "contributors": [
+            {"github": c["github"], "count": c["count"],
+             "title": c["title"], "rank": c["rank"]}
+            for c in contributors
+        ],
+        "stats": stats,
+    }
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+
+# ============================================================================
+# Step 7: Print summary
+# ============================================================================
+
+def print_summary(stats):
+    print("\u2705 computed.json generated successfully")
+    print(f"   Memes: {stats['total_memes']}")
+    print(f"   Videos: {stats['total_videos']}")
+    print(f"   Contributors: {stats['total_contributors']}")
+    print(f"   Hall of Fame: {stats['hall_of_fame_count']}")
+
+
+# ============================================================================
+# Main
+# ============================================================================
+
+def main():
+    meme_tiers, contributor_tiers = load_tiers(TIERS_FILE)
+    memes = parse_all_memes(MEMES_DIR, meme_tiers)
+    contributor_counts = aggregate_contributors(MEMES_DIR)
+    memes = compute_meme_rankings(memes)
+    contributors = compute_contributor_rankings(contributor_counts, contributor_tiers)
+    stats = compute_stats(memes, contributors)
+    write_output(memes, contributors, stats)
+    print_summary(stats)
+
+
+if __name__ == "__main__":
+    main()

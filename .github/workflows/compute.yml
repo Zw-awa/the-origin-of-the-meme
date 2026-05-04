@@ -1,0 +1,33 @@
+name: Compute Rankings
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'memes/**'
+      - '_data/tiers.yaml'
+
+permissions:
+  contents: write
+
+jobs:
+  compute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Compute rankings
+        run: python scripts/compute.py
+
+      - name: Commit computed.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update computed.json [skip ci]"
+          file_pattern: "_data/computed.json"
