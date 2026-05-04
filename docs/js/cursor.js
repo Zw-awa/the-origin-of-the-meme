@@ -26,9 +26,22 @@
     var isHovering = false;
     var hoverableSelector = 'a, button, .stat-card, .ranking-card, .meme-card, .contributor-card, .hof-card, .tier-entry, .btn-neon, .btn-muted, .tag-filter, .video-card, .search-input, .nav-hamburger';
     var lastTrailTime = 0;
-    var trailThrottle = 16;
+    var trailThrottle = 30;
 
     var BURST_COLORS = ['#00f0ff', '#8b5cf6', '#ff3366', '#ffd700', '#00ff88', '#ff00aa'];
+
+    var POOL_SIZE = 20;
+    var trailPool = [];
+    var trailIndex = 0;
+    for (var p = 0; p < POOL_SIZE; p++) {
+        var el = document.createElement('div');
+        el.className = 'trail-particle';
+        el.style.width = '4px';
+        el.style.height = '4px';
+        el.style.display = 'none';
+        document.body.appendChild(el);
+        trailPool.push(el);
+    }
 
     document.addEventListener('mousemove', function (e) {
         mouseX = e.clientX;
@@ -66,22 +79,18 @@
         if (now - lastTrailTime < trailThrottle) return;
         lastTrailTime = now;
 
-        var particle = document.createElement('div');
-        particle.className = 'trail-particle';
+        var particle = trailPool[trailIndex];
+        trailIndex = (trailIndex + 1) % POOL_SIZE;
         var hue = (now / 10) % 360;
-        particle.style.width = '4px';
-        particle.style.height = '4px';
-        particle.style.background = 'hsl(' + hue + ', 100%, 70%)';
+        var color = 'hsl(' + hue + ', 100%, 70%)';
+        particle.style.background = color;
+        particle.style.boxShadow = '0 0 6px ' + color;
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
-        particle.style.boxShadow = '0 0 6px hsl(' + hue + ', 100%, 70%)';
-        document.body.appendChild(particle);
-
-        setTimeout(function () {
-            if (particle.parentNode) {
-                particle.parentNode.removeChild(particle);
-            }
-        }, 650);
+        particle.style.display = '';
+        particle.style.animation = 'none';
+        particle.offsetHeight;
+        particle.style.animation = '';
     }
 
     function createClickBurst(x, y) {
@@ -90,9 +99,9 @@
         container.style.left = x + 'px';
         container.style.top = y + 'px';
 
-        for (var i = 0; i < 12; i++) {
-            var angle = (i / 12) * Math.PI * 2;
-            var distance = 30 + Math.random() * 40;
+        for (var i = 0; i < 8; i++) {
+            var angle = (i / 8) * Math.PI * 2;
+            var distance = 25 + Math.random() * 30;
             var tx = Math.cos(angle) * distance;
             var ty = Math.sin(angle) * distance;
 
