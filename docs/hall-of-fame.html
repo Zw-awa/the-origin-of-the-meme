@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>荣誉殿堂 | 万恶之源</title>
+    <title data-i18n="pageTitle.hall">荣誉殿堂 | 万恶之源</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -15,25 +15,50 @@
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="memes.html">排行</a></li>
-                <li><a href="index.html#tier-system">等级体系</a></li>
-                <li><a href="hall-of-fame.html">荣誉殿堂</a></li>
-                <li><a href="contributors.html">贡献者</a></li>
+                <li><a href="memes.html" data-i18n="nav.memes">排行</a></li>
+                <li><a href="index.html#tier-system" data-i18n="nav.tiers">等级体系</a></li>
+                <li><a href="hall-of-fame.html" data-i18n="nav.hall">荣誉殿堂</a></li>
+                <li><a href="contributors.html" data-i18n="nav.contributors">贡献者</a></li>
                 <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" class="nav-github" target="_blank" rel="noopener">GitHub</a></li>
+                <li class="nav-lang-group">
+                    <button class="nav-lang-btn" data-lang="zh" onclick="switchLang('zh')" title="中文">中</button>
+                    <button class="nav-lang-btn" data-lang="en" onclick="switchLang('en')" title="English">EN</button>
+                    <button class="nav-lang-btn" data-lang="ja" onclick="switchLang('ja')" title="日本語">日</button>
+                </li>
             </ul>
         </div>
     </nav>
 
+    <div class="hof-bg-particles" aria-hidden="true">
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+        <span class="hof-particle"></span>
+    </div>
+
     <div class="hall-of-fame-hero">
-        <h1 class="hall-of-fame-title">荣誉殿堂</h1>
-        <p class="hall-of-fame-subtitle">渡劫飞升, B站永远的传说</p>
+        <div class="hof-hero-glow"></div>
+        <h1 class="hall-of-fame-title" data-i18n="hall_page.title">荣誉殿堂</h1>
+        <p class="hall-of-fame-subheading" data-i18n="hall_page.subheading">B 站 永 远 的 传 说</p>
+        <p class="hall-of-fame-subtitle" data-i18n="hall_page.subtitle">收录所有达到「渡劫飞升」境界的万恶之源</p>
     </div>
 
     <div class="hall-of-fame-grid" id="hof-container">
         <div class="empty-state">
             <div class="empty-state-icon">&#9813;</div>
-            <p class="empty-state-text">还没有梗达到渡劫飞升, 快来贡献吧!</p>
-            <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="empty-state-action" target="_blank" rel="noopener">参与贡献</a>
+            <p class="empty-state-text" data-i18n="hall_page.empty">还没有梗达到渡劫飞升, 快来贡献吧!</p>
+            <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="empty-state-action" target="_blank" rel="noopener" data-i18n="hall_page.cta">参与贡献</a>
         </div>
     </div>
 
@@ -48,62 +73,68 @@
         </div>
         <div class="footer-inner">
             <div class="footer-col">
-                <h3>项目链接</h3>
+                <h3 data-i18n="footer.links">项目链接</h3>
                 <ul>
-                    <li><a href="memes.html">梗列表</a></li>
-                    <li><a href="hall-of-fame.html">荣誉殿堂</a></li>
-                    <li><a href="contributors.html">贡献者排行</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="memes.html" data-i18n="footer.memes">梗列表</a></li>
+                    <li><a href="hall-of-fame.html" data-i18n="footer.hall">荣誉殿堂</a></li>
+                    <li><a href="contributors.html" data-i18n="footer.contributors">贡献者排行</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener" data-i18n="footer.github">GitHub</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>相关资源</h3>
+                <h3 data-i18n="footer.resources">相关资源</h3>
                 <ul>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">贡献指南</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/issues" target="_blank" rel="noopener">问题反馈</a></li>
-                    <li><a href="https://www.bilibili.com" target="_blank" rel="noopener">Bilibili</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" data-i18n="footer.guide">贡献指南</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/issues" target="_blank" rel="noopener" data-i18n="footer.issues">问题反馈</a></li>
+                    <li><a href="https://www.bilibili.com" target="_blank" rel="noopener" data-i18n="footer.bilibili">Bilibili</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>关于</h3>
+                <h3 data-i18n="footer.about">关于</h3>
                 <ul>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme#%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88" target="_blank" rel="noopener">项目介绍</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme#%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88" target="_blank" rel="noopener" data-i18n="footer.intro">项目介绍</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">MIT License</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-disclaimer">
+        <div class="footer-disclaimer" data-i18n="footer.disclaimer">
             本索引中的所有链接及元数据均为公开信息的整理与索引。所有视频、音频及相关素材的版权归原作者及哔哩哔哩(bilibili.com)所有。本项目仅提供索引服务, 不进行任何形式的内容存储、复制或分发。
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="js/data.js"></script>
     <script src="js/cursor.js"></script>
     <script>
     (function () {
-        loadData().then(function (data) {
+        loadFullData().then(function (data) {
             var hofMemes = getHallOfFameMemes(data);
             var container = document.getElementById('hof-container');
 
             if (hofMemes.length === 0) return;
 
             container.innerHTML = '';
-            hofMemes.forEach(function (meme) {
+            hofMemes.forEach(function (meme, index) {
                 var card = document.createElement('div');
                 card.className = 'hof-card';
+                card.style.setProperty('--card-index', index);
+
+                var submissionsVal = meme.submissions || 0;
+                var rankVal = meme.rank || 0;
+
                 card.innerHTML =
-                    '<div class="hof-card-crown">&#9813;</div>' +
+                    '<div class="hof-card-crown" style="animation-delay:' + (index * 0.15 + 0.2) + 's">&#9813;</div>' +
                     '<div class="hof-card-name">' + escapeHtml(meme.id) + '</div>' +
                     '<div class="meme-detail-tier" style="margin-bottom:12px">' + buildTierBadge(meme.tier) + '</div>' +
                     (meme.description ? '<div class="hof-card-desc">' + escapeHtml(meme.description) + '</div>' : '') +
                     '<div class="hof-card-stats">' +
                         '<div class="hof-stat">' +
-                            '<div class="hof-stat-value">' + formatNumber(meme.submissions) + '</div>' +
-                            '<div class="hof-stat-label">收录视频</div>' +
+                            '<div class="hof-stat-value" data-target="' + submissionsVal + '">0</div>' +
+                            '<div class="hof-stat-label">' + t('hall_page.videos') + '</div>' +
                         '</div>' +
                         '<div class="hof-stat">' +
-                            '<div class="hof-stat-value">#' + meme.rank + '</div>' +
-                            '<div class="hof-stat-label">排名</div>' +
+                            '<div class="hof-stat-value" data-target="' + rankVal + '" data-prefix="#">0</div>' +
+                            '<div class="hof-stat-label">' + t('hall_page.rank') + '</div>' +
                         '</div>' +
                     '</div>';
                 card.style.cursor = 'pointer';
@@ -112,6 +143,40 @@
                 });
                 container.appendChild(card);
             });
+
+            // Count-up animation via IntersectionObserver
+            var statValues = container.querySelectorAll('.hof-stat-value[data-target]');
+            if (statValues.length > 0 && 'IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        var el = entry.target;
+                        var target = parseInt(el.getAttribute('data-target'), 10);
+                        var prefix = el.getAttribute('data-prefix') || '';
+                        var duration = 1200;
+                        var startTime = null;
+
+                        function step(timestamp) {
+                            if (!startTime) startTime = timestamp;
+                            var progress = Math.min((timestamp - startTime) / duration, 1);
+                            // ease-out-expo
+                            var eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                            var current = Math.round(eased * target);
+                            el.textContent = prefix + current;
+                            if (progress < 1) {
+                                requestAnimationFrame(step);
+                            } else {
+                                el.textContent = prefix + formatNumber(target);
+                            }
+                        }
+
+                        requestAnimationFrame(step);
+                        observer.unobserve(el);
+                    });
+                }, { threshold: 0.5 });
+
+                statValues.forEach(function (el) { observer.observe(el); });
+            }
         });
     })();
     </script>

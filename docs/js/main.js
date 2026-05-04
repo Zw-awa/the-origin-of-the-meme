@@ -5,6 +5,10 @@
 (function () {
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    function isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    }
+
     initNavScroll();
     initHamburger();
     init3DTilt();
@@ -93,7 +97,7 @@
 
     function init3DTilt() {
         var cards = document.querySelectorAll('.stat-card');
-        if (!cards.length || prefersReduced) return;
+        if (!cards.length || prefersReduced || isTouchDevice()) return;
 
         cards.forEach(function (card) {
             card.addEventListener('mousemove', function (e) {
@@ -139,11 +143,7 @@
 
                     if (indicator) indicator.classList.add('lit');
                     if (bar && targetWidth) {
-                        if (prefersReduced) {
-                            bar.style.width = targetWidth + '%';
-                        } else {
-                            bar.style.width = targetWidth + '%';
-                        }
+                bar.style.width = targetWidth + '%';
                     }
 
                     entry.querySelectorAll('.tier-name, .tier-range, .tier-label').forEach(function (el) {
@@ -170,7 +170,7 @@
 
     function initContributorMagnetics() {
         var cards = document.querySelectorAll('.contributor-card');
-        if (!cards.length || prefersReduced) return;
+        if (!cards.length || prefersReduced || isTouchDevice()) return;
 
         cards.forEach(function (card) {
             var avatar = card.querySelector('.contributor-avatar');
@@ -196,7 +196,6 @@
             card.addEventListener('mouseenter', function (e) {
                 card.classList.add('ripple-active');
                 var rect = card.getBoundingClientRect();
-                var ripple = card.querySelector('::after');
                 if (e && rect) {
                     card.style.setProperty('--ripple-x', (e.clientX - rect.left) + 'px');
                     card.style.setProperty('--ripple-y', (e.clientY - rect.top) + 'px');
@@ -240,7 +239,7 @@
                 link.classList.add('active');
             }
 
-            if (href.indexOf(pageName) > -1 && pageName !== 'index.html') {
+            if (pageName !== 'index.html' && (href === pageName || href.startsWith(pageName + '#'))) {
                 link.classList.add('active');
             }
         });

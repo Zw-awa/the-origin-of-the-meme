@@ -76,9 +76,17 @@ body {
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
-    cursor: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.js-loaded body {
+    cursor: none;
+}
+
+.js-loaded .cursor-dot,
+.js-loaded .cursor-ring {
+    display: block;
 }
 
 a {
@@ -94,9 +102,21 @@ img {
 button {
     border: none;
     background: none;
-    cursor: none;
     font-family: inherit;
     color: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+.hof-card:focus-visible,
+.ranking-card:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 3px;
 }
 
 /* ── Typography ────────────────────────────────────────────── */
@@ -256,6 +276,29 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
 }
 
+/* Language Switcher */
+.nav-lang-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: var(--space-md);
+    padding-left: var(--space-md);
+    border-left: 1px solid var(--border);
+}
+.nav-lang-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+.nav-lang-btn:hover { color: var(--neon-cyan); }
+.nav-lang-btn.active { color: var(--neon-cyan); border-color: rgba(0, 240, 255, 0.3); }
+
 /* Hamburger */
 .nav-hamburger {
     display: none;
@@ -264,7 +307,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 4px;
     background: none;
     border: none;
-    cursor: none;
     z-index: 1001;
 }
 
@@ -1542,10 +1584,124 @@ section {
 }
 
 /* ── Hall of Fame Page ──────────────────────────────────────── */
+
+/* ── Background Particles (仙气 floating gold) ─────────────── */
+.hof-bg-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hof-particle {
+    position: absolute;
+    bottom: -10px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--neon-gold);
+    opacity: 0;
+    animation: hofParticleDrift var(--drift-dur, 10s) var(--drift-delay, 0s) ease-in-out infinite;
+}
+
+.hof-particle:nth-child(1)  { left: 5%;  --drift-dur: 12s; --drift-delay: 0s; }
+.hof-particle:nth-child(2)  { left: 10%; --drift-dur: 9s;  --drift-delay: 1s; width: 2px; height: 2px; }
+.hof-particle:nth-child(3)  { left: 18%; --drift-dur: 14s; --drift-delay: 3s; }
+.hof-particle:nth-child(4)  { left: 25%; --drift-dur: 8s;  --drift-delay: 0.5s; width: 4px; height: 4px; }
+.hof-particle:nth-child(5)  { left: 33%; --drift-dur: 11s; --drift-delay: 2s; }
+.hof-particle:nth-child(6)  { left: 42%; --drift-dur: 15s; --drift-delay: 4s; width: 2px; height: 2px; }
+.hof-particle:nth-child(7)  { left: 50%; --drift-dur: 10s; --drift-delay: 1.5s; }
+.hof-particle:nth-child(8)  { left: 58%; --drift-dur: 13s; --drift-delay: 0s; width: 3px; height: 3px; }
+.hof-particle:nth-child(9)  { left: 67%; --drift-dur: 9s;  --drift-delay: 3.5s; }
+.hof-particle:nth-child(10) { left: 75%; --drift-dur: 12s; --drift-delay: 2s; width: 2px; height: 2px; }
+.hof-particle:nth-child(11) { left: 82%; --drift-dur: 8s;  --drift-delay: 0.8s; }
+.hof-particle:nth-child(12) { left: 88%; --drift-dur: 14s; --drift-delay: 5s; width: 4px; height: 4px; }
+.hof-particle:nth-child(13) { left: 93%; --drift-dur: 11s; --drift-delay: 2.5s; }
+.hof-particle:nth-child(14) { left: 97%; --drift-dur: 10s; --drift-delay: 6s; width: 2px; height: 2px; }
+.hof-particle:nth-child(15) { left: 15%; --drift-dur: 16s; --drift-delay: 7s; }
+
+@keyframes hofParticleDrift {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+    }
+    10% {
+        opacity: 0.25;
+    }
+    50% {
+        transform: translateY(-40vh) translateX(15px);
+    }
+    90% {
+        opacity: 0.15;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-90vh) translateX(-10px);
+    }
+}
+
+/* ── Hero Section ──────────────────────────────────────────── */
 .hall-of-fame-hero {
     text-align: center;
     padding-top: calc(var(--nav-height) + var(--space-4xl));
     margin-bottom: var(--space-2xl);
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero sparkle pseudo-elements */
+.hall-of-fame-hero::before,
+.hall-of-fame-hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: var(--neon-gold);
+    pointer-events: none;
+    opacity: 0;
+    animation: heroSparkle 3s ease-in-out infinite;
+}
+
+.hall-of-fame-hero::before {
+    width: 4px;
+    height: 4px;
+    top: 20%;
+    left: 30%;
+    animation-delay: 0s;
+}
+
+.hall-of-fame-hero::after {
+    width: 3px;
+    height: 3px;
+    top: 40%;
+    right: 28%;
+    animation-delay: 1.5s;
+}
+
+@keyframes heroSparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    20% { opacity: 0.6; }
+    50% { opacity: 0.8; transform: scale(1.5); }
+    80% { opacity: 0.2; }
+}
+
+/* Radial golden glow behind title */
+.hof-hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(500px, 70vw);
+    height: min(500px, 70vw);
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, rgba(255, 170, 0, 0.03) 30%, transparent 60%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: heroGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes heroGlowPulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
 }
 
 .hall-of-fame-title {
@@ -1558,6 +1714,9 @@ section {
     background-clip: text;
     background-size: 200% 200%;
     animation: goldShimmer 4s ease-in-out infinite;
+    text-shadow: none;
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes goldShimmer {
@@ -1565,12 +1724,31 @@ section {
     50% { background-position: 100% 50%; }
 }
 
+/* Title glow overlay via drop-shadow filter */
+.hall-of-fame-title {
+    filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.25));
+}
+
+.hall-of-fame-subheading {
+    font-family: var(--font-heading);
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    color: rgba(255, 215, 0, 0.55);
+    margin-top: var(--space-sm);
+    position: relative;
+    z-index: 2;
+}
+
 .hall-of-fame-subtitle {
     font-size: 18px;
     color: var(--text-muted);
     margin-top: var(--space-md);
+    position: relative;
+    z-index: 2;
 }
 
+/* ── Grid ──────────────────────────────────────────────────── */
 .hall-of-fame-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -1578,8 +1756,11 @@ section {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-lg) var(--space-4xl);
+    position: relative;
+    z-index: 1;
 }
 
+/* ── Card ──────────────────────────────────────────────────── */
 .hof-card {
     background: var(--bg-card);
     border: 1px solid rgba(255, 215, 0, 0.15);
@@ -1588,28 +1769,80 @@ section {
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s var(--ease-out-expo), border-color 0.4s, box-shadow 0.4s;
+    opacity: 0;
+    animation: hofCardEntry 0.6s var(--ease-out-expo) forwards;
+    animation-delay: calc(var(--card-index, 0) * 0.1s);
 }
 
+@keyframes hofCardEntry {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+        filter: blur(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Card pulse glow */
+.hof-card {
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+    animation:
+        hofCardEntry 0.6s var(--ease-out-expo) forwards,
+        hofCardPulse 3s ease-in-out infinite;
+    animation-delay: calc(var(--card-index, 0) * 0.1s), calc(var(--card-index, 0) * 0.1s + 0.6s);
+}
+
+@keyframes hofCardPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.06); }
+    50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.12); }
+}
+
+/* Gold radial gradient from top, extending further down */
 .hof-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.05), transparent 60%);
+    background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.07) 0%, rgba(255, 170, 0, 0.03) 40%, transparent 70%);
     pointer-events: none;
+    transition: opacity 0.4s;
+}
+
+.hof-card:hover::before {
+    opacity: 1.5;
 }
 
 .hof-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--neon-gold);
-    box-shadow: 0 12px 40px rgba(255, 215, 0, 0.1);
+    transform: translateY(-8px);
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow:
+        0 0 25px rgba(255, 215, 0, 0.15),
+        0 12px 40px rgba(255, 215, 0, 0.08);
 }
 
+/* ── Crown ─────────────────────────────────────────────────── */
 .hof-card-crown {
+    display: inline-block;
     font-size: 48px;
     margin-bottom: var(--space-md);
+    background: linear-gradient(180deg, #ffe680 0%, var(--neon-gold) 40%, #cc8800 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.5));
+    animation: crownFloat 2s ease-in-out infinite;
 }
 
+@keyframes crownFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* ── Card Name ─────────────────────────────────────────────── */
 .hof-card-name {
     font-family: var(--font-heading);
     font-size: 24px;
@@ -1625,6 +1858,7 @@ section {
     line-height: 1.6;
 }
 
+/* ── Stats ─────────────────────────────────────────────────── */
 .hof-card-stats {
     display: flex;
     justify-content: center;
@@ -1640,6 +1874,11 @@ section {
     font-size: 28px;
     font-weight: 700;
     color: var(--neon-gold);
+    transition: text-shadow 0.3s;
+}
+
+.hof-stat:hover .hof-stat-value {
+    text-shadow: 0 0 16px rgba(255, 215, 0, 0.4);
 }
 
 .hof-stat-label {
@@ -1647,6 +1886,25 @@ section {
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+
+/* ── Empty State Enhancement ────────────────────────────────── */
+.hall-of-fame-grid .empty-state-icon {
+    display: inline-block;
+    font-size: 48px;
+    margin-bottom: var(--space-md);
+    opacity: 0.5;
+    background: linear-gradient(180deg, #ffe680, var(--neon-gold), #cc8800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+    animation: emptyStateGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes emptyStateGlow {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)); }
 }
 
 /* ── Contributors Page ──────────────────────────────────────── */
@@ -1768,6 +2026,12 @@ section {
         padding: var(--space-lg);
         gap: var(--space-md);
         border-bottom: 1px solid var(--border);
+    }
+
+    .nav-lang-group {
+        margin-left: auto;
+        padding-left: 0;
+        border-left: none;
     }
 
     .nav-hamburger {

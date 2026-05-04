@@ -112,7 +112,7 @@ the-origin-of-the-meme/
 │   ├── validate.py                 # PR 校验脚本
 │   ├── compute.py                  # 排行榜计算脚本
 │   └── tiers.py                    # 等级查找共享模块
-├── docs/                           # GitHub Pages 源文件（开发中）
+├── docs/                           # GitHub Pages 源文件 ✅
 ├── .github/
 │   ├── workflows/
 │   │   ├── validate.yml            # PR 自动校验
@@ -131,8 +131,8 @@ the-origin-of-the-meme/
 - **贡献者称号** — 贡献越多称号越高，社区激励
 - **源数据与展示分离** — YAML 只存原始数据，排行榜和等级由 Actions 自动计算
 - **PR 自动检查** — 格式校验、查重、等级变化预览 ✅
-- **荣誉殿堂** — 渡劫飞升级别的梗获得专属展示（开发中）
-- **GitHub Pages** — 精美的在线浏览页面（开发中）
+- **荣誉殿堂** — 渡劫飞升级别的梗获得专属展示，金色仙气主题 ✅
+- **GitHub Pages** — 精美的在线浏览页面 ✅
 - **贡献者排行榜** — 自动生成，展示每位贡献者的称号和贡献数 ✅
 - **多语言支持** — 中文 / English / 日本語
 

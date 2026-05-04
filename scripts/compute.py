@@ -35,7 +35,7 @@ def parse_all_memes(memes_dir, meme_tiers):
         try:
             with open(yf, "r", encoding="utf-8") as f:
                 data = yaml.safe_load(f)
-        except Exception as e:
+        except (yaml.YAMLError, OSError, ValueError) as e:
             print(f"WARNING: Skipping {yf.name} — YAML parse error: {e}", file=sys.stderr)
             continue
 
@@ -71,7 +71,7 @@ def aggregate_contributors(memes_dir):
         try:
             with open(yf, "r", encoding="utf-8") as f:
                 data = yaml.safe_load(f)
-        except Exception:
+        except (yaml.YAMLError, OSError, ValueError):
             continue
 
         if not isinstance(data, dict):
@@ -84,8 +84,8 @@ def aggregate_contributors(memes_dir):
         for video in videos:
             if isinstance(video, dict):
                 contributor = video.get("contributor")
-                if contributor is not None:
-                    username = str(contributor).strip()
+                if isinstance(contributor, str):
+                    username = contributor.strip()
                     if username:
                         counts[username] = counts.get(username, 0) + 1
 
@@ -175,12 +175,12 @@ def build_full_memes(memes_dir, memes):
         try:
             with open(yf, "r", encoding="utf-8") as f:
                 raw = yaml.safe_load(f)
-        except Exception:
+        except (yaml.YAMLError, OSError, ValueError):
             continue
         if not isinstance(raw, dict):
             continue
 
-        meme_id = raw.get("name", yf.stem)
+        meme_id = str(raw.get("name", yf.stem))
         computed = lookup.get(meme_id, {})
 
         full.append({
@@ -239,7 +239,17 @@ def print_summary(stats):
 # ============================================================================
 
 def main():
+    try:
+        _main()
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
+
+def _main():
     meme_tiers, contributor_tiers = load_tiers(TIERS_FILE)
+    # NOTE: YAML files are parsed 3 times (meme list, contributor counts, full data).
+    # Acceptable at current scale (< 100 memes); refactor to single-pass if the
+    # dataset grows significantly.
     memes = parse_all_memes(MEMES_DIR, meme_tiers)
     contributor_counts = aggregate_contributors(MEMES_DIR)
     memes = compute_meme_rankings(memes)

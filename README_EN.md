@@ -112,7 +112,7 @@ the-origin-of-the-meme/
 │   ├── validate.py                 # PR format validation
 │   ├── compute.py                  # Tier & ranking computation
 │   └── tiers.py                    # Tier logic helpers
-├── docs/                           # GitHub Pages source (in development)
+├── docs/                           # GitHub Pages source ✅
 ├── .github/
 │   ├── workflows/                  # GitHub Actions CI
 │   │   ├── validate.yml            # PR checks (format validation, dedup, tier preview)
@@ -131,8 +131,8 @@ the-origin-of-the-meme/
 - **Contributor Titles** — The more you contribute, the higher your title. Built-in community motivation
 - **Data / Display Separation** — YAML files store raw data only; rankings and tiers are computed automatically by GitHub Actions
 - **Automated PR Checks** — Format validation, duplicate detection, and tier-change previews run on every pull request ✅
-- **Hall of Honor** — Memes at 渡劫飞升 (Tribulation Transcendence) tier get a dedicated showcase page (in development)
-- **GitHub Pages** — A polished browsing experience on the web (in development)
+- **Hall of Honor** — Memes at 渡劫飞升 (Tribulation Transcendence) tier get a dedicated showcase page ✅
+- **GitHub Pages** — A polished browsing experience on the web ✅
 - **Contributor Leaderboard** — Auto-generated, showing every contributor's title and contribution count ✅
 - **Multilingual Support** — 中文 / English / 日本語
 

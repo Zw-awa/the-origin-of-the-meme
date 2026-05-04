@@ -3,7 +3,8 @@
    ═══════════════════════════════════════════════════════════════ */
 
 (function () {
-    var isMobile = window.matchMedia('(max-width: 640px)').matches;
+    var isMobile = window.matchMedia('(max-width: 640px)').matches ||
+                   ('ontouchstart' in window || navigator.maxTouchPoints > 0);
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (isMobile || prefersReduced) return;
@@ -47,24 +48,14 @@
 
     document.addEventListener('mouseout', function (e) {
         var target = e.target;
-        if (target.closest(hoverableSelector) && !target.closest(hoverableSelector + ':hover')) {
-            isHovering = false;
-            ring.classList.remove('hover');
-        }
-    });
-
-    var hoverCheck = setInterval(function () {
-        var el = document.elementFromPoint(mouseX, mouseY);
-        var shouldHover = el && el.closest(hoverableSelector);
-        if (shouldHover !== isHovering) {
-            isHovering = shouldHover;
-            if (isHovering) {
-                ring.classList.add('hover');
-            } else {
+        if (target.closest(hoverableSelector)) {
+            var related = e.relatedTarget;
+            if (!related || !related.closest(hoverableSelector)) {
+                isHovering = false;
                 ring.classList.remove('hover');
             }
         }
-    }, 100);
+    });
 
     document.addEventListener('click', function (e) {
         createClickBurst(e.clientX, e.clientY);
@@ -133,11 +124,11 @@
     animateRing();
 
     window.addEventListener('resize', function () {
-        if (window.matchMedia('(max-width: 640px)').matches) {
+        if (window.matchMedia('(max-width: 640px)').matches ||
+            ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
             if (dot.parentNode) dot.parentNode.removeChild(dot);
             if (ring.parentNode) ring.parentNode.removeChild(ring);
             document.body.style.cursor = '';
-            clearInterval(hoverCheck);
             cursorActive = false;
         } else if (!cursorActive) {
             cursorActive = true;
@@ -146,18 +137,6 @@
             ringX = mouseX;
             ringY = mouseY;
             animateRing();
-            hoverCheck = setInterval(function () {
-                var el = document.elementFromPoint(mouseX, mouseY);
-                var shouldHover = el && el.closest(hoverableSelector);
-                if (shouldHover !== isHovering) {
-                    isHovering = shouldHover;
-                    if (isHovering) {
-                        ring.classList.add('hover');
-                    } else {
-                        ring.classList.remove('hover');
-                    }
-                }
-            }, 100);
         }
     });
 
@@ -166,4 +145,6 @@
         _cursorRing: ring,
         _hoverableSelector: hoverableSelector
     });
+
+    document.documentElement.classList.add('js-loaded');
 })();

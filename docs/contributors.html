@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>贡献者排行 | 万恶之源</title>
+    <title data-i18n="pageTitle.contributors">贡献者排行 | 万恶之源</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -15,25 +15,30 @@
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="memes.html">排行</a></li>
-                <li><a href="index.html#tier-system">等级体系</a></li>
-                <li><a href="hall-of-fame.html">荣誉殿堂</a></li>
-                <li><a href="contributors.html" class="active">贡献者</a></li>
+                <li><a href="memes.html" data-i18n="nav.memes">排行</a></li>
+                <li><a href="index.html#tier-system" data-i18n="nav.tiers">等级体系</a></li>
+                <li><a href="hall-of-fame.html" data-i18n="nav.hall">荣誉殿堂</a></li>
+                <li><a href="contributors.html" class="active" data-i18n="nav.contributors">贡献者</a></li>
                 <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" class="nav-github" target="_blank" rel="noopener">GitHub</a></li>
+                <li class="nav-lang-group">
+                    <button class="nav-lang-btn" data-lang="zh" onclick="switchLang('zh')" title="中文">中</button>
+                    <button class="nav-lang-btn" data-lang="en" onclick="switchLang('en')" title="English">EN</button>
+                    <button class="nav-lang-btn" data-lang="ja" onclick="switchLang('ja')" title="日本語">日</button>
+                </li>
             </ul>
         </div>
     </nav>
 
     <div class="contributors-page-header">
-        <h1 class="section-title gradient-pink">贡献者排行榜</h1>
-        <p class="section-subtitle">每一位贡献者都在为B站梗文化添砖加瓦, 贡献越多称号越高</p>
+        <h1 class="section-title gradient-pink" data-i18n="contributors_page.title">贡献者排行榜</h1>
+        <p class="section-subtitle" data-i18n="contributors_page.subtitle">每一位贡献者都在为B站梗文化添砖加瓦, 贡献越多称号越高</p>
     </div>
 
     <div class="contributors-page-grid" id="contributors-page-container">
         <div class="empty-state">
             <div class="empty-state-icon">&#9733;</div>
-            <p class="empty-state-text">还没有贡献者, 来成为第一个吧!</p>
-            <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="empty-state-action" target="_blank" rel="noopener">参与贡献</a>
+            <p class="empty-state-text" data-i18n="contributors_page.empty">还没有贡献者, 来成为第一个吧!</p>
+            <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="empty-state-action" target="_blank" rel="noopener" data-i18n="contributors_page.contribute">参与贡献</a>
         </div>
     </div>
 
@@ -48,35 +53,36 @@
         </div>
         <div class="footer-inner">
             <div class="footer-col">
-                <h3>项目链接</h3>
+                <h3 data-i18n="footer.links">项目链接</h3>
                 <ul>
-                    <li><a href="memes.html">梗列表</a></li>
-                    <li><a href="hall-of-fame.html">荣誉殿堂</a></li>
-                    <li><a href="contributors.html">贡献者排行</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="memes.html" data-i18n="footer.memes">梗列表</a></li>
+                    <li><a href="hall-of-fame.html" data-i18n="footer.hall">荣誉殿堂</a></li>
+                    <li><a href="contributors.html" data-i18n="footer.contributors">贡献者排行</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener" data-i18n="footer.github">GitHub</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>相关资源</h3>
+                <h3 data-i18n="footer.resources">相关资源</h3>
                 <ul>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">贡献指南</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/issues" target="_blank" rel="noopener">问题反馈</a></li>
-                    <li><a href="https://www.bilibili.com" target="_blank" rel="noopener">Bilibili</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" data-i18n="footer.guide">贡献指南</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/issues" target="_blank" rel="noopener" data-i18n="footer.issues">问题反馈</a></li>
+                    <li><a href="https://www.bilibili.com" target="_blank" rel="noopener" data-i18n="footer.bilibili">Bilibili</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>关于</h3>
+                <h3 data-i18n="footer.about">关于</h3>
                 <ul>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme#%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88" target="_blank" rel="noopener">项目介绍</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme#%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88" target="_blank" rel="noopener" data-i18n="footer.intro">项目介绍</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">MIT License</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-disclaimer">
+        <div class="footer-disclaimer" data-i18n="footer.disclaimer">
             本索引中的所有链接及元数据均为公开信息的整理与索引。所有视频、音频及相关素材的版权归原作者及哔哩哔哩(bilibili.com)所有。本项目仅提供索引服务, 不进行任何形式的内容存储、复制或分发。
         </div>
     </footer>
 
+    <script src="js/i18n.js"></script>
     <script src="js/data.js"></script>
     <script src="js/cursor.js"></script>
     <script>
@@ -96,7 +102,7 @@
                     '<img class="contributor-avatar" src="https://github.com/' + escapeHtml(c.github) + '.png" alt="' + escapeHtml(c.github) + '" loading="lazy" onerror="this.src=\'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22%3E%3Crect fill=%22%231a1a28%22 width=%2280%22 height=%2280%22/%3E%3Ctext fill=%22%238888aa%22 x=%2240%22 y=%2245%22 text-anchor=%22middle%22 font-size=%2220%22%3E' + escapeHtml(c.github.charAt(0).toUpperCase()) + '%3C/text%3E%3C/svg%3E\'">' +
                     '<div class="contributor-username">' + escapeHtml(c.github) + '</div>' +
                     '<div class="contributor-title-badge ' + getContributorTierClass(c.title) + '">' + escapeHtml(c.title) + '</div>' +
-                    '<div class="contributor-count">' + formatNumber(c.count) + ' 次贡献</div>';
+                    '<div class="contributor-count">' + formatNumber(c.count) + ' ' + t('common.contributions_unit') + '</div>';
                 card.addEventListener('click', function () {
                     window.open('https://github.com/' + encodeURIComponent(c.github), '_blank', 'noopener');
                 });

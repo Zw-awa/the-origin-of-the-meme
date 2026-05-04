@@ -43,13 +43,13 @@ function isLegendaryTier(tierName) {
 
 async function loadData() {
     try {
-        const res = await fetch('../_data/computed.json');
-        if (!res.ok) throw new Error('computed.json not found');
+        const res = await fetch('./_data/computed.json');
+        if (!res.ok) throw new Error('not found');
         return await res.json();
     } catch {
         try {
-            const res = await fetch('./_data/computed.json');
-            if (!res.ok) throw new Error('computed.json not found');
+            const res = await fetch('../_data/computed.json');
+            if (!res.ok) throw new Error('not found');
             return await res.json();
         } catch {
             return {
@@ -64,13 +64,13 @@ async function loadData() {
 
 async function loadFullData() {
     try {
-        const res = await fetch('../_data/memes-full.json');
-        if (!res.ok) throw new Error('memes-full.json not found');
+        const res = await fetch('./_data/memes-full.json');
+        if (!res.ok) throw new Error('not found');
         return await res.json();
     } catch {
         try {
-            const res = await fetch('./_data/memes-full.json');
-            if (!res.ok) throw new Error('memes-full.json not found');
+            const res = await fetch('../_data/memes-full.json');
+            if (!res.ok) throw new Error('not found');
             return await res.json();
         } catch {
             return { generated_at: null, memes: [] };
@@ -101,7 +101,8 @@ function getMemesGroupedByTier(data) {
 }
 
 function formatNumber(n) {
-    return (n ?? 0).toLocaleString('zh-CN');
+    var locale = typeof LANG !== 'undefined' ? (LANG === 'ja' ? 'ja-JP' : LANG === 'en' ? 'en-US' : 'zh-CN') : 'zh-CN';
+    return (n ?? 0).toLocaleString(locale);
 }
 
 function escapeHtml(str) {
@@ -115,6 +116,13 @@ function buildTierBadge(tierName, large) {
     if (isLegendaryTier(tierName)) cls += ' legendary';
     if (large) cls += ' tier-badge-lg';
     return '<span class="' + cls + '">' + escapeHtml(tierName) + '</span>';
+}
+
+function safeHref(url) {
+    if (!url || typeof url !== 'string') return '#';
+    var lower = url.trim().toLowerCase();
+    if (lower.startsWith('http://') || lower.startsWith('https://')) return url;
+    return '#';
 }
 
 Object.assign(window, {
@@ -133,5 +141,6 @@ Object.assign(window, {
     getMemesGroupedByTier: getMemesGroupedByTier,
     formatNumber: formatNumber,
     escapeHtml: escapeHtml,
-    buildTierBadge: buildTierBadge
+    buildTierBadge: buildTierBadge,
+    safeHref: safeHref
 });

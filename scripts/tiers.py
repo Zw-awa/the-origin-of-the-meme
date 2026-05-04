@@ -35,6 +35,15 @@ def load_tiers(path):
         print("ERROR: contributor_tiers is missing or empty in tiers.yaml", file=sys.stderr)
         sys.exit(1)
 
+    for i, tier in enumerate(meme_tiers):
+        if "name" not in tier:
+            print(f"ERROR: meme_tiers[{i}] missing 'name' key", file=sys.stderr)
+            sys.exit(1)
+    for i, tier in enumerate(contributor_tiers):
+        if "name" not in tier:
+            print(f"ERROR: contributor_tiers[{i}] missing 'name' key", file=sys.stderr)
+            sys.exit(1)
+
     return meme_tiers, contributor_tiers
 
 
@@ -50,13 +59,18 @@ def lookup_tier(submissions, tiers):
     for tier in tiers:
         tier_min = tier.get("min", 0)
         tier_max = tier.get("max")
-        # Guard against explicit null: treat as no upper bound.
+        # Guard against explicit null: treat as no lower/upper bound.
+        if tier_min is None:
+            tier_min = 0
         if tier_max is None:
             tier_max = float("inf")
         if tier_min <= submissions <= tier_max:
             return tier["name"]
 
     # Fallback — should be unreachable with sensible tier configs.
-    if submissions < tiers[0].get("min", 0):
+    fallback_min = tiers[0].get("min", 0)
+    if fallback_min is None:
+        fallback_min = 0
+    if submissions < fallback_min:
         return "unknown"
     return tiers[0]["name"]

@@ -21,6 +21,21 @@ REPORT_PATH = str(PROJECT_ROOT / "validation-report.md")
 
 BVID_REGEX = re.compile(r"^BV[a-zA-Z0-9]{10}$")
 FILENAME_STEM_REGEX = re.compile(r"^[\u4e00-\u9fff\w\-]+$", re.ASCII)
+BASE_BRANCH = os.environ.get("GITHUB_BASE_REF", "origin/main")
+
+
+def sanitize_md(text):
+    if not isinstance(text, str):
+        return str(text)
+    return (
+        text.replace("\\", "\\\\")
+        .replace("|", "\\|")
+        .replace("[", "\\[")
+        .replace("]", "\\]")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace("`", "\\`")
+    )
 
 
 def validate_bvid(bvid):
@@ -62,7 +77,7 @@ def get_changed_files():
     """git diff --name-only origin/main...HEAD -- memes/ → list of existing files."""
     try:
         result = subprocess.run(
-            ["git", "diff", "--name-only", "origin/main...HEAD", "--", MEMES_DIR + "/"],
+            ["git", "diff", "--name-only", f"{BASE_BRANCH}...HEAD", "--", MEMES_DIR + "/"],
             capture_output=True,
             text=True,
             check=True,
@@ -78,7 +93,7 @@ def get_changed_files():
 def get_old_file_content(filepath):
     try:
         result = subprocess.run(
-            ["git", "show", f"origin/main:{filepath}"],
+            ["git", "show", f"{BASE_BRANCH}:./{filepath}"],
             capture_output=True,
             text=True,
             check=True,
@@ -91,7 +106,7 @@ def get_old_file_content(filepath):
 def get_computed_json():
     try:
         result = subprocess.run(
-            ["git", "show", f"origin/main:{COMPUTED_PATH}"],
+            ["git", "show", f"{BASE_BRANCH}:./_data/computed.json"],
             capture_output=True,
             text=True,
             check=True,
@@ -117,7 +132,7 @@ def validate_yaml_syntax(filepath):
         if hasattr(e, "problem_mark") and e.problem_mark is not None:
             line = e.problem_mark.line + 1
             errors.append(
-                (filepath, "YAML 语法", f"第 {line} 行: {e.problem}")
+                (filepath, "YAML 语法", f"第 {line} 行: {getattr(e, 'problem', str(e))}")
             )
         else:
             errors.append((filepath, "YAML 语法", str(e)))
@@ -287,34 +302,36 @@ def generate_failure_report(all_errors):
     ]
 
     for filepath, check, msg in all_errors:
-        lines.append(f"| {filepath} | {check} | {msg} |")
+        lines.append(f"| {sanitize_md(filepath)} | {sanitize_md(check)} | {sanitize_md(msg)} |")
 
     lines.append("")
     lines.append("### 修复建议")
 
     for filepath, check, msg in all_errors:
         # Craft a short, actionable suggestion from the error context
+        sf = sanitize_md(filepath)
+        sm = sanitize_md(msg)
         if check == "必填字段":
             if "缺少" in msg:
                 # e.g. "缺少 name 字段或为空" → extract field name
                 field = msg.replace("缺少 ", "").replace(" 字段或为空", "").replace(" 或为空", "").strip()
-                lines.append(f"- {filepath}: 请添加 {field} 字段")
+                lines.append(f"- {sf}: 请添加 {sanitize_md(field)} 字段")
             else:
-                lines.append(f"- {filepath}: {msg}")
+                lines.append(f"- {sf}: {sm}")
         elif check == "bvid 格式":
-            lines.append(f"- {filepath}: {msg}")
+            lines.append(f"- {sf}: {sm}")
         elif check == "bvid 重复":
-            lines.append(f"- {filepath}: 请移除重复的 bvid")
+            lines.append(f"- {sf}: 请移除重复的 bvid")
         elif check == "日期格式":
-            lines.append(f"- {filepath}: 日期格式应为 YYYY-MM-DD")
+            lines.append(f"- {sf}: 日期格式应为 YYYY-MM-DD")
         elif check == "链接格式":
-            lines.append(f"- {filepath}: origin_video 应为完整的 Bilibili 视频链接（https://www.bilibili.com/video/BV...）")
+            lines.append(f"- {sf}: origin_video 应为完整的 Bilibili 视频链接（https://www.bilibili.com/video/BV...）")
         elif check == "名称一致":
-            lines.append(f"- {filepath}: 请将 name 字段修改为与文件名一致")
+            lines.append(f"- {sf}: 请将 name 字段修改为与文件名一致")
         elif check in ("文件名", "文件编码"):
-            lines.append(f"- {filepath}: {msg}")
+            lines.append(f"- {sf}: {sm}")
         else:
-            lines.append(f"- {filepath}: {msg}")
+            lines.append(f"- {sf}: {sm}")
 
     lines.append("")
 
@@ -401,7 +418,7 @@ def generate_success_report(changed_files, meme_tiers, contributor_tiers):
         for name, old_sub, new_sub, old_tier, new_display in meme_rows:
             new_tier_name = lookup_tier(new_sub, meme_tiers)
             lines.append(
-                f"| {name} | {old_sub} ({old_tier}) | {new_sub} ({new_tier_name}) "
+                f"| {sanitize_md(name)} | {old_sub} ({old_tier}) | {new_sub} ({new_tier_name}) "
                 f"| {old_tier} | {new_display} |"
             )
         lines.append("")
@@ -429,7 +446,7 @@ def generate_success_report(changed_files, meme_tiers, contributor_tiers):
             if new_title != old_title:
                 title_arrow = "⬆️ " if new_count > old_count else "⬇️ "
             lines.append(
-                f"| {contributor} | {old_count} ({old_title}) | "
+                f"| {sanitize_md(contributor)} | {old_count} ({old_title}) | "
                 f"{new_count} ({new_title}) | {old_title} | {title_arrow}{new_title} |"
             )
         lines.append("")
@@ -443,6 +460,13 @@ def generate_success_report(changed_files, meme_tiers, contributor_tiers):
 # ---------------------------------------------------------------------------
 
 def main():
+    try:
+        _main()
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
+
+def _main():
     parser = argparse.ArgumentParser(
         description="Validate meme YAML files in a PR"
     )
@@ -457,6 +481,8 @@ def main():
     changed_files = get_changed_files()
     if not changed_files:
         print("No meme files changed.")
+        with open(REPORT_PATH, "w", encoding="utf-8") as f:
+            f.write("## ✅ 没有变更\n\n本次 PR 未修改 memes/ 目录下的文件。")
         sys.exit(0)
 
     # 2. Load tier configuration
@@ -464,6 +490,7 @@ def main():
 
     # 3. Run all 5 validation levels — collect EVERY error
     all_errors: list[tuple[str, str, str]] = []
+    parsed_data: dict[str, dict] = {}
 
     for filepath in changed_files:
         # Level 5 – filename (independent of content)
@@ -486,15 +513,64 @@ def main():
         # Level 4 – BVID dedup
         all_errors.extend(validate_bvid_dedup(filepath, data))
 
+        parsed_data[filepath] = data
+
+    # Cross-file duplicate name check
+    name_to_files: dict[str, str] = {}
+    for filepath, data in parsed_data.items():
+        name_val = data.get("name", "")
+        if isinstance(name_val, str) and (name_val := name_val.strip()):
+            if name_val in name_to_files:
+                other = name_to_files[name_val]
+                all_errors.append(
+                    (filepath, "名称重复", f'"{name_val}" 已存在于 {other}，梗名称不能重复')
+                )
+            else:
+                name_to_files[name_val] = filepath
+
+    # Cross-file bvid duplicate check (informational warning)
+    bvid_to_files: dict[str, list[tuple[str, int]]] = {}
+    for filepath, data in parsed_data.items():
+        videos = data.get("videos", [])
+        if isinstance(videos, list):
+            for idx, video in enumerate(videos):
+                if not isinstance(video, dict):
+                    continue
+                bvid = video.get("bvid", "")
+                if isinstance(bvid, str) and (bvid := bvid.strip()):
+                    if bvid not in bvid_to_files:
+                        bvid_to_files[bvid] = []
+                    bvid_to_files[bvid].append((filepath, idx))
+
+    cross_file_bvid_warnings: list[str] = []
+    for bvid, occurrences in bvid_to_files.items():
+        if len(occurrences) > 1:
+            locations = ", ".join(f"{fp}videos[{i}]" for fp, i in occurrences)
+            cross_file_bvid_warnings.append(
+                f'bvid "{bvid}" 出现在多个文件中: {locations}'
+            )
+
     # 4. Generate report
     if all_errors:
         generate_failure_report(all_errors)
+        if cross_file_bvid_warnings:
+            _append_bvid_warnings(cross_file_bvid_warnings)
         print(f"❌ Validation failed with {len(all_errors)} error(s)")
         sys.exit(1)
     else:
         generate_success_report(changed_files, meme_tiers, contributor_tiers)
+        if cross_file_bvid_warnings:
+            _append_bvid_warnings(cross_file_bvid_warnings)
         print("✅ All checks passed!")
         sys.exit(0)
+
+
+def _append_bvid_warnings(warnings):
+    with open(REPORT_PATH, "a", encoding="utf-8") as f:
+        f.write("\n### ⚠️ 跨文件 bvid 重复 (提示)\n\n")
+        for w in warnings:
+            f.write(f"- {sanitize_md(w)}\n")
+        f.write("\n")
 
 
 if __name__ == "__main__":
