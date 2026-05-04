@@ -37,4 +37,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update computed.json [skip ci]"
-          file_pattern: "_data/computed.json _data/memes-full.json docs/_data/computed.json docs/_data/memes-full.json"
+          file_pattern: "docs/_data/computed.json docs/_data/memes-full.json"
