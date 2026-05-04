@@ -21,7 +21,9 @@ REPORT_PATH = str(PROJECT_ROOT / "validation-report.md")
 
 BVID_REGEX = re.compile(r"^BV[a-zA-Z0-9]{10}$")
 FILENAME_STEM_REGEX = re.compile(r"^[\u4e00-\u9fff\w\-]+$", re.ASCII)
-BASE_BRANCH = os.environ.get("GITHUB_BASE_REF", "origin/main")
+BASE_BRANCH = os.environ.get("GITHUB_BASE_REF", "main")
+if BASE_BRANCH and not BASE_BRANCH.startswith("origin/"):
+    BASE_BRANCH = "origin/" + BASE_BRANCH
 
 
 def sanitize_md(text):
