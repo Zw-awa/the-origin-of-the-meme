@@ -13,6 +13,9 @@ MEMES_DIR = PROJECT_ROOT / "memes"
 DATA_DIR = PROJECT_ROOT / "_data"
 TIERS_FILE = DATA_DIR / "tiers.yaml"
 OUTPUT_FILE = DATA_DIR / "computed.json"
+PAGES_OUTPUT = PROJECT_ROOT / "docs" / "_data" / "computed.json"
+FULL_OUTPUT = DATA_DIR / "memes-full.json"
+FULL_PAGES = PROJECT_ROOT / "docs" / "_data" / "memes-full.json"
 
 
 # Step 1: Load tiers (imported)
@@ -129,7 +132,7 @@ def compute_stats(memes, contributors):
 # ============================================================================
 
 def write_output(memes, contributors, stats):
-    """Serialize and write _data/computed.json."""
+    """Serialize and write _data/computed.json + docs/_data/computed.json."""
     now = datetime.datetime.now(datetime.timezone.utc).strftime(
         "%Y-%m-%dT%H:%M:%SZ"
     )
@@ -151,10 +154,72 @@ def write_output(memes, contributors, stats):
     }
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    PAGES_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+
+    payload = json.dumps(output, indent=2, ensure_ascii=False) + "\n"
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
-        f.write("\n")
+        f.write(payload)
+
+    with open(PAGES_OUTPUT, "w", encoding="utf-8") as f:
+        f.write(payload)
+
+
+def build_full_memes(memes_dir, memes):
+    """Read raw YAML, merge with computed rankings. Returns list of full meme dicts."""
+    lookup = {m["id"]: m for m in memes}
+    yaml_files = sorted(memes_dir.glob("*.yaml"))
+    full = []
+
+    for yf in yaml_files:
+        try:
+            with open(yf, "r", encoding="utf-8") as f:
+                raw = yaml.safe_load(f)
+        except Exception:
+            continue
+        if not isinstance(raw, dict):
+            continue
+
+        meme_id = raw.get("name", yf.stem)
+        computed = lookup.get(meme_id, {})
+
+        full.append({
+            "id": str(meme_id),
+            "aliases": raw.get("aliases") if isinstance(raw.get("aliases"), list) else [],
+            "origin_video": raw.get("origin_video", "") or "",
+            "origin_date": raw.get("origin_date", "") or "",
+            "description": raw.get("description", "") or "",
+            "tags": raw.get("tags") if isinstance(raw.get("tags"), list) else [],
+            "videos": raw.get("videos") if isinstance(raw.get("videos"), list) else [],
+            "submissions": computed.get("submissions", 0),
+            "tier": computed.get("tier", ""),
+            "hall_of_fame": computed.get("hall_of_fame", False),
+            "rank": computed.get("rank", 0),
+        })
+
+    return full
+
+
+def write_full_output(full_memes):
+    """Write _data/memes-full.json + docs/_data/memes-full.json."""
+    now = datetime.datetime.now(datetime.timezone.utc).strftime(
+        "%Y-%m-%dT%H:%M:%SZ"
+    )
+    output = {
+        "generated_at": now,
+        "memes": full_memes,
+    }
+
+    FULL_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    FULL_PAGES.parent.mkdir(parents=True, exist_ok=True)
+
+    payload = json.dumps(output, indent=2, ensure_ascii=False) + "\n"
+
+    with open(FULL_OUTPUT, "w", encoding="utf-8") as f:
+        f.write(payload)
+
+    with open(FULL_PAGES, "w", encoding="utf-8") as f:
+        f.write(payload)
 
 
 # ============================================================================
@@ -181,6 +246,8 @@ def main():
     contributors = compute_contributor_rankings(contributor_counts, contributor_tiers)
     stats = compute_stats(memes, contributors)
     write_output(memes, contributors, stats)
+    full_memes = build_full_memes(MEMES_DIR, memes)
+    write_full_output(full_memes)
     print_summary(stats)
 
 

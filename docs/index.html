@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>万恶之源 | The Origin of the Meme</title>
+    <meta name="description" content="B站梗文化索引, 社区共建, 修仙等级体系">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">万恶之源</a>
+            <button class="nav-hamburger" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="memes.html">排行</a></li>
+                <li><a href="index.html#tier-system">等级体系</a></li>
+                <li><a href="hall-of-fame.html">荣誉殿堂</a></li>
+                <li><a href="contributors.html">贡献者</a></li>
+                <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" class="nav-github" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-text="万恶之源">万恶之源</h1>
+            <p class="hero-subtitle">B站梗文化索引, 社区共建, 修仙等级体系</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="btn-neon" target="_blank" rel="noopener">参与贡献</a>
+                <a href="#rankings" class="btn-muted">查看排行</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>向下探索</span>
+            <div class="hero-scroll-arrow"></div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="stats">
+        <h2 class="section-title gradient-cyan-green">数据总览</h2>
+        <p class="section-subtitle">每一个数字背后, 都是一段B站传说</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">&#9654;</div>
+                <div class="stat-number" data-target="0">0</div>
+                <div class="stat-label">收录梗数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">&#9830;</div>
+                <div class="stat-number" data-target="0">0</div>
+                <div class="stat-label">收录视频</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">&#9733;</div>
+                <div class="stat-number" data-target="0">0</div>
+                <div class="stat-label">贡献者</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">&#9813;</div>
+                <div class="stat-number" data-target="0">0</div>
+                <div class="stat-label">荣誉殿堂</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="rankings">
+        <h2 class="section-title gradient-purple">梗排行榜</h2>
+        <p class="section-subtitle">社区贡献, 修仙等级自动评定</p>
+        <div class="rankings-list" id="rankings-container">
+            <div class="empty-state">
+                <div class="empty-state-icon">&#9733;</div>
+                <p class="empty-state-text">暂无数据, 快来贡献第一个梗吧!</p>
+                <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="empty-state-action" target="_blank" rel="noopener">参与贡献</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="tier-system">
+        <h2 class="section-title gradient-purple">修仙等级体系</h2>
+        <p class="section-subtitle">收录视频越多, 等级越高, 从杂役弟子到渡劫飞升</p>
+        <div class="tier-system" id="tier-system-container">
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="contributors">
+        <h2 class="section-title gradient-pink">贡献者殿堂</h2>
+        <p class="section-subtitle">每一位贡献者都在为B站梗文化添砖加瓦</p>
+        <div class="contributor-grid" id="contributors-container">
+            <div class="empty-state">
+                <div class="empty-state-icon">&#9733;</div>
+                <p class="empty-state-text">还没有贡献者, 来成为第一个吧!</p>
+                <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="empty-state-action" target="_blank" rel="noopener">参与贡献</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-waves">
+            <svg class="wave wave-1" viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,50 C360,100 720,0 1080,50 C1260,75 1380,25 1440,50 L1440,100 L0,100 Z" fill="rgba(0,240,255,0.04)"/>
+            </svg>
+            <svg class="wave wave-2" viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,30 C240,80 600,20 960,60 C1200,90 1320,40 1440,30 L1440,100 L0,100 Z" fill="rgba(139,92,246,0.03)"/>
+            </svg>
+        </div>
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h3>项目链接</h3>
+                <ul>
+                    <li><a href="memes.html">梗列表</a></li>
+                    <li><a href="hall-of-fame.html">荣誉殿堂</a></li>
+                    <li><a href="contributors.html">贡献者排行</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>相关资源</h3>
+                <ul>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">贡献指南</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/issues" target="_blank" rel="noopener">问题反馈</a></li>
+                    <li><a href="https://www.bilibili.com" target="_blank" rel="noopener">Bilibili</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>关于</h3>
+                <ul>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme#%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88" target="_blank" rel="noopener">项目介绍</a></li>
+                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-disclaimer">
+            本索引中的所有链接及元数据均为公开信息的整理与索引。所有视频、音频及相关素材的版权归原作者及哔哩哔哩(bilibili.com)所有。本项目仅提供索引服务, 不进行任何形式的内容存储、复制或分发。
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/cursor.js"></script>
+    <script>
+    (function () {
+        loadData().then(function (data) {
+            renderStats(data);
+            renderRankings(data);
+            renderTierSystem();
+            renderContributors(data);
+            initStatCounters();
+            initTierSystem();
+            initContributorMagnetics();
+            initRankingHover();
+        });
+
+        function renderStats(data) {
+            var stats = data.stats;
+            var cards = document.querySelectorAll('.stat-card .stat-number');
+            if (cards.length >= 4) {
+                cards[0].setAttribute('data-target', stats.total_memes);
+                cards[1].setAttribute('data-target', stats.total_videos);
+                cards[2].setAttribute('data-target', stats.total_contributors);
+                cards[3].setAttribute('data-target', stats.hall_of_fame_count);
+            }
+        }
+
+        function renderRankings(data) {
+            var container = document.getElementById('rankings-container');
+            var memes = data.memes;
+            if (!memes || memes.length === 0) return;
+
+            container.innerHTML = '';
+            memes.forEach(function (meme, i) {
+                var rank = i + 1;
+                var rankClass = '';
+                if (rank === 1) rankClass = ' rank-1';
+                else if (rank === 2) rankClass = ' rank-2';
+                else if (rank === 3) rankClass = ' rank-3';
+
+                var desc = meme.description || '';
+                var tags = meme.tags || [];
+                var tagsHtml = '';
+                if (tags.length > 0) {
+                    tagsHtml = '<div class="ranking-card-tags">' +
+                        tags.map(function (t) { return '<span class="ranking-card-tag">' + escapeHtml(t) + '</span>'; }).join('') +
+                        '</div>';
+                }
+
+                var tierIdx = getTierIndex(meme.tier);
+
+                var card = document.createElement('div');
+                card.className = 'ranking-card' + rankClass;
+                card.setAttribute('data-tier', tierIdx);
+                card.setAttribute('data-meme-id', meme.id);
+                card.innerHTML =
+                    '<div class="rank-number">#' + rank + '</div>' +
+                    '<div class="ranking-card-main">' +
+                        '<div class="ranking-card-name">' + escapeHtml(meme.id) + '</div>' +
+                        (desc ? '<div class="ranking-card-desc">' + escapeHtml(desc) + '</div>' : '') +
+                        tagsHtml +
+                    '</div>' +
+                    '<div class="ranking-card-right">' +
+                        buildTierBadge(meme.tier) +
+                        '<div class="ranking-card-count">' + formatNumber(meme.submissions) + ' 收录</div>' +
+                    '</div>';
+                card.addEventListener('click', function () {
+                    window.location.href = 'meme.html?id=' + encodeURIComponent(meme.id);
+                });
+                container.appendChild(card);
+            });
+        }
+
+        function renderTierSystem() {
+            var container = document.getElementById('tier-system-container');
+            var tiers = [
+                { name: '杂役弟子', range: '0 ~ 2', label: '太少了', idx: 0 },
+                { name: '练气期', range: '3 ~ 5', label: '初露锋芒', idx: 1 },
+                { name: '筑基期', range: '6 ~ 10', label: '小有名气', idx: 2 },
+                { name: '金丹期', range: '11 ~ 20', label: '圈内皆知', idx: 3 },
+                { name: '元婴期', range: '21 ~ 35', label: '出圈利器', idx: 4 },
+                { name: '化神期', range: '36 ~ 50', label: '全站刷屏', idx: 5 },
+                { name: '练虚期', range: '51 ~ 75', label: '现象级', idx: 6 },
+                { name: '合体期', range: '76 ~ 100', label: '统治级', idx: 7 },
+                { name: '大乘期', range: '101 ~ 149', label: '传说级', idx: 8 },
+                { name: '渡劫飞升', range: '150+', label: 'B站永远的传说', idx: 9 }
+            ];
+
+            var maxTier = 9;
+            container.innerHTML = '';
+
+            tiers.forEach(function (tier) {
+                var barWidth = ((tier.idx + 1) / (maxTier + 1)) * 100;
+                var pulseClass = (tier.idx >= 7) ? ' pulse' : '';
+
+                var entry = document.createElement('div');
+                entry.className = 'tier-entry' + pulseClass;
+                entry.innerHTML =
+                    '<div class="tier-indicator tier-' + tier.idx + '"></div>' +
+                    '<div class="tier-info">' +
+                        '<span class="tier-name">' + escapeHtml(tier.name) + '</span>' +
+                        '<span class="tier-range">' + tier.range + ' 收录</span>' +
+                        '<span class="tier-label">' + escapeHtml(tier.label) + '</span>' +
+                        '<div class="tier-energy-bar-wrap">' +
+                            '<div class="tier-energy-bar tier-bar-' + tier.idx + '" data-width="' + barWidth.toFixed(0) + '" style="background:var(--tier-' + tier.idx + ');"></div>' +
+                        '</div>' +
+                    '</div>';
+                container.appendChild(entry);
+            });
+
+            if (tiers.length >= 10) {
+                var lastBar = container.querySelector('.tier-bar-9');
+                if (lastBar) {
+                    lastBar.style.background = 'linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0088)';
+                    lastBar.style.backgroundSize = '200% 100%';
+                    lastBar.style.animation = 'rainbowShift 3s linear infinite';
+                }
+            }
+        }
+
+        function renderContributors(data) {
+            var container = document.getElementById('contributors-container');
+            var contributors = data.contributors;
+            if (!contributors || contributors.length === 0) return;
+
+            container.innerHTML = '';
+            contributors.forEach(function (c) {
+                var card = document.createElement('div');
+                card.className = 'contributor-card';
+                card.innerHTML =
+                    '<img class="contributor-avatar" src="https://github.com/' + escapeHtml(c.github) + '.png" alt="' + escapeHtml(c.github) + '" loading="lazy" onerror="this.src=\'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22%3E%3Crect fill=%22%231a1a28%22 width=%2280%22 height=%2280%22/%3E%3Ctext fill=%22%238888aa%22 x=%2240%22 y=%2245%22 text-anchor=%22middle%22 font-size=%2220%22%3E' + escapeHtml(c.github.charAt(0).toUpperCase()) + '%3C/text%3E%3C/svg%3E\'">' +
+                    '<div class="contributor-username">' + escapeHtml(c.github) + '</div>' +
+                    '<div class="contributor-title-badge ' + getContributorTierClass(c.title) + '">' + escapeHtml(c.title) + '</div>' +
+                    '<div class="contributor-count">' + formatNumber(c.count) + ' 次贡献</div>';
+                card.addEventListener('click', function () {
+                    window.open('https://github.com/' + encodeURIComponent(c.github), '_blank', 'noopener');
+                });
+                container.appendChild(card);
+            });
+        }
+    })();
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -26,4 +26,5 @@ node_modules/
 .cache/
 
 # Auto-generated (by GitHub Actions, do not manually edit)
-_data/computed.json
+/_data/computed.json
+/_data/memes-full.json
