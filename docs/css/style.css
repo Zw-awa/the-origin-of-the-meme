@@ -79,6 +79,11 @@ html {
 
 body {
     background: var(--bg-secondary);
+    background-image:
+        radial-gradient(ellipse 600px 400px at 10% 20%, rgba(0, 161, 214, 0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 85% 60%, rgba(251, 114, 153, 0.03) 0%, transparent 70%),
+        radial-gradient(ellipse 700px 500px at 50% 90%, rgba(0, 161, 214, 0.03) 0%, transparent 70%);
+    background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 16px;
