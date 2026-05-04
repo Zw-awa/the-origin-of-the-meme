@@ -1,0 +1,25 @@
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/
+CLAUDE.md
+
+# Project design docs (internal only, not published)
+design/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node (for future GitHub Pages tooling)
+node_modules/
+.cache/
+
+# Auto-generated (by GitHub Actions, do not manually edit)
+_data/computed.json

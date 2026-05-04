@@ -1,0 +1,55 @@
+# 梗等级阈值
+# 根据收录视频数量 (videos 数组长度) 自动计算
+meme_tiers:
+  - name: "杂役弟子"
+    label: "太少了"
+    min: 0
+    max: 2
+  - name: "练气期"
+    min: 3
+    max: 5
+  - name: "筑基期"
+    min: 6
+    max: 10
+  - name: "金丹期"
+    min: 11
+    max: 20
+  - name: "元婴期"
+    min: 21
+    max: 35
+  - name: "化神期"
+    min: 36
+    max: 50
+  - name: "练虚期"
+    min: 51
+    max: 75
+  - name: "合体期"
+    min: 76
+    max: 100
+  - name: "大乘期"
+    min: 101
+    max: 149
+  - name: "渡劫飞升"
+    label: "B站永远的传说"
+    min: 150
+
+# 贡献者称号阈值
+# 根据所有 YAML 文件中 contributor 字段出现次数自动计算
+contributor_tiers:
+  - name: "杂役弟子"
+    min: 1
+    max: 4
+  - name: "外门弟子"
+    min: 5
+    max: 14
+  - name: "内门弟子"
+    min: 15
+    max: 29
+  - name: "真传弟子"
+    min: 30
+    max: 49
+  - name: "长老"
+    min: 50
+    max: 99
+  - name: "太上长老"
+    min: 100
