@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T12:05:53Z",
+  "generated_at": "2026-05-04T13:22:05Z",
   "memes": [
     {
       "id": "华强买瓜",
@@ -16,8 +16,15 @@
         "影视剪辑",
         "经典对白"
       ],
-      "videos": [],
-      "submissions": 0,
+      "videos": [
+        {
+          "bvid": "BV1RwdhBmE3M",
+          "title": "郝 哥 不 在",
+          "author": "岩罗Crv",
+          "contributor": "Zw-awa"
+        }
+      ],
+      "submissions": 1,
       "tier": "杂役弟子",
       "hall_of_fame": false,
       "rank": 1

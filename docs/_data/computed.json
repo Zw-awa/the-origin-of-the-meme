@@ -1,19 +1,26 @@
 {
-  "generated_at": "2026-05-04T12:05:53Z",
+  "generated_at": "2026-05-04T13:22:05Z",
   "memes": [
     {
       "id": "华强买瓜",
-      "submissions": 0,
+      "submissions": 1,
       "tier": "杂役弟子",
       "hall_of_fame": false,
       "rank": 1
     }
   ],
-  "contributors": [],
+  "contributors": [
+    {
+      "github": "Zw-awa",
+      "count": 1,
+      "title": "杂役弟子",
+      "rank": 1
+    }
+  ],
   "stats": {
     "total_memes": 1,
-    "total_videos": 0,
-    "total_contributors": 0,
+    "total_videos": 1,
+    "total_contributors": 1,
     "hall_of_fame_count": 0
   }
 }
