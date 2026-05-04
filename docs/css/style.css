@@ -80,12 +80,12 @@ html {
 body {
     background: var(--bg-secondary);
     background-image:
-        radial-gradient(ellipse 900px 150px at 5% 600px, rgba(170, 180, 195, 0.22) 0%, transparent 70%),
-        radial-gradient(ellipse 700px 120px at 85% 900px, rgba(165, 175, 190, 0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 1000px 160px at 30% 1400px, rgba(175, 185, 200, 0.2) 0%, transparent 70%),
-        radial-gradient(ellipse 800px 130px at 75% 1800px, rgba(170, 180, 195, 0.16) 0%, transparent 70%),
-        radial-gradient(ellipse 950px 140px at 10% 2400px, rgba(165, 175, 190, 0.19) 0%, transparent 70%),
-        radial-gradient(ellipse 750px 110px at 90% 3000px, rgba(175, 185, 200, 0.15) 0%, transparent 70%);
+        radial-gradient(ellipse 900px 150px at 5% 1200px, rgba(170, 180, 195, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 700px 120px at 85% 1600px, rgba(165, 175, 190, 0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 1000px 160px at 30% 2200px, rgba(175, 185, 200, 0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 800px 130px at 75% 2800px, rgba(170, 180, 195, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 950px 140px at 10% 3500px, rgba(165, 175, 190, 0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 750px 110px at 90% 4200px, rgba(175, 185, 200, 0.17) 0%, transparent 70%);
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 16px;
