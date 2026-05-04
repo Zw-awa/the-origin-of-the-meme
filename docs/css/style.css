@@ -416,7 +416,58 @@ section {
     position: relative;
     padding: var(--space-4xl) var(--space-lg);
     max-width: none;
-    background: var(--bg-primary);
+    background: linear-gradient(180deg, #f0f4f8 0%, var(--bg-primary) 40%, var(--bg-primary) 70%, #e8edf2 100%);
+    overflow: hidden;
+}
+
+/* City skyline silhouette */
+.hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    background:
+        linear-gradient(180deg, transparent 0%, rgba(200, 210, 220, 0.15) 100%);
+    clip-path: polygon(
+        0% 100%,
+        0% 85%, 2% 85%, 2% 60%, 4% 60%, 4% 70%, 5% 70%, 5% 45%, 7% 45%, 7% 70%, 8% 70%, 8% 55%, 10% 55%, 10% 75%, 11% 75%, 11% 50%, 12% 50%, 12% 35%, 14% 35%, 14% 50%, 15% 50%, 15% 65%, 17% 65%, 17% 80%,
+        20% 80%, 20% 55%, 21% 55%, 21% 30%, 23% 30%, 23% 55%, 24% 55%, 24% 70%, 26% 70%, 26% 45%, 27% 45%, 27% 25%, 29% 25%, 29% 45%, 30% 45%, 30% 60%, 32% 60%, 32% 75%,
+        35% 75%, 35% 50%, 36% 50%, 36% 20%, 38% 20%, 38% 50%, 39% 50%, 39% 65%, 41% 65%, 41% 40%, 42% 40%, 42% 55%, 44% 55%, 44% 80%,
+        47% 80%, 47% 60%, 48% 60%, 48% 35%, 50% 35%, 50% 15%, 52% 15%, 52% 35%, 53% 35%, 53% 60%, 55% 60%, 55% 45%, 56% 45%, 56% 70%,
+        59% 70%, 59% 50%, 60% 50%, 60% 28%, 62% 28%, 62% 50%, 63% 50%, 63% 65%, 65% 65%, 65% 40%, 66% 40%, 66% 55%, 68% 55%, 68% 75%,
+        71% 75%, 71% 55%, 72% 55%, 72% 38%, 74% 38%, 74% 55%, 75% 55%, 75% 70%, 77% 70%, 77% 50%, 78% 50%, 78% 60%, 80% 60%, 80% 80%,
+        83% 80%, 83% 65%, 84% 65%, 84% 42%, 86% 42%, 86% 65%, 87% 65%, 87% 75%, 89% 75%, 89% 55%, 90% 55%, 90% 70%, 92% 70%, 92% 80%,
+        95% 80%, 95% 60%, 96% 60%, 96% 72%, 98% 72%, 98% 85%, 100% 85%, 100% 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* Distant buildings layer */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(180deg, transparent 0%, rgba(180, 195, 210, 0.1) 100%);
+    clip-path: polygon(
+        0% 100%,
+        0% 70%, 3% 70%, 3% 55%, 6% 55%, 6% 65%, 10% 65%, 10% 50%, 13% 50%, 13% 60%, 16% 60%, 16% 75%,
+        20% 75%, 20% 55%, 24% 55%, 24% 45%, 28% 45%, 28% 60%, 32% 60%, 32% 70%,
+        36% 70%, 36% 50%, 40% 50%, 40% 40%, 44% 40%, 44% 55%, 48% 55%, 48% 65%,
+        52% 65%, 52% 45%, 56% 45%, 56% 35%, 60% 35%, 60% 50%, 64% 50%, 64% 60%,
+        68% 60%, 68% 50%, 72% 50%, 72% 40%, 76% 40%, 76% 55%, 80% 55%, 80% 70%,
+        84% 70%, 84% 55%, 88% 55%, 88% 45%, 92% 45%, 92% 60%, 96% 60%, 96% 75%,
+        100% 75%, 100% 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
 }
 
 .hero-content {
@@ -675,20 +726,66 @@ section {
     margin: 0 auto;
     padding: var(--space-3xl) var(--space-lg);
     position: relative;
+    overflow: hidden;
+}
+
+/* Mountain silhouettes */
+#tier-system::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, rgba(160, 150, 135, 0.08) 100%);
+    clip-path: polygon(
+        0% 100%,
+        0% 60%, 5% 45%, 10% 55%, 15% 30%, 20% 50%, 22% 48%, 25% 20%, 30% 45%, 35% 55%,
+        38% 40%, 42% 25%, 45% 35%, 48% 15%, 52% 30%, 55% 45%, 58% 35%, 62% 50%,
+        65% 38%, 68% 28%, 72% 42%, 75% 22%, 78% 40%, 80% 50%, 85% 35%, 88% 45%,
+        92% 55%, 95% 40%, 98% 50%, 100% 65%, 100% 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+/* Drifting mist layers */
+#tier-system::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    left: -10%;
+    width: 120%;
+    height: 80px;
+    background:
+        radial-gradient(ellipse 300px 40px at 15% 50%, rgba(220, 215, 200, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 250px 35px at 45% 60%, rgba(215, 210, 195, 0.3) 0%, transparent 70%),
+        radial-gradient(ellipse 350px 45px at 75% 40%, rgba(225, 218, 205, 0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 200px 30px at 90% 55%, rgba(210, 205, 190, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: mistDrift 20s ease-in-out infinite alternate;
 }
 
 #tier-system .section-title {
     color: var(--tier-text);
+    position: relative;
+    z-index: 1;
 }
 
 #tier-system .section-subtitle {
     color: var(--tier-text-muted);
+    position: relative;
+    z-index: 1;
 }
 
 .tier-system {
     display: flex;
     flex-direction: column;
     gap: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .tier-entry {
@@ -882,7 +979,6 @@ section {
     margin: 0 auto;
     padding-left: var(--space-lg);
     padding-right: var(--space-lg);
-    background: var(--bg-primary);
 }
 
 .search-bar {
@@ -1781,6 +1877,11 @@ section {
 @keyframes waveMove {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+}
+
+@keyframes mistDrift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(3%); }
 }
 
 /* ── 23. Responsive ───────────────────────────────────────────────── */
