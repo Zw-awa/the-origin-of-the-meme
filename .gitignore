@@ -19,6 +19,15 @@ tools/
 __pycache__/
 *.pyc
 
+# Local backup / archive files
+*.bak-*
+!*.archive
+*_snapshot.html
+*_dump.html
+/validation-report.md
+/docs/computed.json
+/docs/memes-full.json
+
 # OS
 .DS_Store
 Thumbs.db

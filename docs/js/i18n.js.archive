@@ -22,7 +22,6 @@ var LANG = getLang();
 var I18N = {
     zh: {
         nav: { home: '首页', memes: '梗库', tiers: '等级体系', hall: '荣誉殿堂', contributors: '贡献者', contribute: '参与贡献' },
-        nav_shell: { title: '梗的封神榜', lead: '收录视频最多者 · 上榜 →', link: '参与贡献' },
         hero: { eyebrow: 'Bilibili Meme Index', subtitle: 'B站梗文化索引, 社区共建, 修仙等级体系', btnPrimary: '参与贡献', btnSecondary: '查看排行', btnBrowse: '来逛逛', btnContribute: '我要投稿', btnHall: '荣誉殿堂', scrollHint: '向下探索', meta1: '社区共建', meta2: '无广告', meta3: '开放仓库' },
         stats: { title: '数据总览', subtitle: '每一个数字背后, 都是一段B站传说', memes: '收录梗数', videos: '收录视频', contributors: '贡献者', hall: '荣誉殿堂' },
         rankings: { title: '梗排行榜', subtitle: '社区贡献, 修仙等级自动评定', empty: '暂无数据, 快来贡献第一个梗吧!', contribute: '参与贡献' },
@@ -41,7 +40,6 @@ var I18N = {
     },
     en: {
         nav: { home: 'Home', memes: 'Memes', tiers: 'Tier System', hall: 'Hall of Fame', contributors: 'Contributors', contribute: 'Contribute' },
-        nav_shell: { title: 'Meme Pantheon', lead: 'Most collected videos · Enter →', link: 'Contribute' },
         hero: { eyebrow: 'Bilibili Meme Index', subtitle: 'Bilibili Meme Index · Community-Driven · Xianxia Tier System', btnPrimary: 'Contribute', btnSecondary: 'View Rankings', btnBrowse: 'Browse', btnContribute: 'Submit', btnHall: 'Hall of Fame', scrollHint: 'Scroll Down', meta1: 'Community-Driven', meta2: 'No Ads', meta3: 'Open Repo' },
         stats: { title: 'Overview', subtitle: 'Every number behind the scenes is a Bilibili legend', memes: 'Memes', videos: 'Videos', contributors: 'Contributors', hall: 'Hall of Fame' },
         rankings: { title: 'Meme Rankings', subtitle: 'Community contributions, tier auto-assigned', empty: 'No memes yet. Be the first to contribute!', contribute: 'Contribute' },
@@ -60,7 +58,6 @@ var I18N = {
     },
     ja: {
         nav: { home: 'ホーム', memes: 'ミーム', tiers: 'ランク体系', hall: '栄誉殿堂', contributors: '貢献者', contribute: '貢献する' },
-        nav_shell: { title: 'ミーム封神榜', lead: '収録動画最多 · 上榜へ →', link: '貢献する' },
         hero: { eyebrow: 'Bilibili Meme Index', subtitle: 'Bilibiliミーム索引 · コミュニティ共築 · 修仙ランク体系', btnPrimary: '貢献する', btnSecondary: 'ランキングを見る', btnBrowse: '見てみる', btnContribute: '投稿する', btnHall: '栄誉殿堂', scrollHint: 'スクロール', meta1: 'コミュニティ共築', meta2: '広告なし', meta3: 'オープンリポジトリ' },
         stats: { title: 'データ概要', subtitle: 'すべての数字の裏には、Bilibiliの伝説がある', memes: '収録ミーム', videos: '収録動画', contributors: '貢献者', hall: '栄誉殿堂' },
         rankings: { title: 'ミームランキング', subtitle: 'コミュニティ貢献、ランク自動判定', empty: 'まだミームがありません。最初の貢献者になりましょう！', contribute: '貢献する' },
@@ -97,46 +94,6 @@ function t(key) {
         if (fallback != null) return fallback;
     }
     return key;
-}
-
-function translateTierName(name, lang) {
-    var maps = {
-        en: {
-            '杂役弟子': 'Chore Disciple',
-            '练气期': 'Qi Refining',
-            '筑基期': 'Foundation',
-            '金丹期': 'Golden Core',
-            '元婴期': 'Nascent Soul',
-            '化神期': 'Spirit Severing',
-            '练虚期': 'Void Refining',
-            '合体期': 'Body Union',
-            '大乘期': 'Great Ascension',
-            '渡劫飞升': 'Tribulation Transcendence',
-            '外门弟子': 'Outer Disciple',
-            '内门弟子': 'Inner Disciple',
-            '真传弟子': 'True Disciple',
-            '长老': 'Elder',
-            '太上长老': 'Grand Elder'
-        },
-        ja: {
-            '杂役弟子': '雑役弟子',
-            '练气期': '練気期',
-            '筑基期': '築基期',
-            '金丹期': '金丹期',
-            '元婴期': '元嬰期',
-            '化神期': '化神期',
-            '练虚期': '練虚期',
-            '合体期': '合体期',
-            '大乘期': '大乗期',
-            '渡劫飞升': '渡劫飛昇',
-            '外门弟子': '外門弟子',
-            '内门弟子': '内門弟子',
-            '真传弟子': '真伝弟子',
-            '长老': '長老',
-            '太上长老': '太上長老'
-        }
-    };
-    return (maps[lang] && maps[lang][name]) || name;
 }
 
 /* -- Language Switcher -------------------------------------- */
@@ -222,4 +179,4 @@ if (document.readyState === 'loading') {
 }
 
 /* -- Expose to window --------------------------------------- */
-Object.assign(window, { t: t, LANG: LANG, switchLang: switchLang, initI18n: initI18n, translateTierName: translateTierName });
+Object.assign(window, { t: t, LANG: LANG, switchLang: switchLang, initI18n: initI18n });

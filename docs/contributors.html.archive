@@ -33,13 +33,10 @@
                     <span class="u-sr-only">万恶之源</span>
                 </a>
             </div>
-            <button class="sb-toggle js-nav-toggle astro-5qrshpxv" type="button" aria-label="菜单" aria-controls="site-nav" aria-expanded="false">
-                <span></span>
-            </button>
             <div class="sb-console astro-5qrshpxv" role="presentation">
                 <div class="sb-console__inner js-console astro-5qrshpxv"></div>
             </div>
-            <nav class="sb-menu js-site-nav astro-5qrshpxv" id="site-nav" aria-label="主导航">
+            <nav class="sb-menu js-site-nav astro-5qrshpxv" aria-label="主导航">
                 <ul class="sb__list astro-5qrshpxv">
                     <li class="sb__item astro-5qrshpxv"><a href="index.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.home">首页</span></a></li>
                     <li class="sb__item astro-5qrshpxv"><a href="memes.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.memes">梗库</span></a></li>
@@ -74,8 +71,8 @@
             </ul>
             <aside class="sb-availability astro-5qrshpxv">
                 <p class="astro-5qrshpxv">
-                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav_shell.title">梗的封神榜</span></span>
-                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav_shell.lead">收录视频最多者 · 上榜 →</span> <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="astro-5qrshpxv" data-i18n="nav_shell.link">参与贡献</a></span>
+                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv">梗的封神榜</span></span>
+                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv">收录视频最多者 · 上榜 →</span> <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="astro-5qrshpxv">参与贡献</a></span>
                 </p>
             </aside>
             <a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener" class="sb-qr-code js-qr-code astro-5qrshpxv" title="扫码或点击访问项目仓库">

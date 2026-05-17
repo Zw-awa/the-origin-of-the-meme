@@ -115,7 +115,10 @@ function buildTierBadge(tierName, large) {
     var cls = 'tier-badge ' + getTierClass(tierName);
     if (isLegendaryTier(tierName)) cls += ' legendary';
     if (large) cls += ' tier-badge-lg';
-    return '<span class="' + cls + '">' + escapeHtml(tierName) + '</span>';
+    var translated = typeof window.translateTierName === 'function'
+        ? window.translateTierName(tierName, typeof LANG !== 'undefined' ? LANG : 'zh')
+        : tierName;
+    return '<span class="' + cls + '">' + escapeHtml(translated) + '</span>';
 }
 
 function safeHref(url) {

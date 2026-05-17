@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="pageTitle.contributors">贡献者排行 | 万恶之源</title>
+    <title data-i18n="pageTitle.memes">梗列表 | 万恶之源</title>
     <script>
     try {
         if (localStorage.getItem('hof-theme') === 'day') {
@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/contributors.css">
+    <link rel="stylesheet" href="css/memes.css">
 </head>
-<body class="page-contributors">
+<body class="page-memes">
     <header class="site-head astro-5qrshpxv">
         <div class="site-head__container astro-5qrshpxv">
             <div class="sb-logo astro-5qrshpxv">
@@ -33,13 +33,10 @@
                     <span class="u-sr-only">万恶之源</span>
                 </a>
             </div>
-            <button class="sb-toggle js-nav-toggle astro-5qrshpxv" type="button" aria-label="菜单" aria-controls="site-nav" aria-expanded="false">
-                <span></span>
-            </button>
             <div class="sb-console astro-5qrshpxv" role="presentation">
                 <div class="sb-console__inner js-console astro-5qrshpxv"></div>
             </div>
-            <nav class="sb-menu js-site-nav astro-5qrshpxv" id="site-nav" aria-label="主导航">
+            <nav class="sb-menu js-site-nav astro-5qrshpxv" aria-label="主导航">
                 <ul class="sb__list astro-5qrshpxv">
                     <li class="sb__item astro-5qrshpxv"><a href="index.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.home">首页</span></a></li>
                     <li class="sb__item astro-5qrshpxv"><a href="memes.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.memes">梗库</span></a></li>
@@ -74,8 +71,8 @@
             </ul>
             <aside class="sb-availability astro-5qrshpxv">
                 <p class="astro-5qrshpxv">
-                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav_shell.title">梗的封神榜</span></span>
-                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav_shell.lead">收录视频最多者 · 上榜 →</span> <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="astro-5qrshpxv" data-i18n="nav_shell.link">参与贡献</a></span>
+                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv">梗的封神榜</span></span>
+                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv">收录视频最多者 · 上榜 →</span> <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="astro-5qrshpxv">参与贡献</a></span>
                 </p>
             </aside>
             <a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener" class="sb-qr-code js-qr-code astro-5qrshpxv" title="扫码或点击访问项目仓库">
@@ -85,61 +82,47 @@
     </header>
 
     <main class="page-shell">
-        <section class="page-section contributors-hero">
+        <section class="page-section memes-hero">
             <div class="panel">
-                <div class="panel__inner contributors-hero__inner">
-                    <span class="section-head__eyebrow" data-i18n="contributors_page.eyebrow">贡献者</span>
-                    <h1 class="section-head__title" data-i18n="contributors_page.title">贡献者排行榜</h1>
-                    <p class="section-head__copy" data-i18n="contributors_page.subtitle">每一位贡献者都在为B站梗文化添砖加瓦, 贡献越多称号越高</p>
-                    <p class="contributors-hero__stats"><span data-i18n="contributors_page.statsPrefix">已有</span> <strong id="contributors-total">0</strong> <span data-i18n="contributors_page.statsMiddle">位共建者，收录</span> <strong id="contributors-videos">0</strong> <span data-i18n="contributors_page.statsSuffix">个视频</span></p>
+                <div class="panel__inner memes-hero__inner">
+                    <div class="memes-hero__copy">
+                        <span class="section-head__eyebrow" data-i18n="memes_page.eyebrow">索引视图</span>
+                        <h1 class="section-head__title" data-i18n="memes_page.title">梗列表</h1>
+                        <p class="section-head__copy" data-i18n="memes_page.subtitle">按修仙等级排序, 搜索你熟悉的B站梗</p>
+                        <p class="memes-hero__count"><span data-i18n="memes_page.total">已收录</span> <strong id="memes-total-count">0</strong> <span data-i18n="memes_page.totalSuffix">个梗</span></p>
+                    </div>
+                    <div class="memes-search">
+                        <label class="u-sr-only" for="memes-search-input" data-i18n="memes_page.searchLabel">搜索梗</label>
+                        <span class="memes-search__icon" aria-hidden="true">&#9906;</span>
+                        <input type="text" id="memes-search-input" data-i18n-placeholder="memes_page.search" placeholder="搜索梗名称、别名或标签..." autocomplete="off">
+                    </div>
+                    <div class="memes-tier-chips" id="memes-tier-chips"></div>
                 </div>
             </div>
         </section>
 
-        <section class="page-section contributors-podium">
-            <div class="section-head">
-                <span class="section-head__eyebrow" data-i18n="contributors_page.podium">领奖台</span>
-                <h2 class="section-head__title" data-i18n="contributors_page.podiumTitle">哪怕现在只有一位贡献者，也先让“被记录”的感觉成立。</h2>
-                <p class="section-head__copy" data-i18n="contributors_page.podiumCopy">当前数据少，所以 podium 的目标不是凑出三张卡，而是把真实的贡献关系放在舞台中央。</p>
-            </div>
-            <div class="contributors-podium__grid" id="contributors-podium-grid"></div>
-        </section>
-
-        <section class="page-section page-section--tight" id="contributors-rest-section" hidden>
-            <div class="section-head">
-                <span class="section-head__eyebrow" data-i18n="contributors_page.moreBuilders">更多建设者</span>
-                <h2 class="section-head__title" data-i18n="contributors_page.restTitle">其余贡献者</h2>
-            </div>
-            <div class="contributors-rest__grid" id="contributors-rest-grid"></div>
-        </section>
-
-        <section class="page-section contributors-how">
+        <section class="page-section page-section--tight memes-toolbar">
             <div class="panel">
-                <div class="panel__inner contributors-how__inner">
-                    <div class="section-head">
-                        <span class="section-head__eyebrow" data-i18n="contributors_page.how">如何贡献</span>
-                        <h2 class="section-head__title" data-i18n="contributors_page.howTitle">让新贡献者知道路径，而不是只看见榜单。</h2>
+                <div class="panel__inner memes-toolbar__inner">
+                    <div class="memes-toolbar__meta">
+                        <span class="section-head__eyebrow" data-i18n="memes_page.filterState">筛选状态</span>
+                        <p class="memes-toolbar__results"><strong id="memes-results-count">0</strong> <span data-i18n="memes_page.results">个结果</span></p>
                     </div>
-                    <div class="contributors-how__steps">
-                        <article class="contributors-how__step">
-                            <span class="contributors-how__num">01</span>
-                            <h3 data-i18n="contributors_page.step1Title">Fork 仓库</h3>
-                            <p data-i18n="contributors_page.step1Copy">从 GitHub Fork 项目，先拿到一份你自己的工作副本。</p>
-                        </article>
-                        <article class="contributors-how__step">
-                            <span class="contributors-how__num">02</span>
-                            <h3 data-i18n="contributors_page.step2Title">补充梗或视频</h3>
-                            <p data-i18n="contributors_page.step2Copy">在数据文件中补充梗、视频、别名、描述或贡献者信息。</p>
-                        </article>
-                        <article class="contributors-how__step">
-                            <span class="contributors-how__num">03</span>
-                            <h3 data-i18n="contributors_page.step3Title">发起 Pull Request</h3>
-                            <p data-i18n="contributors_page.step3Copy">提交 PR，等待 Actions 校验通过，让你的名字被正式记录进来。</p>
-                        </article>
-                    </div>
-                    <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="btn btn--solid" target="_blank" rel="noopener" data-i18n="contributors_page.contribute">参与贡献</a>
+                    <div class="memes-toolbar__sort" id="memes-sort-controls"></div>
+                    <div class="memes-toolbar__tags" id="memes-tag-controls"></div>
                 </div>
             </div>
+        </section>
+
+        <section class="page-section page-section--tight">
+            <div class="memes-grid" id="memes-grid"></div>
+            <div class="empty-state" id="memes-empty-state" hidden>
+                <div class="empty-state__icon">00</div>
+                <h2 class="empty-state__title" data-i18n="memes_page.noResults">没有匹配的梗</h2>
+                <p class="empty-state__copy" data-i18n="memes_page.emptyCopy">当前数据量很小，筛选后没有结果是正常情况。先保证空状态足够体面，再等待内容慢慢长出来。</p>
+                <button class="btn" id="memes-clear-filters" type="button" data-i18n="memes_page.clear">清空筛选</button>
+            </div>
+            <nav class="memes-pagination" id="memes-pagination" aria-label="分页导航"></nav>
         </section>
     </main>
 
@@ -180,6 +163,6 @@
     <script src="js/i18n.js"></script>
     <script src="js/data.js"></script>
     <script src="js/nav.js"></script>
-    <script src="js/contributors.js"></script>
+    <script src="js/memes.js"></script>
 </body>
 </html>

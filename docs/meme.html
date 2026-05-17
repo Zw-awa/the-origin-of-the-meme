@@ -4,198 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="pageTitle.meme">梗详情 | 万恶之源</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <script>
+    try {
+        if (localStorage.getItem('hof-theme') === 'day') {
+            document.documentElement.classList.add('theme-contrasted');
+        }
+    } catch (_) {}
+    </script>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/meme.css">
 </head>
-<body>
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-logo">万恶之源</a>
-            <button class="nav-hamburger" aria-label="菜单">
-                <span></span><span></span><span></span>
+<body class="page-meme">
+    <header class="site-head astro-5qrshpxv">
+        <div class="site-head__container astro-5qrshpxv">
+            <div class="sb-logo astro-5qrshpxv">
+                <a href="index.html" class="astro-5qrshpxv" aria-label="万恶之源首页">
+                    <svg class="astro-5qrshpxv" width="48" height="48" viewBox="0 0 49 49" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="24.5" cy="24.5" rx="6" ry="8"></ellipse>
+                        <circle cx="24.5" cy="16" r="4"></circle>
+                        <circle cx="22.5" cy="15" r="0.8" fill="#fff"></circle>
+                        <circle cx="26.5" cy="15" r="0.8" fill="#fff"></circle>
+                        <path d="M19 20 L10 14 M18 24 L6 22 M18 28 L6 30 M19 32 L10 38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+                        <path d="M30 20 L39 14 M31 24 L43 22 M31 28 L43 30 M30 32 L39 38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+                    </svg>
+                    <span class="u-sr-only">万恶之源</span>
+                </a>
+            </div>
+            <button class="sb-toggle js-nav-toggle astro-5qrshpxv" type="button" aria-label="菜单" aria-controls="site-nav" aria-expanded="false">
+                <span></span>
             </button>
-            <ul class="nav-links">
-                <li><a href="memes.html" data-i18n="nav.memes">排行</a></li>
-                <li><a href="index.html#tier-system" data-i18n="nav.tiers">等级体系</a></li>
-                <li><a href="hall-of-fame.html" data-i18n="nav.hall">荣誉殿堂</a></li>
-                <li><a href="contributors.html" data-i18n="nav.contributors">贡献者</a></li>
-                <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" class="nav-github" target="_blank" rel="noopener">GitHub</a></li>
-                <li class="nav-lang-group">
-                    <button class="nav-lang-btn" data-lang="zh" onclick="switchLang('zh')" title="中文">中</button>
-                    <button class="nav-lang-btn" data-lang="en" onclick="switchLang('en')" title="English">EN</button>
-                    <button class="nav-lang-btn" data-lang="ja" onclick="switchLang('ja')" title="日本語">日</button>
+            <div class="sb-console astro-5qrshpxv" role="presentation">
+                <div class="sb-console__inner js-console astro-5qrshpxv"></div>
+            </div>
+            <nav class="sb-menu js-site-nav astro-5qrshpxv" id="site-nav" aria-label="主导航">
+                <ul class="sb__list astro-5qrshpxv">
+                    <li class="sb__item astro-5qrshpxv"><a href="index.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.home">首页</span></a></li>
+                    <li class="sb__item astro-5qrshpxv"><a href="memes.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.memes">梗库</span></a></li>
+                    <li class="sb__item astro-5qrshpxv"><a href="hall-of-fame.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.hall">荣誉殿堂</span></a></li>
+                    <li class="sb__item astro-5qrshpxv"><a href="contributors.html" class="js-menu-link astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav.contributors">贡献者</span></a></li>
+                </ul>
+            </nav>
+            <ul class="sb-socials astro-5qrshpxv">
+                <li class="sb__item astro-5qrshpxv"><a href="https://github.com/Zw-awa" target="_blank" rel="noopener" class="astro-5qrshpxv"><span class="sb__icon sb__icon--codepen astro-5qrshpxv" style="--path: path('M10 0C4.48 0 0 4.58 0 10.25c0 4.53 2.87 8.37 6.84 9.72.5.09.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.27 2.75 1.05A9.4 9.4 0 0 1 10 4.95c.85 0 1.71.12 2.51.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.49C17.14 18.62 20 14.78 20 10.25 20 4.58 15.52 0 10 0z');"></span><span class="u-sr-only">GitHub</span></a></li>
+                <li class="sb__item astro-5qrshpxv"><a href="https://space.bilibili.com/327252676" target="_blank" rel="noopener" class="astro-5qrshpxv"><span class="sb__icon sb__icon--linkedin astro-5qrshpxv" style="--path: path('M2.84.18A1.5 1.5 0 0 1 3.9.62l1.95 1.95h4.3l1.95-1.95a1.5 1.5 0 1 1 2.12 2.12l-.16.16h.85a3 3 0 0 1 3 3v6.6a3 3 0 0 1-3 3H1.1a3 3 0 0 1-3-3V5.9a3 3 0 0 1 3-3h.85l-.16-.16A1.5 1.5 0 0 1 2.84.18zM3.5 6.6a.9.9 0 0 0-.9.9v3.6a.9.9 0 0 0 .9.9h.6V6.6h-.6zm9 0v5.4h.6a.9.9 0 0 0 .9-.9V7.5a.9.9 0 0 0-.9-.9h-.6zM5.7 8.1a.9.9 0 0 1 1.8 0v.9a.9.9 0 1 1-1.8 0v-.9zm3.6 0a.9.9 0 0 1 1.8 0v.9a.9.9 0 1 1-1.8 0v-.9z');"></span><span class="u-sr-only">Bilibili</span></a></li>
+            </ul>
+            <ul class="sb-tools astro-5qrshpxv">
+                <li class="sb__item astro-5qrshpxv">
+                    <button class="sb-contrast js-contrast astro-5qrshpxv" type="button" aria-label="切换昼夜主题">
+                        <span class="theme-icon theme-icon--moon"></span>
+                        <span class="theme-icon theme-icon--sun"></span>
+                    </button>
+                </li>
+                <li class="sb__item astro-5qrshpxv">
+                    <div class="sb-language-switch js-language-switch astro-5qrshpxv">
+                        <button class="sb-language-current js-lang-current astro-5qrshpxv" type="button" aria-haspopup="true" aria-expanded="false" aria-label="切换语言">
+                            <span class="sb-language-current__label js-lang-current-label astro-5qrshpxv"></span>
+                            <span class="sb-language-current__caret astro-5qrshpxv">▾</span>
+                        </button>
+                        <div class="sb-language-list astro-5qrshpxv">
+                            <button class="sb-language-option js-lang-option astro-5qrshpxv" type="button" data-lang="zh">中文</button>
+                            <button class="sb-language-option js-lang-option astro-5qrshpxv" type="button" data-lang="en">English</button>
+                            <button class="sb-language-option js-lang-option astro-5qrshpxv" type="button" data-lang="ja">日本語</button>
+                        </div>
+                    </div>
                 </li>
             </ul>
+            <aside class="sb-availability astro-5qrshpxv">
+                <p class="astro-5qrshpxv">
+                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav_shell.title">梗的封神榜</span></span>
+                    <span class="sb__line astro-5qrshpxv"><span class="sb__text astro-5qrshpxv" data-i18n="nav_shell.lead">收录视频最多者 · 上榜 →</span> <a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="astro-5qrshpxv" data-i18n="nav_shell.link">参与贡献</a></span>
+                </p>
+            </aside>
+            <a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener" class="sb-qr-code js-qr-code astro-5qrshpxv" title="扫码或点击访问项目仓库">
+                <img src="hall-assets/images/qr-code.svg" alt="QR Code" width="72" height="72" class="astro-5qrshpxv">
+            </a>
         </div>
-    </nav>
+    </header>
 
-    <div class="meme-detail" id="meme-detail">
-        <a href="memes.html" class="meme-detail-back" data-i18n="meme_page.back">← 返回梗列表</a>
-        <div class="empty-state" id="loading-state">
-            <div class="empty-state-icon">&#9733;</div>
-            <p class="empty-state-text" data-i18n="common.loading">加载中...</p>
+    <main class="page-shell">
+        <div id="meme-root" class="meme-root">
+            <div class="empty-state">
+                <div class="empty-state__icon">...</div>
+                <h1 class="empty-state__title" data-i18n="common.loading">加载中...</h1>
+                <p class="empty-state__copy" data-i18n="meme_page.loadingCopy">梗详情页会优先确认 URL 参数与真实数据结构，而不是先堆内容。</p>
+            </div>
         </div>
-    </div>
+    </main>
 
-    <footer class="footer">
-        <div class="footer-waves">
-            <svg class="wave wave-1" viewBox="0 0 1440 100" preserveAspectRatio="none">
-                <path d="M0,50 C360,100 720,0 1080,50 C1260,75 1380,25 1440,50 L1440,100 L0,100 Z" fill="rgba(0,161,214,0.04)"/>
-            </svg>
-            <svg class="wave wave-2" viewBox="0 0 1440 100" preserveAspectRatio="none">
-                <path d="M0,30 C240,80 600,20 960,60 C1200,90 1320,40 1440,30 L1440,100 L0,100 Z" fill="rgba(251,114,153,0.03)"/>
-            </svg>
-        </div>
-        <div class="footer-inner">
-            <div class="footer-col">
-                <h3 data-i18n="footer.links">项目链接</h3>
-                <ul>
-                    <li><a href="memes.html" data-i18n="footer.memes">梗列表</a></li>
-                    <li><a href="hall-of-fame.html" data-i18n="footer.hall">荣誉殿堂</a></li>
-                    <li><a href="contributors.html" data-i18n="footer.contributors">贡献者排行</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener" data-i18n="footer.github">GitHub</a></li>
-                </ul>
+    <footer class="site-foot">
+        <div class="site-foot__inner">
+            <div class="site-foot__top">
+                <section>
+                    <h3 class="site-foot__title" data-i18n="footer.links">项目链接</h3>
+                    <ul class="site-foot__list">
+                        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+                        <li><a href="memes.html" data-i18n="footer.memes">梗列表</a></li>
+                        <li><a href="hall-of-fame.html" data-i18n="footer.hall">荣誉殿堂</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3 class="site-foot__title" data-i18n="footer.resources">相关资源</h3>
+                    <ul class="site-foot__list">
+                        <li><a href="contributors.html" data-i18n="footer.contributors">贡献者排行</a></li>
+                        <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" data-i18n="footer.guide">贡献指南</a></li>
+                        <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/issues" target="_blank" rel="noopener" data-i18n="footer.issues">问题反馈</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3 class="site-foot__title" data-i18n="footer.about">关于</h3>
+                    <ul class="site-foot__list">
+                        <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme" target="_blank" rel="noopener" data-i18n="footer.github">GitHub</a></li>
+                        <li><a href="https://www.bilibili.com" target="_blank" rel="noopener" data-i18n="footer.bilibili">Bilibili</a></li>
+                        <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">MIT License</a></li>
+                    </ul>
+                </section>
             </div>
-            <div class="footer-col">
-                <h3 data-i18n="footer.resources">相关资源</h3>
-                <ul>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" data-i18n="footer.guide">贡献指南</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/issues" target="_blank" rel="noopener" data-i18n="footer.issues">问题反馈</a></li>
-                    <li><a href="https://www.bilibili.com" target="_blank" rel="noopener" data-i18n="footer.bilibili">Bilibili</a></li>
-                </ul>
+            <div class="site-foot__disclaimer" data-i18n="footer.disclaimer">
+                本索引中的所有链接及元数据均为公开信息的整理与索引。所有视频、音频及相关素材的版权归原作者及哔哩哔哩(bilibili.com)所有。本项目仅提供索引服务, 不进行任何形式的内容存储、复制或分发。
             </div>
-            <div class="footer-col">
-                <h3 data-i18n="footer.about">关于</h3>
-                <ul>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme#%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88" target="_blank" rel="noopener" data-i18n="footer.intro">项目介绍</a></li>
-                    <li><a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">MIT License</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-disclaimer" data-i18n="footer.disclaimer">
-            本索引中的所有链接及元数据均为公开信息的整理与索引。所有视频、音频及相关素材的版权归原作者及哔哩哔哩(bilibili.com)所有。本项目仅提供索引服务, 不进行任何形式的内容存储、复制或分发。
         </div>
     </footer>
 
     <script src="js/i18n.js"></script>
     <script src="js/data.js"></script>
-    <script>
-    (function () {
-        var params = new URLSearchParams(window.location.search);
-        var memeId = params.get('id');
-
-        var container = document.getElementById('meme-detail');
-
-        if (!memeId) {
-            container.innerHTML =
-                '<div class="empty-state">' +
-                    '<div class="empty-state-icon">&#9888;</div>' +
-                    '<p class="empty-state-text">' + t('meme_page.noId') + '</p>' +
-                    '<a href="memes.html" class="empty-state-action">' + t('meme_page.browseAll') + '</a>' +
-                '</div>';
-            return;
-        }
-
-        document.title = t('pageTitle.meme');
-
-        loadFullData().then(function (data) {
-            var meme = getMemeById(data, memeId);
-            if (!meme) {
-                container.innerHTML =
-                    '<a href="memes.html" class="meme-detail-back">' + t('meme_page.back') + '</a>' +
-                    '<div class="empty-state">' +
-                        '<div class="empty-state-icon">&#128269;</div>' +
-                        '<p class="empty-state-text">' + t('meme_page.notFound') + ': ' + escapeHtml(memeId) + '</p>' +
-                        '<a href="memes.html" class="empty-state-action">' + t('meme_page.browseAll') + '</a>' +
-                    '</div>';
-                return;
-            }
-
-            document.title = memeId + ' | ' + t('common.siteName');
-            renderMemeDetail(meme);
-        }).catch(function () {
-            container.innerHTML =
-                '<a href="memes.html" class="meme-detail-back">&#8592; ' + t('meme_page.back') + '</a>' +
-                '<div class="empty-state">' +
-                    '<div class="empty-state-icon">&#9888;</div>' +
-                    '<p class="empty-state-text">' + t('common.error') + '</p>' +
-                '</div>';
-        });
-
-        function renderMemeDetail(meme) {
-            var aliasesHtml = '';
-            if (meme.aliases && meme.aliases.length > 0) {
-                aliasesHtml = '<div class="meme-detail-aliases">' + t('meme_page.aliases') + ': ' +
-                    meme.aliases.map(function (a) { return '<span>' + escapeHtml(a) + '</span>'; }).join('') +
-                    '</div>';
-            }
-
-            var tagsHtml = '';
-            if (meme.tags && meme.tags.length > 0) {
-                tagsHtml = '<div class="meme-detail-tags">' +
-                    meme.tags.map(function (tag) {
-                        return '<span class="meme-detail-tag">' + escapeHtml(tag) + '</span>';
-                    }).join('') +
-                    '</div>';
-            }
-
-            var descHtml = '';
-            if (meme.description) {
-                descHtml = '<p class="meme-detail-description">' + escapeHtml(meme.description) + '</p>';
-            }
-
-            var originHtml = '';
-            if (meme.origin_video) {
-                var safeUrl = safeHref(meme.origin_video);
-                originHtml = '<div class="meme-detail-origin">' +
-                    '<p style="color:var(--text-muted);margin-bottom:8px;">' + t('meme_page.originVideo') + '</p>' +
-                    '<a href="' + safeUrl + '" target="_blank" rel="noopener">' + escapeHtml(meme.origin_video) + '</a>' +
-                    '</div>';
-            }
-
-            var videosHtml = '';
-            if (meme.videos && meme.videos.length > 0) {
-                videosHtml = '<div class="meme-detail-videos">' +
-                    '<h2>' + t('meme_page.videos') + ' (' + meme.videos.length + ')</h2>' +
-                    '<div class="video-list">';
-                meme.videos.forEach(function (video) {
-                    var bvid = video.bvid || '';
-                    var biliUrl = bvid ? 'https://www.bilibili.com/video/' + bvid : '#';
-                    videosHtml += '<div class="video-card">' +
-                        '<div class="video-card-title">' +
-                            '<a href="' + biliUrl + '" target="_blank" rel="noopener">' + escapeHtml(video.title || t('common.noTitle')) + '</a>' +
-                        '</div>' +
-                        '<div class="video-card-author">' + t('meme_page.upMaster') + ': ' + escapeHtml(video.author || t('common.unknown')) + '</div>';
-                    if (video.description) {
-                        videosHtml += '<div class="video-card-desc">' + escapeHtml(video.description) + '</div>';
-                    }
-                    if (video.contributor) {
-                        videosHtml += '<div class="video-card-contributor">' + t('meme_page.contributorLabel') + ': <a href="https://github.com/' + encodeURIComponent(video.contributor) + '" target="_blank" rel="noopener">@' + escapeHtml(video.contributor) + '</a></div>';
-                    }
-                    videosHtml += '</div>';
-                });
-                videosHtml += '</div></div>';
-            }
-
-            var ctaHtml = '<div class="meme-detail-cta">' +
-                '<a href="https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md" class="btn-neon" target="_blank" rel="noopener">' + t('meme_page.contribute') + '</a>' +
-                '</div>';
-
-            container.innerHTML =
-                '<a href="memes.html" class="meme-detail-back">&#8592; ' + t('meme_page.back') + '</a>' +
-                '<div class="meme-detail-header">' +
-                    '<div class="meme-detail-tier">' + buildTierBadge(meme.tier, true) + '</div>' +
-                    '<h1 class="meme-detail-name">' + escapeHtml(meme.id) + '</h1>' +
-                    aliasesHtml +
-                    '</div>' +
-                tagsHtml +
-                descHtml +
-                originHtml +
-                videosHtml +
-                ctaHtml;
-        }
-    })();
-    </script>
-    <script src="js/main.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/meme.js"></script>
 </body>
 </html>

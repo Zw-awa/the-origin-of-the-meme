@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'LXGWNeoXiHei';
+  src: url('../hall-assets/fonts/LXGWNeoXiHei.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bigger Display';
+  src: url('../hall-assets/fonts/Bigger-Display.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fraktion Mono';
+  src: url('../hall-assets/fonts/PPFraktionMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fraktion Mono';
+  src: url('../hall-assets/fonts/PPFraktionMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Editorial New';
+  src: url('../hall-assets/fonts/PPEditorialNew-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Editorial New';
+  src: url('../hall-assets/fonts/PPEditorialNew-Ultralight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}

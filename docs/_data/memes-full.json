@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T14:11:30Z",
+  "generated_at": "2026-05-17T14:18:17Z",
   "memes": [
     {
       "id": "华强买瓜",
@@ -28,6 +28,32 @@
       "tier": "杂役弟子",
       "hall_of_fame": false,
       "rank": 1
+    },
+    {
+      "id": "高松灯企鹅",
+      "aliases": [
+        "企鹅",
+        "不要嫌弃朋友分享给你的史"
+      ],
+      "origin_video": "",
+      "origin_date": "",
+      "description": "",
+      "tags": [
+        "鬼畜",
+        "动物"
+      ],
+      "videos": [
+        {
+          "bvid": "BV1nNrxBgEVB",
+          "title": "🐧：不要嫌弃朋友分享给你的史",
+          "author": "嘎咕灵感菇",
+          "contributor": "Zw-awa"
+        }
+      ],
+      "submissions": 1,
+      "tier": "杂役弟子",
+      "hall_of_fame": false,
+      "rank": 2
     }
   ]
 }
