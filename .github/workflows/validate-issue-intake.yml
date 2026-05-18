@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
+  issue_intake_validate:
     if: startsWith(github.event.issue.title, '[Meme Intake]') || contains(github.event.issue.labels.*.name, 'meme-intake')
     runs-on: ubuntu-latest
     timeout-minutes: 5
