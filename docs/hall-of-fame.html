@@ -789,7 +789,11 @@ html.theme-contrasted .theme-hover-orbit--moon { display: none; }
 </script>
 <script id="intro-failsafe">
 (function () {
+  var introReleased = false;
+
   function releaseIntro() {
+    if (introReleased) return;
+    introReleased = true;
     var root = document.documentElement;
     var intro = document.querySelector('.js-intro');
     var wrapper = document.querySelector('.js-site-wrapper');
