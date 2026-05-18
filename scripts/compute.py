@@ -33,8 +33,12 @@ def load_json_file(path):
     return data if isinstance(data, dict) else None
 
 
-def reuse_generated_at_if_unchanged(path, output):
-    existing = load_json_file(path)
+def reuse_generated_at_if_unchanged(paths, output):
+    existing = None
+    for path in paths:
+        existing = load_json_file(path)
+        if existing:
+            break
     if not existing:
         return output
 
@@ -180,7 +184,7 @@ def write_output(memes, contributors, stats):
         ],
         "stats": stats,
     }
-    output = reuse_generated_at_if_unchanged(OUTPUT_FILE, output)
+    output = reuse_generated_at_if_unchanged([PAGES_OUTPUT, OUTPUT_FILE], output)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     PAGES_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
@@ -236,7 +240,7 @@ def write_full_output(full_memes):
         "generated_at": now,
         "memes": full_memes,
     }
-    output = reuse_generated_at_if_unchanged(FULL_OUTPUT, output)
+    output = reuse_generated_at_if_unchanged([FULL_PAGES, FULL_OUTPUT], output)
 
     FULL_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     FULL_PAGES.parent.mkdir(parents=True, exist_ok=True)
