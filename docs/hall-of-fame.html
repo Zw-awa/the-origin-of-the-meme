@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" class="is-scroll-blocked astro-j7pv25f6"> <head><meta charset="utf-8"><title>荣誉殿堂 · 万恶之源 | Hall of Fame</title><meta name="description" content="荣誉殿堂 · 收录视频最多的梗在此封神"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.9"><meta name="apple-mobile-web-app-title" content="万恶之源"><meta name="theme-color" content="#160000"><meta name="msapplication-navbutton-color" content="#160000"><meta name="apple-mobile-web-app-status-bar-style" content="#160000"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="website"><meta property="og:title" content="荣誉殿堂 · 万恶之源"><meta property="og:description" content="梗的封神榜"><meta name="twitter:card" content="summary_large_image"><link rel="preload" href="hall-assets/fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/PPEditorialNew-Ultralight.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/PPFraktionMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/PPFraktionMono-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/Bigger-Display.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="stylesheet" href="hall-assets/_astro/index.MJ9FiCyD.css"><script type="module" src="hall-assets/_astro/hoisted.BvNyQ0G_.js"></script><style id="our-fonts">
+<!DOCTYPE html><html lang="zh-CN" class="astro-j7pv25f6"> <head><meta charset="utf-8"><title>荣誉殿堂 · 万恶之源 | Hall of Fame</title><meta name="description" content="荣誉殿堂 · 收录视频最多的梗在此封神"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.15.9"><meta name="apple-mobile-web-app-title" content="万恶之源"><meta name="theme-color" content="#160000"><meta name="msapplication-navbutton-color" content="#160000"><meta name="apple-mobile-web-app-status-bar-style" content="#160000"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="website"><meta property="og:title" content="荣誉殿堂 · 万恶之源"><meta property="og:description" content="梗的封神榜"><meta name="twitter:card" content="summary_large_image"><link rel="preload" href="hall-assets/fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/PPEditorialNew-Ultralight.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/PPFraktionMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/PPFraktionMono-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="hall-assets/fonts/Bigger-Display.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="stylesheet" href="hall-assets/_astro/index.MJ9FiCyD.css"><script type="module" src="hall-assets/_astro/hoisted.BvNyQ0G_.js"></script><style id="our-fonts">
 @font-face {
   font-family: 'LXGWNeoXiHei';
   src: url('hall-assets/fonts/LXGWNeoXiHei.woff2') format('woff2'),
@@ -787,6 +787,39 @@ html.theme-contrasted .theme-hover-orbit--moon { display: none; }
   }
 })();
 </script>
+<script id="intro-failsafe">
+(function () {
+  function releaseIntro() {
+    var root = document.documentElement;
+    var intro = document.querySelector('.js-intro');
+    var wrapper = document.querySelector('.js-site-wrapper');
+    var mount = document.querySelector('.js-mount');
+    if (wrapper) wrapper.style.opacity = '1';
+    if (mount) mount.style.opacity = '1';
+    if (intro) intro.remove();
+    root.classList.remove('is-scroll-blocked');
+    root.classList.add('is-loaded');
+    if (window.lenis && typeof window.lenis.resize === 'function') {
+      window.lenis.resize();
+    }
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  function armFailsafe() {
+    window.setTimeout(function () {
+      if (document.querySelector('.js-intro')) {
+        releaseIntro();
+      }
+    }, 3200);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armFailsafe, { once: true });
+  } else {
+    armFailsafe();
+  }
+})();
+</script>
 <style>
 /* intro logo: 盖住 wodniack 的拼字 div，显示蜘蛛 */
 .site-intro .sb-logo {
@@ -890,7 +923,7 @@ html.theme-contrasted .theme-hover-orbit--moon { display: none; }
   animation: hero-flip-y 1s linear 1 forwards !important;
 }
 
-</style></head> <body class="astro-j7pv25f6"> <div class="site-wrapper js-site-wrapper astro-j7pv25f6" style="opacity: 0;"> <header class="site-head astro-5qrshpxv" data-intersect> <div class="site-head__container astro-5qrshpxv"> <div class="sb-logo astro-5qrshpxv"> <a href="index.html" class="astro-5qrshpxv"> <svg class="js-logo astro-5qrshpxv" width="48" height="48" style="color:var(--color-secondary);width:3rem;height:3rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49" fill="currentColor">
+</style></head> <body class="astro-j7pv25f6"> <div class="site-wrapper js-site-wrapper astro-j7pv25f6"> <header class="site-head astro-5qrshpxv" data-intersect> <div class="site-head__container astro-5qrshpxv"> <div class="sb-logo astro-5qrshpxv"> <a href="index.html" class="astro-5qrshpxv"> <svg class="js-logo astro-5qrshpxv" width="48" height="48" style="color:var(--color-secondary);width:3rem;height:3rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49" fill="currentColor">
   <!-- 蜘蛛身 -->
   <ellipse cx="24.5" cy="24.5" rx="6" ry="8"/>
   <!-- 头 -->
@@ -968,7 +1001,7 @@ CONTRIBUTE ON GITHUB
   <path d="M19 20 L10 14 M18 24 L6 22 M18 28 L6 30 M19 32 L10 38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
   <!-- 8 条腿 - 右 4 -->
   <path d="M30 20 L39 14 M31 24 L43 22 M31 28 L43 30 M30 32 L39 38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-</svg></a> </div><!-- .site-foot__logo --> </footer>  </div><!-- .site-wrapper --> <div class="site-intro js-intro astro-j7pv25f6" style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: var(--color-primary);"> <div class="sb-logo js-logo astro-j7pv25f6"> <div class="sb__path sb__path--v sb__path--v-1 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--h sb__path--h-1 js-logo-line-h astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-2 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-3 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--h sb__path--h-2 js-logo-line-h astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-4 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--h sb__path--h-3 js-logo-line-h astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-5 js-logo-line-v astro-j7pv25f6"></div> </div><!-- .sb-logo --> <div class="site-intro__border site-intro__border--top js-border-top astro-j7pv25f6"></div> <div class="site-intro__border site-intro__border--left js-border-left astro-j7pv25f6"></div> <div class="site-intro__border site-intro__border--right js-border-right astro-j7pv25f6"></div> </div><!-- .site-intro --> <div class="site-mount js-mount astro-j7pv25f6"></div> <div class="site-contrast-mask js-contrast-mask astro-j7pv25f6"></div> <div class="site-scrollbar astro-yxqriywh"> <div class="site-scrollbar__track astro-yxqriywh"></div> <div class="site-scrollbar__thumb js-thumb astro-yxqriywh"></div> </div>     <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><footer style="position:fixed;bottom:10px;left:14px;z-index:9999;font-family:'Fraktion Mono',monospace;font-size:12px;color:var(--color-secondary);letter-spacing:0.08em;pointer-events:auto;background:var(--color-primary);padding:6px 10px;border:1px solid var(--color-secondary);border-radius:2px;opacity:0.9;">Adapted from <a href="https://wodniack.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">wodniack.dev</a> · <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">CC BY-NC 4.0</a></footer>
+</svg></a> </div><!-- .site-foot__logo --> </footer>  </div><!-- .site-wrapper --> <div class="site-intro js-intro astro-j7pv25f6"> <div class="sb-logo js-logo astro-j7pv25f6"> <div class="sb__path sb__path--v sb__path--v-1 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--h sb__path--h-1 js-logo-line-h astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-2 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-3 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--h sb__path--h-2 js-logo-line-h astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-4 js-logo-line-v astro-j7pv25f6"></div> <div class="sb__path sb__path--h sb__path--h-3 js-logo-line-h astro-j7pv25f6"></div> <div class="sb__path sb__path--v sb__path--v-5 js-logo-line-v astro-j7pv25f6"></div> </div><!-- .sb-logo --> <div class="site-intro__border site-intro__border--top js-border-top astro-j7pv25f6"></div> <div class="site-intro__border site-intro__border--left js-border-left astro-j7pv25f6"></div> <div class="site-intro__border site-intro__border--right js-border-right astro-j7pv25f6"></div> </div><!-- .site-intro --> <div class="site-mount js-mount astro-j7pv25f6"></div> <div class="site-contrast-mask js-contrast-mask astro-j7pv25f6"></div> <div class="site-scrollbar astro-yxqriywh"> <div class="site-scrollbar__track astro-yxqriywh"></div> <div class="site-scrollbar__thumb js-thumb astro-yxqriywh"></div> </div>     <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><footer style="position:fixed;bottom:10px;left:14px;z-index:9999;font-family:'Fraktion Mono',monospace;font-size:12px;color:var(--color-secondary);letter-spacing:0.08em;pointer-events:auto;background:var(--color-primary);padding:6px 10px;border:1px solid var(--color-secondary);border-radius:2px;opacity:0.9;">Adapted from <a href="https://wodniack.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">wodniack.dev</a> · <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">CC BY-NC 4.0</a></footer>
 <script>
 (function () {
   function patchWorks(memes) {
