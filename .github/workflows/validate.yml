@@ -2,8 +2,6 @@ name: Validate Meme Data
 
 on:
   pull_request:
-    paths:
-      - 'memes/**'
   workflow_dispatch:
 
 permissions:
