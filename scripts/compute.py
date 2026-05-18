@@ -18,6 +18,36 @@ FULL_OUTPUT = DATA_DIR / "memes-full.json"
 FULL_PAGES = PROJECT_ROOT / "docs" / "_data" / "memes-full.json"
 
 
+def utc_now():
+    return datetime.datetime.now(datetime.timezone.utc).strftime(
+        "%Y-%m-%dT%H:%M:%SZ"
+    )
+
+
+def load_json_file(path):
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def reuse_generated_at_if_unchanged(path, output):
+    existing = load_json_file(path)
+    if not existing:
+        return output
+
+    existing_body = dict(existing)
+    new_body = dict(output)
+    existing_body.pop("generated_at", None)
+    new_body.pop("generated_at", None)
+
+    if existing_body == new_body and existing.get("generated_at"):
+        output["generated_at"] = existing["generated_at"]
+    return output
+
+
 # Step 1: Load tiers (imported)
 
 # Step 2: Iterate all memes
@@ -133,9 +163,7 @@ def compute_stats(memes, contributors):
 
 def write_output(memes, contributors, stats):
     """Serialize and write _data/computed.json + docs/_data/computed.json."""
-    now = datetime.datetime.now(datetime.timezone.utc).strftime(
-        "%Y-%m-%dT%H:%M:%SZ"
-    )
+    now = utc_now()
 
     output = {
         "generated_at": now,
@@ -152,6 +180,7 @@ def write_output(memes, contributors, stats):
         ],
         "stats": stats,
     }
+    output = reuse_generated_at_if_unchanged(OUTPUT_FILE, output)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     PAGES_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
@@ -202,13 +231,12 @@ def build_full_memes(memes_dir, memes):
 
 def write_full_output(full_memes):
     """Write _data/memes-full.json + docs/_data/memes-full.json."""
-    now = datetime.datetime.now(datetime.timezone.utc).strftime(
-        "%Y-%m-%dT%H:%M:%SZ"
-    )
+    now = utc_now()
     output = {
         "generated_at": now,
         "memes": full_memes,
     }
+    output = reuse_generated_at_if_unchanged(FULL_OUTPUT, output)
 
     FULL_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     FULL_PAGES.parent.mkdir(parents=True, exist_ok=True)
