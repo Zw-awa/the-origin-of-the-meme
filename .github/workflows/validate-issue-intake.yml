@@ -1,0 +1,190 @@
+name: Validate Meme Intake Issue
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: issue-intake-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: startsWith(github.event.issue.title, '[Meme Intake]') || contains(github.event.issue.labels.*.name, 'meme-intake')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml==6.0.2
+
+      - name: Validate issue payload
+        id: validate
+        run: python scripts/validate_issue.py --event-path "$GITHUB_EVENT_PATH"
+        continue-on-error: true
+
+      - name: Generate fallback report
+        if: steps.validate.outcome == 'failure'
+        run: |
+          if [ ! -s issue-validation-report.md ]; then
+            echo '<!-- issue-intake-validation -->' > issue-validation-report.md
+            echo '## ❌ 梗提报自动校验失败' >> issue-validation-report.md
+            echo '' >> issue-validation-report.md
+            echo '校验脚本执行异常，暂时无法正确解析该 Issue。' >> issue-validation-report.md
+            echo '' >> issue-validation-report.md
+            echo '- 请确认模板字段完整，尤其是目标文件名和 YAML 提案' >> issue-validation-report.md
+            echo '- 如仍有问题，请参考 CONTRIBUTING.md 或直接改用 PR 提交' >> issue-validation-report.md
+          fi
+
+      - name: Upsert validation comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- issue-intake-validation -->';
+            const body = fs.readFileSync('issue-validation-report.md', 'utf8');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) =>
+              comment.user?.login === 'github-actions[bot]' &&
+              typeof comment.body === 'string' &&
+              comment.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }
+
+      - name: Sync review labels
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          VALIDATION_OUTCOME: ${{ steps.validate.outcome }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const labels = [
+              {
+                name: 'meme-intake',
+                color: '0e8a16',
+                description: '通过 Issue 提交的梗数据提报',
+              },
+              {
+                name: 'status:auto-check-passed',
+                color: '1d76db',
+                description: 'Issue 自动校验通过',
+              },
+              {
+                name: 'status:auto-check-failed',
+                color: 'd73a4a',
+                description: 'Issue 自动校验失败',
+              },
+              {
+                name: 'status:needs-manual-review',
+                color: 'fbca04',
+                description: '已通过自动校验，等待维护者人工审核',
+              },
+              {
+                name: 'status:awaiting-author-update',
+                color: 'd87616',
+                description: '需要提报者更新 Issue 内容后重新校验',
+              },
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner,
+                  repo,
+                  name: label.name,
+                });
+              } catch (error) {
+                if (error.status !== 404) {
+                  throw error;
+                }
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  ...label,
+                });
+              }
+            }
+
+            const outcome = process.env.VALIDATION_OUTCOME;
+            const desired = outcome === 'success'
+              ? ['meme-intake', 'status:auto-check-passed', 'status:needs-manual-review']
+              : ['meme-intake', 'status:auto-check-failed', 'status:awaiting-author-update'];
+            const removable = [
+              'status:auto-check-passed',
+              'status:auto-check-failed',
+              'status:needs-manual-review',
+              'status:awaiting-author-update',
+            ];
+
+            const existingNames = context.payload.issue.labels.map((label) => label.name);
+
+            for (const name of removable) {
+              if (!existingNames.includes(name) || desired.includes(name)) {
+                continue;
+              }
+              try {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number,
+                  name,
+                });
+              } catch (error) {
+                if (error.status !== 404) {
+                  throw error;
+                }
+              }
+            }
+
+            const labelsToAdd = desired.filter((name) => !existingNames.includes(name));
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number,
+                labels: labelsToAdd,
+              });
+            }
+
+      - name: Fail if validation failed
+        if: steps.validate.outcome == 'failure'
+        run: exit 1

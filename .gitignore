@@ -25,6 +25,7 @@ __pycache__/
 *_snapshot.html
 *_dump.html
 /validation-report.md
+/issue-validation-report.md
 /docs/computed.json
 /docs/memes-full.json
 

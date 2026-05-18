@@ -1,0 +1,16 @@
+name: 站点 / 仓库问题反馈
+description: 反馈页面、脚本、文档或数据问题
+title: "[Site]: "
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 问题描述
+      placeholder: 请描述你遇到的问题或想反馈的内容
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 复现方式 / 补充信息
+      placeholder: 如有页面链接、截图说明、脚本报错、相关 YAML 文件名等，请补充在这里

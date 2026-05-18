@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 直接提交 Pull Request
+    url: https://github.com/Zw-awa/the-origin-of-the-meme/compare
+    about: 如果你已经准备好 YAML 修改，PR 仍然是最快的正式收录路径。
+  - name: 贡献指南
+    url: https://github.com/Zw-awa/the-origin-of-the-meme/blob/main/CONTRIBUTING.md
+    about: 查看 YAML 格式、字段说明和提交规范。
