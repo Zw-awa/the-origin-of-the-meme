@@ -97,6 +97,91 @@ PR 提交后，GitHub Actions 会自动检查：
 
 审核通过后会合并到主分支，梗的等级和排行榜会自动更新。
 
+## 不方便提 PR？可以先提 Issue
+
+如果你暂时不方便直接 Fork + 提交 PR，现在也可以使用仓库里的 **「梗数据提报」Issue 模板**：
+
+- 在 Issue 表单里填写提交类型、梗名称、目标文件名
+- 粘贴 **完整的目标 YAML 文件内容**
+- 提交后会自动进行基础校验
+- 校验通过后，Issue 会打上“待人工审核”状态标签
+
+这条链路适合“先提报、后处理”，但要注意：
+
+- **Issue 不会直接写入仓库**
+- 正式收录仍然需要维护者人工审核，或将内容转成 PR
+- 如果你已经能直接改仓库，还是优先推荐 PR，因为这是完整、正式、可追踪的提交路径
+
+如果维护者确认某条 Issue 提报可以继续推进，也可以给该 Issue 添加 `action:create-draft-pr` 标签。仓库会自动：
+
+- 把 Issue 中的 YAML 提案写入目标文件
+- 运行一次 `scripts/compute.py`
+- 创建或更新一条对应的 Draft PR
+
+这样就能把“先提 Issue”平滑转到正式的 PR 审核链路里。
+
+如果 Draft PR 创建后，提报者又更新了原 Issue，维护者可以再添加 `action:sync-from-issue` 标签。仓库会用最新的 Issue 内容重新同步同一条 Draft PR 分支。
+
+## 维护者快速上手
+
+如果你是仓库维护者，下面这套流程可以最快把 Issue 提报接入正式审核链路。
+
+### 场景 1：Issue 刚提交，先看自动校验结果
+
+1. 打开使用 **「梗数据提报」** 模板创建的 Issue
+2. 查看 GitHub Actions 自动评论
+3. 看标签状态：
+   - `status:auto-check-passed` + `status:needs-manual-review`：可以进入人工判断
+   - `status:auto-check-failed` + `status:awaiting-author-update`：先让提报者修正，不要继续转 PR
+
+### 场景 2：决定把 Issue 转成 Draft PR
+
+适用条件：
+
+- 自动校验已经通过
+- YAML 结构基本可信
+- 内容值得继续进入正式代码审核
+
+操作方法：
+
+1. 给该 Issue 添加 `action:create-draft-pr` 标签
+2. 等待 Actions 自动执行
+3. 工作流会自动：
+   - 把 Issue 中的 YAML 提案写入目标文件
+   - 运行 `scripts/compute.py`
+   - 创建或更新一条对应的 Draft PR
+4. 回到 Issue 查看机器人评论里的 Draft PR 链接
+
+### 场景 3：Issue 更新后，重新同步到已有 Draft PR
+
+如果提报者没有直接改 Draft PR，而是继续修改了原 Issue 内容：
+
+1. 先确认 Issue 最新内容已经重新通过自动校验
+2. 给该 Issue 添加 `action:sync-from-issue` 标签
+3. 工作流会把最新 Issue 内容重新同步到同一条 Draft PR 分支
+
+这个动作适合“继续以 Issue 作为编辑入口”的情况；如果提报者已经开始直接改 Draft PR，就不需要再同步。
+
+### 场景 4：什么时候不要转 PR
+
+下面这些情况建议停在 Issue 阶段，不要直接转 Draft PR：
+
+- 自动校验没通过
+- YAML 虽然合法，但梗归类明显有争议
+- 视频和梗的关联性不足
+- 与现有条目重复，但提报者还没说明差异
+- 你希望作者先补充 `origin_video`、描述或上下文说明
+
+### 推荐的最短处理路径
+
+对于大多数维护者，最快的操作就是：
+
+1. 看 Issue 标签是否为 `status:auto-check-passed`
+2. 快速检查 YAML 和内容是否靠谱
+3. 可以推进就打 `action:create-draft-pr`
+4. 若作者后来继续改 Issue，再打 `action:sync-from-issue`
+5. 后续全部回到 Draft PR 里按正常 PR 流程审
+
 ## 收录建议
 
 - 推荐收录播放量超过 1 万的视频，但这不是硬性要求

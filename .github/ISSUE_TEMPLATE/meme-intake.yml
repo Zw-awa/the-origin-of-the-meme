@@ -1,0 +1,79 @@
+name: 梗数据提报
+description: 通过 Issue 提报梗数据，先进入自动校验，再进入人工审核
+title: "[Meme Intake]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这个模板适合“不方便直接提交 PR，但已经整理好 YAML”的场景。
+
+        使用方式：
+        - 请粘贴完整的目标 YAML 文件内容，不要只贴 diff 或零散字段
+        - 提交后会自动进行基础校验
+        - 自动校验通过后，Issue 会进入人工审核队列
+        - 这条链路不会直接修改仓库数据，正式收录仍然需要维护者人工处理或转成 PR
+  - type: dropdown
+    id: submission_type
+    attributes:
+      label: 提交类型
+      description: 请选择本次提报的类型
+      options:
+        - 新增梗条目
+        - 为已有梗添加视频收录
+        - 修正已有条目信息
+    validations:
+      required: true
+  - type: input
+    id: meme_name
+    attributes:
+      label: 梗名称
+      description: 应与 YAML 中的 name 字段一致
+      placeholder: 华强买瓜
+    validations:
+      required: true
+  - type: input
+    id: target_filename
+    attributes:
+      label: 目标文件名
+      description: 仓库中的目标文件名，必须以 .yaml 结尾
+      placeholder: 华强买瓜.yaml
+    validations:
+      required: true
+  - type: textarea
+    id: yaml_payload
+    attributes:
+      label: YAML 提案
+      description: 请粘贴完整的目标 YAML 文件内容
+      render: yaml
+      placeholder: |
+        name: 华强买瓜
+        aliases: ["这瓜保熟吗"]
+        origin_video: ""
+        origin_date: ""
+        description: "一句话描述这个梗"
+        tags: ["鬼畜", "影视剪辑"]
+
+        videos:
+          - bvid: BVxxxxxxxxxx
+            title: "视频标题"
+            author: "UP主名称"
+            contributor: "你的GitHub用户名"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 补充说明
+      description: 可选。补充出处、争议点、为什么值得收录等
+      placeholder: 如果 origin_video 暂时缺失，请说明原因；如果这是新增梗，也可补充背景。
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已阅读贡献指南，并确认这里粘贴的是完整 YAML 文件内容
+          required: true
+        - label: 我理解 Issue 只进入自动校验和人工审核，不会直接写入仓库
+          required: true
+        - label: 我确认提报内容与 B 站梗相关，且使用的是公开可索引信息
+          required: true
