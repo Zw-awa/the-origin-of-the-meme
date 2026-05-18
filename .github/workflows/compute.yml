@@ -2,7 +2,12 @@ name: Compute Rankings
 
 on:
   push:
-    branches-ignore: [main]
+    branches: ['**']
+    paths:
+      - 'memes/**'
+      - '_data/tiers.yaml'
+      - 'scripts/**'
+  pull_request:
     paths:
       - 'memes/**'
       - '_data/tiers.yaml'
@@ -22,6 +27,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -33,9 +40,14 @@ jobs:
       - name: Compute rankings
         run: python scripts/compute.py
 
-      - name: Commit computed data
+      - name: Commit computed data to branch
+        if: github.event_name == 'push' && github.ref_name != 'main'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: ${{ github.ref_name }}
           commit_message: "chore: update computed data [skip ci]"
           file_pattern: "docs/_data/computed.json docs/_data/memes-full.json"
+
+      - name: Verify computed data is up to date
+        if: github.event_name == 'pull_request' || github.ref_name == 'main'
+        run: git diff --exit-code -- docs/_data/computed.json docs/_data/memes-full.json
