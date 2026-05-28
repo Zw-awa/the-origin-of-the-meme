@@ -203,6 +203,10 @@
         `;
 
         document.title = meme.id + ' | ' + window.t('pageTitle.meme');
+
+        root.querySelectorAll('.meme-video-card, .meme-related-card, .meme-detail-section .panel').forEach(function (node, index) {
+            node.style.transitionDelay = ((index % 6) * 36) + 'ms';
+        });
     }
 
     async function init() {

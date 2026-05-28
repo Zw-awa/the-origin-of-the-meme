@@ -84,6 +84,7 @@ function initDanmakuLayer(id, items, baseDuration, minTop, maxTop) {
 
 function initHeroFade() {
     const hero = document.getElementById('home-hero');
+    const frame = hero ? hero.querySelector('.home-hero__frame') : null;
     if (!hero) return;
 
     function onScroll() {
@@ -92,6 +93,9 @@ function initHeroFade() {
         const progress = Math.min(Math.max(-rect.top / (heroHeight * 0.8), 0), 1);
         hero.style.opacity = String(1 - progress * 0.85);
         hero.style.transform = `translateY(${progress * 24}px)`;
+        if (frame) {
+            frame.style.transform = `translateY(${progress * -18}px) scale(${(1 - progress * 0.035).toFixed(4)})`;
+        }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -181,6 +185,9 @@ function renderRankings(memes) {
     }
 
     list.innerHTML = html;
+    list.querySelectorAll('.home-ranking-row').forEach((row, index) => {
+        row.style.transitionDelay = `${index * 35}ms`;
+    });
 }
 
 function avatarFallback(login) {
@@ -219,6 +226,10 @@ function renderContributors(contributors) {
             </div>
         </a>
     `).join('');
+
+    grid.querySelectorAll('.home-contributor-card').forEach((card, index) => {
+        card.style.transitionDelay = `${80 + index * 40}ms`;
+    });
 }
 
 function initStairStripes() {

@@ -1,18 +1,7 @@
 # IDE & Editor
-.vscode/
-.idea/
-*.swp
-*.swo
 *~
 
-# AI assistants
-.claude/
-CLAUDE.md
-
-# Project design docs (internal only, not published)
-design/
-
-# Local tools (not for git)
+# Local tools
 tools/
 
 # Python

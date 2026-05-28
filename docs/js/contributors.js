@@ -48,6 +48,9 @@
         }
 
         podium.innerHTML = contributors.slice(0, 3).map(buildPodiumCard).join('');
+        podium.querySelectorAll('.contributors-podium__card').forEach(function (card, index) {
+            card.style.transitionDelay = (index * 45) + 'ms';
+        });
 
         var rest = contributors.slice(3);
         if (!rest.length) {
@@ -67,6 +70,9 @@
                 </a>
             `;
         }).join('');
+        restGrid.querySelectorAll('.contributors-rest__card').forEach(function (card, index) {
+            card.style.transitionDelay = ((index % 8) * 26) + 'ms';
+        });
     }
 
     if (document.readyState === 'loading') {

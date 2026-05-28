@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/motion.css">
     <link rel="stylesheet" href="css/memes.css">
 </head>
 <body class="page-memes">
@@ -92,7 +93,7 @@
                         <span class="section-head__eyebrow" data-i18n="memes_page.eyebrow">索引视图</span>
                         <h1 class="section-head__title" data-i18n="memes_page.title">梗列表</h1>
                         <p class="section-head__copy" data-i18n="memes_page.subtitle">按修仙等级排序, 搜索你熟悉的B站梗</p>
-                        <p class="memes-hero__count"><span data-i18n="memes_page.total">已收录</span> <strong id="memes-total-count">0</strong> <span data-i18n="memes_page.totalSuffix">个梗</span></p>
+                        <p class="memes-hero__count"><span data-i18n="memes_page.total">已收录</span> <strong id="memes-total-count" data-live-number>0</strong> <span data-i18n="memes_page.totalSuffix">个梗</span></p>
                     </div>
                     <div class="memes-search">
                         <label class="u-sr-only" for="memes-search-input" data-i18n="memes_page.searchLabel">搜索梗</label>
@@ -109,7 +110,7 @@
                 <div class="panel__inner memes-toolbar__inner">
                     <div class="memes-toolbar__meta">
                         <span class="section-head__eyebrow" data-i18n="memes_page.filterState">筛选状态</span>
-                        <p class="memes-toolbar__results"><strong id="memes-results-count">0</strong> <span data-i18n="memes_page.results">个结果</span></p>
+                        <p class="memes-toolbar__results"><strong id="memes-results-count" data-live-number>0</strong> <span data-i18n="memes_page.results">个结果</span></p>
                     </div>
                     <div class="memes-toolbar__sort" id="memes-sort-controls"></div>
                     <div class="memes-toolbar__tags" id="memes-tag-controls"></div>
@@ -166,6 +167,7 @@
     <script src="js/i18n.js"></script>
     <script src="js/data.js"></script>
     <script src="js/nav.js"></script>
+    <script src="js/motion.js"></script>
     <script src="js/memes.js"></script>
 </body>
 </html>

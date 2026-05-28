@@ -131,6 +131,11 @@ input {
     0 18px 60px rgba(0, 0, 0, 0.18),
     inset 0 0 0 1px var(--line-soft);
   overflow: hidden;
+  transition:
+    transform var(--duration-fast) var(--ease-spring),
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease,
+    background var(--duration-normal) ease;
 }
 
 .panel::before {
@@ -145,6 +150,10 @@ input {
   position: relative;
   z-index: 1;
   padding: 1.5rem;
+}
+
+.panel:hover {
+  border-color: var(--line-strong);
 }
 
 .pill {
@@ -164,7 +173,8 @@ input {
     transform var(--duration-fast) var(--ease-spring),
     border-color var(--duration-fast) ease,
     background var(--duration-fast) ease,
-    color var(--duration-fast) ease;
+    color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
 }
 
 .pill:hover,
@@ -173,6 +183,7 @@ input {
   border-color: var(--color-secondary);
   background: var(--color-secondary);
   color: var(--color-primary);
+  box-shadow: 0 10px 24px var(--color-shadow);
 }
 
 .btn {
@@ -192,7 +203,8 @@ input {
     transform var(--duration-fast) var(--ease-spring),
     background var(--duration-fast) ease,
     color var(--duration-fast) ease,
-    box-shadow var(--duration-fast) ease;
+    box-shadow var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
 }
 
 .btn:hover {
@@ -226,6 +238,11 @@ input {
   position: relative;
   padding: 1.75rem 1.25rem;
   border-right: 1px solid var(--line-soft);
+  transition: background var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.stat-card:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 62%);
 }
 
 .stat-card:last-child {
@@ -259,6 +276,11 @@ input {
   color: var(--tier-color, var(--color-secondary));
   font: 700 12px/1 var(--font-mono);
   letter-spacing: 0.08em;
+  transition:
+    transform var(--duration-fast) var(--ease-spring),
+    box-shadow var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    background var(--duration-fast) ease;
 }
 
 .tier-badge::before {
@@ -268,6 +290,13 @@ input {
   border-radius: 50%;
   background: currentColor;
   box-shadow: 0 0 16px currentColor;
+}
+
+.motion-reactive.is-hovering .tier-badge,
+.tier-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px color-mix(in srgb, currentColor 20%, transparent);
+  background: color-mix(in srgb, currentColor 10%, transparent);
 }
 
 .tier-badge-lg {
@@ -347,10 +376,12 @@ input {
 
 .site-foot__list a {
   color: var(--ink-soft);
+  transition: color var(--duration-fast) ease, text-shadow var(--duration-fast) ease;
 }
 
 .site-foot__list a:hover {
   color: var(--color-secondary);
+  text-shadow: 0 0 12px var(--color-shadow);
 }
 
 .site-foot__disclaimer {

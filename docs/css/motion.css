@@ -1,0 +1,259 @@
+:root {
+  --motion-pointer-x: 72%;
+  --motion-pointer-y: 18%;
+  --motion-scroll-progress: 0;
+  --motion-scroll-shift: 0px;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: -18%;
+  background:
+    radial-gradient(circle at var(--motion-pointer-x) var(--motion-pointer-y), var(--color-halo), transparent 24%),
+    radial-gradient(circle at calc(100% - var(--motion-pointer-x)) calc(100% - var(--motion-pointer-y)), var(--color-shadow), transparent 30%);
+  opacity: 0.9;
+  pointer-events: none;
+  transform: translate3d(0, calc(var(--motion-scroll-shift) * -0.35), 0);
+  transition: opacity var(--duration-normal) ease, transform 0.18s linear;
+  z-index: -2;
+}
+
+.site-head.astro-5qrshpxv::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-secondary), transparent 72%);
+  box-shadow: 0 0 24px var(--color-halo);
+  opacity: 0.92;
+  pointer-events: none;
+  transform: scaleX(var(--motion-scroll-progress));
+  transform-origin: 0 50%;
+}
+
+.motion-section {
+  position: relative;
+  --section-progress: 0;
+}
+
+.motion-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(18rem, 44%);
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-secondary), transparent 85%);
+  box-shadow: 0 0 18px transparent;
+  opacity: calc(0.2 + (var(--section-progress) * 0.9));
+  transform: scaleX(calc(0.24 + (var(--section-progress) * 0.76)));
+  transform-origin: 0 50%;
+  transition:
+    opacity var(--duration-fast) ease,
+    transform var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-fast) ease;
+}
+
+.motion-section.is-current::before {
+  opacity: 0.94;
+  transform: scaleX(1);
+  box-shadow: 0 0 18px var(--color-halo);
+}
+
+.motion-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--color-secondary) 10%, transparent), transparent 48%);
+  opacity: calc(var(--section-progress) * 0.32);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.22s linear;
+}
+
+.motion-reveal {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0) scale(0.985);
+  transition:
+    opacity 0.72s ease,
+    transform 0.9s var(--ease-spring);
+  transition-delay: var(--motion-delay, 0ms);
+}
+
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.section-head.motion-reveal {
+  transform: translate3d(0, 24px, 0);
+}
+
+.section-head.motion-reveal .section-head__eyebrow::before {
+  transform: scaleX(0.24);
+  transform-origin: 0 50%;
+  transition: transform 0.7s var(--ease-spring), box-shadow var(--duration-fast) ease;
+}
+
+.section-head.motion-reveal .section-head__title,
+.section-head.motion-reveal .section-head__copy {
+  transform: translate3d(0, 12px, 0);
+  opacity: 0;
+  transition:
+    transform 0.9s var(--ease-spring),
+    opacity 0.72s ease;
+}
+
+.section-head.motion-reveal.is-visible .section-head__eyebrow::before {
+  transform: scaleX(1);
+  box-shadow: 0 0 16px var(--color-halo);
+}
+
+.section-head.motion-reveal.is-visible .section-head__title,
+.section-head.motion-reveal.is-visible .section-head__copy {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+.section-head.motion-reveal.is-visible .section-head__title {
+  text-shadow: 0 0 22px var(--color-shadow);
+}
+
+.motion-reactive {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.motion-reactive > :not(.motion-glow-layer) {
+  position: relative;
+  z-index: 2;
+}
+
+.motion-glow-layer {
+  position: absolute;
+  inset: -20%;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at var(--motion-focus-x, 50%) var(--motion-focus-y, 50%), color-mix(in srgb, var(--color-secondary) 28%, transparent), transparent 34%),
+    linear-gradient(135deg, transparent 0%, color-mix(in srgb, var(--color-secondary) 12%, transparent) 48%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(var(--motion-drift-x, 0px), var(--motion-drift-y, 0px), 0) scale(1.04);
+  transition:
+    opacity var(--duration-fast) ease,
+    transform 0.16s linear;
+  z-index: 1;
+}
+
+.motion-reactive.is-hovering .motion-glow-layer {
+  opacity: 0.88;
+}
+
+.motion-reactive.is-hovering {
+  box-shadow:
+    0 24px 56px var(--color-shadow),
+    inset 0 0 0 1px var(--line-strong);
+}
+
+.motion-reactive.is-hovering .section-head__title,
+.motion-reactive.is-hovering .meme-card__name,
+.motion-reactive.is-hovering .meme-related-card__name,
+.motion-reactive.is-hovering .contributors-podium__name,
+.motion-reactive.is-hovering .home-ranking-row__name {
+  text-shadow: 0 0 20px var(--color-shadow);
+}
+
+.motion-reactive.is-pressed,
+.btn.is-pressed,
+.pill.is-pressed,
+.memes-pagination__btn.is-pressed {
+  filter: brightness(1.08);
+}
+
+[data-live-number] {
+  display: inline-block;
+  transform-origin: 50% 60%;
+}
+
+[data-live-number].is-live-bumping {
+  animation: live-number-bump 0.34s var(--ease-spring);
+}
+
+.motion-click-ring {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--color-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 18px var(--color-halo);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: motion-click-ring 0.56s cubic-bezier(.22, 1, .36, 1) forwards;
+  z-index: 80;
+}
+
+@keyframes motion-click-ring {
+  0% {
+    opacity: 0.92;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(5.2);
+  }
+}
+
+@keyframes live-number-bump {
+  0% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 0 transparent;
+  }
+
+  40% {
+    transform: translateY(-2px) scale(1.08);
+    text-shadow: 0 0 14px var(--color-halo);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 0 transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after,
+  .site-head.astro-5qrshpxv::after,
+  .motion-section::before,
+  .motion-reveal,
+  .section-head.motion-reveal .section-head__eyebrow::before,
+  .section-head.motion-reveal .section-head__title,
+  .section-head.motion-reveal .section-head__copy,
+  .motion-glow-layer,
+  [data-live-number].is-live-bumping,
+  .motion-click-ring {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .motion-reveal,
+  .section-head.motion-reveal .section-head__title,
+  .section-head.motion-reveal .section-head__copy {
+    opacity: 1 !important;
+  }
+
+  .motion-glow-layer,
+  body::after {
+    display: none;
+  }
+
+  .site-head.astro-5qrshpxv::after {
+    opacity: 0.4;
+  }
+}
