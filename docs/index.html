@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/motion.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body class="page-home">
@@ -115,15 +116,15 @@
                     </div>
                     <div class="stats-grid">
                         <article class="stat-card">
-                            <span class="stat-card__value" id="stat-total-memes">0</span>
+                            <span class="stat-card__value" id="stat-total-memes" data-live-number>0</span>
                             <span class="stat-card__label" data-i18n="stats.memes">收录梗数</span>
                         </article>
                         <article class="stat-card">
-                            <span class="stat-card__value" id="stat-total-contributors">0</span>
+                            <span class="stat-card__value" id="stat-total-contributors" data-live-number>0</span>
                             <span class="stat-card__label" data-i18n="stats.contributors">贡献者</span>
                         </article>
                         <article class="stat-card">
-                            <span class="stat-card__value" id="stat-total-videos">0</span>
+                            <span class="stat-card__value" id="stat-total-videos" data-live-number>0</span>
                             <span class="stat-card__label" data-i18n="stats.videos">收录视频</span>
                         </article>
                     </div>
@@ -139,7 +140,6 @@
             </div>
 
             <div class="stair-stage panel">
-                <div class="stair-stage__header" data-i18n="tierSystem.stageHeader">Tier Ascent</div>
                 <div class="stair-stage__body" id="js-stair-stage-body">
                     <div class="stair-scene">
                         <div class="stair-celestial" aria-label="关于等级体系">
@@ -153,10 +153,129 @@
                             </div>
                         </div>
 
-                        <div class="stair-cloud-band" aria-hidden="true">
-                            <svg viewBox="0 0 1000 200" preserveAspectRatio="none">
-                                <path d="M 0 200 L 0 150 C 8 142, 18 138, 28 142 C 38 110, 58 95, 80 105 C 95 70, 130 50, 160 80 C 175 60, 200 65, 215 95 C 230 78, 250 82, 260 110 C 285 60, 330 35, 365 70 C 380 90, 400 88, 415 105 C 440 50, 480 30, 510 75 C 525 100, 545 95, 555 115 C 575 70, 615 75, 640 100 C 660 65, 695 60, 720 95 C 740 80, 765 84, 775 110 C 795 60, 840 50, 870 90 C 890 110, 910 105, 925 120 C 945 95, 975 100, 990 130 C 996 138, 1000 142, 1000 145 L 1000 200 Z"></path>
-                            </svg>
+                        <div class="stair-masonry" aria-hidden="true">
+                            <div class="stair-masonry__row">
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                            <div class="stair-masonry__row stair-masonry__row--offset">
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                            <div class="stair-masonry__row">
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                            <div class="stair-masonry__row stair-masonry__row--offset">
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+
+                        <div class="stair-dressing" aria-hidden="true">
+                            <div class="stair-dressing__garden">
+                                <div class="stair-planter stair-planter--bush">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--cluster">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--fan">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--cluster">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--bush">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--reed">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--fan">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--cluster">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                                <div class="stair-planter stair-planter--reed">
+                                    <div class="stair-planter__foliage">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="stair-planter__pot"></div>
+                                </div>
+                            </div>
+                            <div class="stair-cat">
+                                <svg class="stair-cat__svg" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <defs>
+                                        <linearGradient id="stair-cat-fur-gradient" x1="0" y1="0" x2="0" y2="1">
+                                            <stop class="stair-cat__grad-stop stair-cat__grad-stop--light" offset="0%"/>
+                                            <stop class="stair-cat__grad-stop stair-cat__grad-stop--mid" offset="58%"/>
+                                            <stop class="stair-cat__grad-stop stair-cat__grad-stop--dark" offset="100%"/>
+                                        </linearGradient>
+                                        <linearGradient id="stair-cat-tail-gradient" x1="0" y1="0" x2="1" y2="1">
+                                            <stop class="stair-cat__grad-stop stair-cat__grad-stop--tail-light" offset="0%"/>
+                                            <stop class="stair-cat__grad-stop stair-cat__grad-stop--tail-mid" offset="62%"/>
+                                            <stop class="stair-cat__grad-stop stair-cat__grad-stop--tail-dark" offset="100%"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <g class="stair-cat__tail-group">
+                                        <path class="stair-cat__tail-shape" d="M121 124C136 118 150 108 161 95C170 84 175 70 175 59C175 51 172 47 168 47C164 47 162 54 161 63C159 78 154 93 147 107C141 119 135 129 133 137C132 143 134 148 138 150C143 152 150 149 156 143C167 132 174 120 178 107C181 96 181 87 179 78C177 70 173 67 171 69C169 71 168 76 167 84C165 97 160 110 152 121C146 129 140 133 134 133C129 133 127 130 126 124Z" fill="url(#stair-cat-tail-gradient)"/>
+                                        <path class="stair-cat__tail-patch" d="M170 55C173 53 176 53 178 55C180 58 180 62 178 66C174 63 172 59 170 55Z"/>
+                                        <path class="stair-cat__tail-highlight" d="M153 91C158 82 162 73 164 65C165 61 166 59 168 59C170 60 170 63 169 67C166 77 162 87 156 96C152 102 148 103 147 101C146 99 148 95 153 91Z"/>
+                                    </g>
+                                    <g class="stair-cat__body-group">
+                                        <path class="stair-cat__body-shape" d="M109 152C103 152 97 151 92 149C84 145 78 139 74 129C70 119 69 106 69 91C69 76 71 62 76 52C82 42 93 37 109 37C125 37 136 42 142 52C147 62 149 76 149 91C149 106 148 119 144 129C140 139 134 145 126 149C121 151 115 152 109 152Z" fill="url(#stair-cat-fur-gradient)"/>
+                                        <path class="stair-cat__body-patch" d="M113 146C118 143 123 136 126 127C129 116 129 103 128 90C127 77 125 64 120 54C118 66 117 80 117 95C117 112 116 128 113 146Z"/>
+                                        <path class="stair-cat__neck-shadow" d="M97 78C101 75 106 73 109 73C112 73 117 75 121 78C119 84 118 90 118 97C118 103 118 109 119 115C115 117 112 118 109 118C106 118 103 117 99 115C100 109 100 103 100 97C100 90 99 84 97 78Z"/>
+                                        <path class="stair-cat__spine-line" d="M109 43C109 60 109 77 109 94C109 112 109 130 109 149"/>
+                                        <path class="stair-cat__hip-line stair-cat__hip-line--left" d="M96 137C93 142 92 147 91 151"/>
+                                        <path class="stair-cat__hip-line stair-cat__hip-line--right" d="M122 137C125 142 126 147 127 151"/>
+                                        <path class="stair-cat__body-highlight" d="M123 49C127 58 130 71 131 85C132 99 132 113 129 124C127 133 124 136 121 136C118 135 117 131 119 126C121 116 121 103 120 89C119 74 117 61 114 51C113 47 114 44 117 43C119 43 121 45 123 49Z"/>
+                                        <path class="stair-cat__fur-streak stair-cat__fur-streak--a" d="M101 79C101 91 101 105 100 121"/>
+                                        <path class="stair-cat__fur-streak stair-cat__fur-streak--b" d="M95 84C95 96 95 110 95 126"/>
+                                        <path class="stair-cat__fur-streak stair-cat__fur-streak--c" d="M117 80C118 92 118 106 117 122"/>
+                                        <path class="stair-cat__paw-shape stair-cat__paw-shape--left" d="M94 149C94 144 97 141 101 141C105 141 108 144 108 149V154H94V149Z" fill="url(#stair-cat-fur-gradient)"/>
+                                        <path class="stair-cat__paw-shape stair-cat__paw-shape--right" d="M110 149C110 144 113 141 117 141C121 141 124 144 124 149V154H110V149Z" fill="url(#stair-cat-fur-gradient)"/>
+                                    </g>
+                                    <g class="stair-cat__head-group">
+                                        <path class="stair-cat__ear-shape stair-cat__ear-shape--left" d="M98 44L101 8L108 45Z" fill="url(#stair-cat-fur-gradient)"/>
+                                        <path class="stair-cat__ear-shape stair-cat__ear-shape--right" d="M110 45L117 8L120 44Z" fill="url(#stair-cat-fur-gradient)"/>
+                                        <path class="stair-cat__head-shape" d="M109 77C101 77 95 71 95 63C95 55 101 49 109 49C117 49 123 55 123 63C123 71 117 77 109 77Z" fill="url(#stair-cat-fur-gradient)"/>
+                                        <path class="stair-cat__face-patch" d="M109 75C103 75 99 71 99 65C99 59 103 55 109 55C115 55 119 59 119 65C119 71 115 75 109 75Z"/>
+                                        <path class="stair-cat__head-highlight" d="M117 53C119 56 120 60 120 64C120 67 119 70 117 71C115 72 114 71 114 68C114 64 113 59 111 54C110 51 111 49 113 49C114 49 116 50 117 53Z"/>
+                                        <path class="stair-cat__head-seam" d="M96 65C99 67 104 68 109 68C114 68 119 67 122 65"/>
+                                    </g>
+                                </svg>
+                            </div>
                         </div>
 
                         <div class="stair-stairs" id="js-stair-canvas"></div>
@@ -265,6 +384,7 @@
     <script src="js/i18n.js"></script>
     <script src="js/data.js"></script>
     <script src="js/nav.js"></script>
+    <script src="js/motion.js"></script>
     <script type="module" src="js/index.js"></script>
 </body>
 </html>

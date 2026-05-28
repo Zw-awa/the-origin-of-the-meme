@@ -2,33 +2,79 @@
   position: relative;
   min-height: calc(100vh - var(--nav-height));
   display: grid;
-  place-items: center;
+  align-items: end;
   overflow: hidden;
+  isolation: isolate;
+  padding: clamp(2rem, 6vw, 4rem) 0 clamp(2.5rem, 8vh, 5rem);
+}
+
+.home-hero::before,
+.home-hero::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.home-hero::before {
+  inset: 4% 0 18%;
+  background:
+    radial-gradient(circle at 18% 24%, color-mix(in srgb, var(--color-secondary) 10%, transparent), transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 36%, color-mix(in srgb, var(--color-primary) 16%, transparent) 100%);
+  opacity: 0.92;
+  transform: translateY(calc(var(--motion-scroll-shift) * -0.25));
+}
+
+.home-hero::after {
+  inset: auto -6% 8% auto;
+  width: min(34vw, 420px);
+  height: min(34vw, 420px);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-secondary) 14%, transparent) 0%, transparent 64%);
+  border-radius: 50%;
+  opacity: 0.42;
+  filter: blur(14px);
+  transform: translateY(calc(var(--motion-scroll-shift) * 0.35));
 }
 
 .home-hero__frame {
   position: relative;
   z-index: 2;
   width: min(100%, 70rem);
-  padding: clamp(2rem, 7vw, 5rem);
-  border: 1px solid var(--line-strong);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(0.4rem, 2vw, 1.25rem) 0;
+  border: 0;
   background:
-    linear-gradient(135deg, var(--color-shadow), transparent 34%),
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 25%),
-    var(--surface-2);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 58%, transparent 100%);
+  box-shadow: none;
+  transition:
+    transform var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
+}
+
+.home-hero__frame::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--color-secondary) 18%, var(--color-secondary) 82%, transparent);
+  pointer-events: none;
+  opacity: 0.75;
 }
 
 .home-hero__title {
-  margin: 0.45rem 0 0.9rem;
+  margin: 0.25rem 0 0.8rem;
   font: 400 clamp(4.4rem, 12vw, 9rem)/0.9 var(--font-display);
   letter-spacing: 0.08em;
   text-wrap: balance;
+  text-shadow: 0 0 32px transparent;
+  transition: text-shadow var(--duration-fast) ease;
+  max-width: min(12ch, 100%);
 }
 
 .home-hero__subtitle {
-  margin: 0;
-  max-width: 46rem;
+  margin: 0 0 0.2rem;
+  max-width: 38rem;
   color: var(--ink-soft);
   font-size: clamp(1.05rem, 2vw, 1.3rem);
 }
@@ -37,18 +83,26 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: 2rem;
+  margin-top: 1.6rem;
 }
 
 .home-hero__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1.4rem;
   color: var(--color-dim);
   font: 700 11px/1 var(--font-mono);
   letter-spacing: 0.22em;
   text-transform: uppercase;
+}
+
+.home-hero__frame:hover .home-hero__title {
+  text-shadow: 0 0 32px var(--color-shadow);
+}
+
+.home-hero__frame:hover {
+  transform: translateY(-2px);
 }
 
 .home-hero__danmaku {
@@ -91,30 +145,37 @@ html.theme-contrasted .home-hero__danmaku--back span {
 }
 
 .home-tiers .stair-stage {
-  overflow: hidden;
+  overflow: visible;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
-.stair-stage__header {
-  position: relative;
-  z-index: 2;
-  padding: 0.6rem 1rem;
-  background: var(--color-secondary);
-  color: var(--color-primary);
-  font: 700 11px/1 var(--font-mono);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
+.home-tiers .stair-stage::before {
+  display: none;
+}
+
+.home-tiers .stair-stage.motion-section::after {
+  display: none;
 }
 
 .stair-stage__body {
   position: relative;
   height: 760vh;
+  border-top: 1px solid color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-secondary) 32%, transparent);
+  background:
+    linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--color-secondary) 4%, transparent) 24%, color-mix(in srgb, var(--color-secondary) 3%, transparent) 72%, transparent 100%);
 }
 
 .stair-scene {
   position: sticky;
   top: var(--nav-height);
   height: calc(100vh - var(--nav-height));
-  overflow: hidden;
+  overflow: visible;
   perspective: 1800px;
   perspective-origin: 50% 50%;
 }
@@ -127,47 +188,74 @@ html.theme-contrasted .home-hero__danmaku--back span {
     linear-gradient(var(--line-soft) 1px, transparent 1px),
     linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
   background-size: 40px 40px;
-  opacity: 0.5;
+  opacity: 0.22;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
   pointer-events: none;
 }
 
 .stair-celestial {
   position: absolute;
-  top: 3vh;
+  top: -18vh;
   left: 50%;
   transform: translateX(-50%);
-  width: min(42vh, 520px);
-  height: min(42vh, 520px);
+  width: min(148vh, 2100px);
+  height: min(148vh, 2100px);
   border-radius: 50%;
-  background: var(--color-secondary);
-  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-secondary) 18%, transparent);
+  color: color-mix(in srgb, var(--color-primary) 82%, transparent);
   overflow: hidden;
   isolation: isolate;
-  z-index: 4;
+  z-index: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 3.2rem 3.8rem;
+  padding: min(26vh, 360px) 3.8rem 0;
+  filter: blur(16px);
+  opacity: 0.58;
+  transform: translateX(-50%);
+}
+
+.stair-celestial::before,
+.stair-celestial::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.stair-celestial::before {
+  background:
+    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--color-secondary) 24%, transparent), transparent 48%),
+    radial-gradient(circle at 50% 58%, color-mix(in srgb, var(--color-secondary) 8%, transparent), transparent 74%);
+}
+
+.stair-celestial::after {
+  inset: 9%;
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 18%, transparent);
+  opacity: 0.16;
 }
 
 .stair-celestial__stripes {
   position: absolute;
-  top: 50%;
+  top: 43%;
   left: 0;
   width: 100%;
-  height: 50%;
+  height: 42%;
   overflow: hidden;
+  opacity: 0.66;
 }
 
 .stair-celestial__stripe {
   position: absolute;
   left: 0;
   width: 100%;
-  background: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 74%, transparent);
   border-radius: 1px;
   animation: stair-stripe-flow var(--dur, 4s) linear infinite;
   animation-delay: var(--delay, 0s);
-  height: 14px;
+  height: 16px;
+  filter: blur(2px);
 }
 
 @keyframes stair-stripe-flow {
@@ -178,8 +266,11 @@ html.theme-contrasted .home-hero__danmaku--back span {
 .stair-celestial__text {
   position: relative;
   z-index: 2;
-  margin-top: -10%;
+  margin-top: 0;
+  width: min(34rem, 62vw);
   text-align: center;
+  opacity: 0.18;
+  transform: translateY(6%);
 }
 
 .stair-celestial__title {
@@ -192,38 +283,399 @@ html.theme-contrasted .home-hero__danmaku--back span {
 
 .stair-celestial__text p {
   margin: 0.35rem 0;
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-.stair-cloud-band {
+.stair-masonry {
   position: absolute;
-  top: 46vh;
-  left: 0;
-  width: 100%;
-  height: 14vh;
-  z-index: 3;
+  top: 31vh;
+  left: 50%;
+  width: min(94vw, 1500px);
+  height: 20vh;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: grid;
+  align-content: start;
+  gap: 0;
+  padding: clamp(0.7rem, 1.8vh, 1.35rem) 0 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.stair-masonry::before,
+.stair-masonry::after {
+  display: none;
+}
+
+.stair-masonry__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 0;
+  height: clamp(1.5rem, 3.2vh, 2.35rem);
+  padding-inline: 0;
+}
+
+.stair-masonry__row--offset {
+  width: 106.25%;
+  grid-template-columns: repeat(17, minmax(0, 1fr));
+  transform: translateX(-3.125%);
+}
+
+.stair-masonry__row span {
+  position: relative;
+  display: block;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-white) 8%, var(--color-secondary)), color-mix(in srgb, var(--color-secondary) 84%, var(--color-primary)));
+  box-shadow:
+    inset 0 -3px 0 color-mix(in srgb, var(--color-primary) 78%, transparent),
+    inset -2px 0 0 color-mix(in srgb, var(--color-primary) 62%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--color-white) 10%, transparent);
+}
+
+.stair-masonry__row span::before,
+.stair-masonry__row span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   pointer-events: none;
 }
 
-.stair-cloud-band svg {
+.stair-masonry__row span::before {
+  background:
+    linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--color-primary) 22%, transparent) 9%, transparent 9.5%, transparent 49%, color-mix(in srgb, var(--color-primary) 18%, transparent) 49.5%, transparent 50%, transparent 100%);
+  opacity: 0.92;
+}
+
+.stair-masonry__row span::after {
+  inset: auto 0 -28%;
+  height: 34%;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 66%, transparent), transparent);
+  clip-path: polygon(8% 0, 92% 0, 84% 100%, 16% 100%);
+  opacity: 0.94;
+}
+
+.stair-dressing {
+  --plant-outline: color-mix(in srgb, var(--color-primary) 88%, transparent);
+  --foliage-a: color-mix(in srgb, var(--color-white) 18%, var(--color-secondary));
+  --foliage-b: color-mix(in srgb, var(--color-secondary) 82%, var(--color-primary) 18%);
+  --foliage-c: color-mix(in srgb, var(--color-secondary) 64%, var(--color-primary) 36%);
+  --pot-fill: color-mix(in srgb, var(--color-secondary) 58%, var(--color-primary) 42%);
+  --cat-outline: color-mix(in srgb, var(--color-primary) 88%, transparent);
+  --cat-eye: #e4c55c;
+  --cat-fur-main: color-mix(in srgb, var(--color-primary) 94%, transparent);
+  --cat-fur-secondary: color-mix(in srgb, var(--color-primary) 78%, var(--color-secondary) 22%);
+  --cat-patch: color-mix(in srgb, var(--color-white) 16%, var(--color-secondary) 84%);
+  position: absolute;
+  top: 17vh;
+  left: 6%;
+  width: min(88vw, 76rem);
+  height: 14vh;
+  transform: none;
   display: block;
-  width: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+html.theme-contrasted .stair-dressing {
+  --cat-eye: #071521;
+  --cat-fur-main: #f0933f;
+  --cat-fur-secondary: #fff3e9;
+  --cat-patch: #fffdf8;
+}
+
+html.theme-contrasted .stair-cat__body-patch,
+html.theme-contrasted .stair-cat__face-patch,
+html.theme-contrasted .stair-cat__tail-patch {
+  opacity: 0.9;
+}
+
+html:not(.theme-contrasted) .stair-dressing {
+  --cat-fur-main: #09090b;
+  --cat-fur-secondary: #09090b;
+  --cat-fur-light: #1a1d22;
+  --cat-fur-mid: #101215;
+  --cat-fur-deep: #060608;
+  --cat-patch: #0d0d10;
+  --cat-sheen: rgba(86, 95, 112, 0.24);
+  --cat-sheen-line: rgba(104, 112, 128, 0.22);
+}
+
+html.theme-contrasted .stair-dressing {
+  --cat-fur-light: #ffd4ab;
+  --cat-fur-mid: #f39a4b;
+  --cat-fur-deep: #c96c21;
+  --cat-sheen: rgba(255, 255, 255, 0.34);
+  --cat-sheen-line: rgba(255, 255, 255, 0.26);
+}
+
+.stair-dressing::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2rem;
+  height: 0.5rem;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-primary) 36%, transparent) 10%, color-mix(in srgb, var(--color-primary) 36%, transparent) 90%, transparent);
+  opacity: 0.42;
+}
+
+.stair-dressing__garden {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(40vw, 36rem);
   height: 100%;
 }
 
-.stair-cloud-band path {
-  fill: var(--color-secondary);
-  filter: drop-shadow(0 0 20px var(--color-halo));
+.stair-planter {
+  position: absolute;
+  bottom: 0;
+  width: clamp(4.8rem, 8vw, 7.6rem);
+  height: 100%;
+  flex: 0 0 auto;
+  --plant-width: 1;
+  --plant-height: 1;
+  --plant-shift: 0rem;
+  --pot-scale: 1;
+}
+
+.stair-dressing__garden .stair-planter:nth-child(1) { left: 0; z-index: 3; bottom: 0; --plant-width: 0.9; --plant-height: 0.62; --plant-shift: -0.05rem; }
+.stair-dressing__garden .stair-planter:nth-child(2) { left: 3%; z-index: 5; bottom: 0; --plant-width: 0.94; --plant-height: 0.88; }
+.stair-dressing__garden .stair-planter:nth-child(3) { left: 8%; z-index: 7; bottom: 0; --plant-width: 1.02; --plant-height: 1.48; --plant-shift: 0.08rem; }
+.stair-dressing__garden .stair-planter:nth-child(4) { left: 14%; z-index: 6; bottom: 0; --plant-width: 0.98; --plant-height: 1.02; }
+.stair-dressing__garden .stair-planter:nth-child(5) { left: 18%; z-index: 8; bottom: 0; --plant-width: 1.04; --plant-height: 1.66; --plant-shift: 0.15rem; }
+.stair-dressing__garden .stair-planter:nth-child(6) { left: 24%; z-index: 4; bottom: 0; --plant-width: 0.82; --plant-height: 0.7; }
+.stair-dressing__garden .stair-planter:nth-child(7) { left: 27%; z-index: 9; bottom: 0; --plant-width: 1.06; --plant-height: 1.82; --plant-shift: 0.2rem; }
+.stair-dressing__garden .stair-planter:nth-child(8) { left: 34%; z-index: 5; bottom: 0; --plant-width: 0.96; --plant-height: 1.08; }
+.stair-dressing__garden .stair-planter:nth-child(9) { left: 38%; z-index: 2; bottom: 0; --plant-width: 0.74; --plant-height: 0.58; }
+
+.stair-planter__pot {
+  position: absolute;
+  left: 50%;
+  bottom: -0.8rem;
+  width: 62%;
+  height: 24%;
+  transform: translateX(-50%) scaleX(var(--pot-scale));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-white) 10%, var(--pot-fill)), color-mix(in srgb, var(--pot-fill) 86%, var(--color-primary)));
+  border: 3px solid var(--plant-outline);
+  border-bottom-width: 4px;
+  clip-path: polygon(10% 0, 90% 0, 82% 100%, 18% 100%);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--color-primary) 44%, transparent);
+}
+
+.stair-planter__pot::before,
+.stair-planter__pot::after {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  pointer-events: none;
+}
+
+.stair-planter__pot::before {
+  top: 18%;
+  height: 2px;
+  background: color-mix(in srgb, var(--color-primary) 72%, transparent);
+  opacity: 0.72;
+}
+
+.stair-planter__pot::after {
+  top: 0;
+  height: 26%;
+  border-top: 2px solid color-mix(in srgb, var(--color-white) 18%, transparent);
+  opacity: 0.55;
+}
+
+.stair-planter__foliage {
+  position: absolute;
+  inset: 0 0 18%;
+  transform-origin: 50% 100%;
+  transform: translateY(var(--plant-shift)) scale(var(--plant-width), var(--plant-height));
+}
+
+.stair-planter__foliage span {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform-origin: 50% 100%;
+  border: 3px solid var(--plant-outline);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.stair-planter__foliage span::before,
+.stair-planter__foliage span::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.stair-planter__foliage span::before {
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: color-mix(in srgb, var(--color-primary) 62%, transparent);
+  opacity: 0.7;
+}
+
+.stair-planter__foliage span::after {
+  left: 18%;
+  right: 18%;
+  top: 18%;
+  height: 2px;
+  background: color-mix(in srgb, var(--color-white) 16%, transparent);
+  opacity: 0.35;
+}
+
+.stair-planter--fan .stair-planter__foliage span {
+  width: 18%;
+  height: 58%;
+  border-radius: 999px 999px 0 999px;
+  background: linear-gradient(180deg, var(--foliage-c), var(--foliage-a));
+}
+
+.stair-planter--fan .stair-planter__foliage span:nth-child(1) { transform: translateX(-50%) rotate(-48deg); }
+.stair-planter--fan .stair-planter__foliage span:nth-child(2) { transform: translateX(-50%) rotate(-24deg); }
+.stair-planter--fan .stair-planter__foliage span:nth-child(3) { transform: translateX(-50%) rotate(0deg); height: 68%; }
+.stair-planter--fan .stair-planter__foliage span:nth-child(4) { transform: translateX(-50%) rotate(24deg); }
+.stair-planter--fan .stair-planter__foliage span:nth-child(5) { transform: translateX(-50%) rotate(48deg); }
+
+.stair-planter--bush .stair-planter__foliage span {
+  width: 28%;
+  height: 38%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--foliage-a), var(--foliage-b));
+}
+
+.stair-planter--bush .stair-planter__foliage span:nth-child(1) { left: 22%; bottom: 16%; }
+.stair-planter--bush .stair-planter__foliage span:nth-child(2) { left: 38%; bottom: 28%; width: 30%; height: 44%; }
+.stair-planter--bush .stair-planter__foliage span:nth-child(3) { left: 56%; bottom: 18%; }
+.stair-planter--bush .stair-planter__foliage span:nth-child(4) { left: 32%; bottom: 4%; width: 26%; height: 34%; }
+.stair-planter--bush .stair-planter__foliage span:nth-child(5) { left: 50%; bottom: 0; width: 26%; height: 34%; }
+
+.stair-planter--cluster .stair-planter__foliage span {
+  width: 20%;
+  height: 42%;
+  border-radius: 999px 999px 0 999px;
+  background: linear-gradient(180deg, var(--foliage-a), var(--foliage-c));
+}
+
+.stair-planter--cluster .stair-planter__foliage span:nth-child(1) { transform: translateX(-50%) rotate(-42deg); left: 32%; bottom: 4%; }
+.stair-planter--cluster .stair-planter__foliage span:nth-child(2) { transform: translateX(-50%) rotate(-18deg); left: 42%; bottom: 10%; height: 52%; }
+.stair-planter--cluster .stair-planter__foliage span:nth-child(3) { transform: translateX(-50%) rotate(8deg); left: 52%; bottom: 8%; height: 58%; }
+.stair-planter--cluster .stair-planter__foliage span:nth-child(4) { transform: translateX(-50%) rotate(30deg); left: 62%; bottom: 3%; }
+.stair-planter--cluster .stair-planter__foliage span:nth-child(5) { transform: translateX(-50%) rotate(-8deg); left: 48%; bottom: 0; width: 18%; height: 34%; }
+.stair-planter--cluster .stair-planter__foliage span:nth-child(6) { transform: translateX(-50%) rotate(18deg); left: 56%; bottom: 0; width: 18%; height: 34%; }
+
+.stair-planter--reed .stair-planter__foliage span {
+  width: 12%;
+  height: 72%;
+  border-radius: 999px 999px 0 999px;
+  background: linear-gradient(180deg, var(--foliage-a), var(--foliage-c));
+}
+
+.stair-planter--reed .stair-planter__foliage span:nth-child(1) { transform: translateX(-50%) rotate(-22deg); left: 38%; }
+.stair-planter--reed .stair-planter__foliage span:nth-child(2) { transform: translateX(-50%) rotate(-6deg); left: 48%; height: 84%; }
+.stair-planter--reed .stair-planter__foliage span:nth-child(3) { transform: translateX(-50%) rotate(10deg); left: 58%; height: 78%; }
+.stair-planter--reed .stair-planter__foliage span:nth-child(4) { transform: translateX(-50%) rotate(26deg); left: 68%; height: 64%; }
+
+.stair-cat {
+  position: absolute;
+  right: 8%;
+  bottom: -0.25rem;
+  width: clamp(6.8rem, 10.8vw, 9.1rem);
+  height: clamp(6.2rem, 10.6vw, 7.8rem);
+  z-index: 6;
+  transform-origin: 50% 100%;
+  animation: stair-cat-sway 4.8s ease-in-out infinite;
+}
+
+.stair-cat__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.stair-cat__tail-group {
+  transform-box: fill-box;
+  transform-origin: 126px 123px;
+  animation: stair-cat-tail 2.8s ease-in-out infinite;
+}
+
+.stair-cat__tail-shape,
+.stair-cat__body-shape,
+.stair-cat__head-shape,
+.stair-cat__ear-shape,
+.stair-cat__paw-shape {
+  fill: var(--cat-fur-main);
+}
+
+.stair-cat__grad-stop--light { stop-color: var(--cat-fur-light); }
+.stair-cat__grad-stop--mid { stop-color: var(--cat-fur-mid); }
+.stair-cat__grad-stop--dark { stop-color: var(--cat-fur-deep); }
+.stair-cat__grad-stop--tail-light { stop-color: var(--cat-fur-light); }
+.stair-cat__grad-stop--tail-mid { stop-color: var(--cat-fur-mid); }
+.stair-cat__grad-stop--tail-dark { stop-color: var(--cat-fur-deep); }
+
+.stair-cat__tail-patch {
+  fill: var(--cat-patch);
+  opacity: 0;
+}
+
+.stair-cat__tail-highlight,
+.stair-cat__body-highlight,
+.stair-cat__head-highlight {
+  fill: var(--cat-sheen);
+}
+
+.stair-cat__neck-shadow {
+  fill: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  opacity: 0.72;
+}
+
+.stair-cat__body-patch,
+.stair-cat__face-patch {
+  fill: var(--cat-patch);
+  opacity: 0;
+}
+
+.stair-cat__spine-line,
+.stair-cat__hip-line,
+.stair-cat__fur-streak,
+.stair-cat__head-seam {
+  fill: none;
+  stroke: var(--cat-sheen-line);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.stair-cat__head-highlight {
+  opacity: 0.46;
+}
+
+@keyframes stair-cat-sway {
+  0%, 100% { transform: rotate(-1.5deg) translateY(0); }
+  50% { transform: rotate(1.8deg) translateY(-0.1rem); }
+}
+
+@keyframes stair-cat-tail {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(16deg); }
 }
 
 .stair-stairs {
   position: absolute;
-  top: 18vh;
+  top: 43vh;
   left: 0;
   width: 100%;
-  height: 82vh;
-  z-index: 2;
+  height: 57vh;
+  z-index: 3;
+  overflow: hidden;
 }
 
 .stair-stairs canvas {
@@ -308,28 +760,77 @@ html.theme-contrasted .home-hero__danmaku--back span {
 .home-ranking-list {
   display: grid;
   gap: 0.9rem;
+  perspective: 1200px;
 }
 
 .home-ranking-row {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 1rem;
   align-items: center;
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--line-soft);
-  background: rgba(255, 255, 255, 0.015);
-  transition: transform var(--duration-fast) var(--ease-spring), border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  padding: 1.15rem 0.25rem 1rem;
+  border: 0;
+  background:
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02) 55%, transparent);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
+  transform-origin: 50% 100%;
+}
+
+.home-ranking-row::before,
+.home-ranking-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.home-ranking-row::before {
+  top: 0;
+  height: 1px;
+  width: min(14rem, 36%);
+  background: linear-gradient(90deg, var(--color-secondary), transparent 84%);
+  opacity: 0.42;
+  transform: scaleX(0.32);
+  transform-origin: 0 50%;
+  transition: transform var(--duration-fast) var(--ease-spring), opacity var(--duration-fast) ease;
+}
+
+.home-ranking-row::after {
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong) 18%, var(--line-strong) 82%, transparent);
+  opacity: 0.45;
 }
 
 .home-ranking-row:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-secondary);
-  box-shadow: 0 14px 30px var(--color-shadow);
+  transform: translateX(6px);
+  box-shadow: none;
+}
+
+.home-ranking-row:hover::before {
+  transform: scaleX(1);
+  opacity: 0.92;
+}
+
+.home-ranking-row__name,
+.home-hall-card__title,
+.home-about__title,
+.home-contributor-card strong {
+  transition: letter-spacing var(--duration-fast) ease, text-shadow var(--duration-fast) ease;
+}
+
+.home-ranking-row:hover .home-ranking-row__name,
+.home-contributor-card:hover strong,
+.home-hall-card:hover .home-hall-card__title {
+  letter-spacing: 0.075em;
+  text-shadow: 0 0 18px var(--color-shadow);
 }
 
 .home-ranking-row--placeholder {
   color: var(--ink-soft);
-  border-style: dashed;
+  border-style: none;
 }
 
 .home-ranking-row__rank {
@@ -364,16 +865,48 @@ html.theme-contrasted .home-hero__danmaku--back span {
 
 .home-contributor-card {
   position: relative;
-  padding: 1.4rem;
-  border: 1px solid var(--line-strong);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent), var(--surface-2);
-  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  padding: 1.3rem 0.2rem 1rem;
+  border: 0;
+  background:
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02) 56%, transparent);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
 }
 
 .home-contributor-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-secondary);
-  box-shadow: 0 18px 30px var(--color-shadow);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.home-contributor-card::before,
+.home-contributor-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.home-contributor-card::before {
+  top: 0;
+  width: min(12rem, 44%);
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-secondary), transparent 82%);
+  opacity: 0.42;
+  transform: scaleX(0.36);
+  transform-origin: 0 50%;
+  transition: transform var(--duration-fast) var(--ease-spring), opacity var(--duration-fast) ease;
+}
+
+.home-contributor-card::after {
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong) 20%, var(--line-strong) 80%, transparent);
+  opacity: 0.45;
+}
+
+.home-contributor-card:hover::before {
+  transform: scaleX(1);
+  opacity: 0.92;
 }
 
 .home-contributor-card__rank {
@@ -396,6 +929,12 @@ html.theme-contrasted .home-hero__danmaku--back span {
   height: 68px;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
+}
+
+.home-contributor-card:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 0 26px var(--color-shadow);
 }
 
 .home-contributor-card strong {
@@ -415,6 +954,11 @@ html.theme-contrasted .home-hero__danmaku--back span {
 
 .home-hall-card {
   display: block;
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+
+.home-hall-card:hover {
+  transform: translateY(-4px);
 }
 
 .home-hall-card .panel__inner {
@@ -443,6 +987,22 @@ html.theme-contrasted .home-hero__danmaku--back span {
   text-transform: uppercase;
 }
 
+.home-about__grid article {
+  position: relative;
+  padding-top: 1rem;
+}
+
+.home-about__grid article::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(12rem, 100%);
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-secondary), transparent 80%);
+  opacity: 0.4;
+}
+
 .home-about__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -468,11 +1028,23 @@ html.theme-contrasted .home-hero__danmaku--back span {
   .stair-stage__body {
     height: 640vh;
   }
+
+  .stair-celestial {
+    top: -10vh;
+    width: min(126vh, 1500px);
+    height: min(126vh, 1500px);
+    padding-top: min(22vh, 260px);
+  }
+
+  .stair-masonry {
+    width: min(95vw, 1180px);
+    height: 18vh;
+  }
 }
 
 @media (max-width: 768px) {
   .home-hero__frame {
-    padding: 1.5rem;
+    padding: 1rem 0 0;
   }
 
   .home-hero__title {
@@ -485,23 +1057,67 @@ html.theme-contrasted .home-hero__danmaku--back span {
   }
 
   .stair-celestial {
-    width: min(34vh, 320px);
-    height: min(34vh, 320px);
-    padding: 1.8rem;
+    top: -8vh;
+    width: min(112vh, 980px);
+    height: min(112vh, 980px);
+    padding: min(20vh, 220px) 1.8rem 0;
+    filter: blur(12px);
+    opacity: 0.52;
   }
 
   .stair-celestial__text p {
     font-size: 11px;
   }
 
-  .stair-cloud-band {
-    top: 44vh;
-    height: 9vh;
+  .stair-masonry {
+    top: 34vh;
+    width: min(96vw, 820px);
+    height: 17vh;
+    gap: 0.4rem;
+  }
+
+  .stair-masonry__row {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    height: 1.25rem;
+    gap: 0;
+  }
+
+  .stair-masonry__row--offset {
+    width: 108.3334%;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    transform: translateX(-4.1667%);
+  }
+
+  .stair-dressing {
+    left: 6%;
+    width: min(62vw, 26rem);
+    height: 12vh;
+    top: 20vh;
+  }
+
+  .stair-dressing__garden {
+    width: min(60vw, 20rem);
+  }
+
+  .stair-cat {
+    right: 4%;
+    width: 6.4rem;
+    height: 5.4rem;
+  }
+
+  .stair-dressing__garden {
+    width: min(60vw, 20rem);
+  }
+
+  .stair-cat {
+    right: 4%;
+    width: 6.4rem;
+    height: 5.4rem;
   }
 
   .stair-stairs {
-    top: 16vh;
-    height: 76vh;
+    top: 45vh;
+    height: 47vh;
   }
 
   .tier-plate {
@@ -517,6 +1133,7 @@ html.theme-contrasted .home-hero__danmaku--back span {
   .home-ranking-row {
     grid-template-columns: 1fr;
     justify-items: start;
+    padding-inline: 0;
   }
 
   .home-ranking-row__meta {

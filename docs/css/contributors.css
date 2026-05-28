@@ -3,8 +3,59 @@
   gap: 1rem;
 }
 
+.contributors-hero .panel {
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.contributors-hero .panel::before {
+  display: none;
+}
+
+.contributors-hero .panel::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary) 20%, var(--color-secondary) 80%, transparent);
+  opacity: 0.72;
+}
+
+.contributors-hero__inner {
+  position: relative;
+  max-width: 42rem;
+  padding: clamp(1rem, 3vw, 1.8rem) 0 0.65rem;
+  padding-inline: 0.2rem;
+}
+
+.contributors-hero__inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(14rem, 26%);
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-secondary), transparent 82%);
+  opacity: 0.72;
+}
+
+.contributors-hero .section-head__title {
+  max-width: 10ch;
+  font-size: clamp(3rem, 7vw, 5.1rem);
+  line-height: 0.9;
+  letter-spacing: 0.06em;
+}
+
+.contributors-hero__inner .section-head__copy,
+.contributors-hero__inner > p:not(.contributors-hero__stats) {
+  max-width: 34rem;
+  font-size: 1rem;
+}
+
 .contributors-hero__stats {
-  margin: 0;
+  margin: 0.2rem 0 0;
   color: var(--ink-soft);
   font: 700 12px/1 var(--font-mono);
   letter-spacing: 0.18em;
@@ -26,18 +77,64 @@
   display: grid;
   gap: 1.1rem;
   min-height: 22rem;
-  padding: 1.6rem;
-  border: 1px solid var(--line-strong);
+  padding: 1.45rem 0.25rem 1rem;
+  border: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 35%),
-    var(--surface-2);
-  transition: transform var(--duration-fast) var(--ease-spring), border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02) 55%, transparent);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
 }
 
 .contributors-podium__card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-secondary);
-  box-shadow: 0 18px 32px var(--color-shadow);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.contributors-podium__card::before,
+.contributors-podium__card::after,
+.contributors-rest__card::before,
+.contributors-rest__card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.contributors-podium__card::before,
+.contributors-rest__card::before {
+  top: 0;
+  width: min(12rem, 44%);
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-secondary), transparent 82%);
+  opacity: 0.42;
+  transform: scaleX(0.36);
+  transform-origin: 0 50%;
+  transition: transform var(--duration-fast) var(--ease-spring), opacity var(--duration-fast) ease;
+}
+
+.contributors-podium__card::after,
+.contributors-rest__card::after {
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong) 18%, var(--line-strong) 82%, transparent);
+  opacity: 0.45;
+}
+
+.contributors-podium__card:hover::before,
+.contributors-rest__card:hover::before {
+  transform: scaleX(1);
+  opacity: 0.92;
+}
+
+.contributors-podium__name,
+.contributors-rest__name {
+  transition: letter-spacing var(--duration-fast) ease, text-shadow var(--duration-fast) ease;
+}
+
+.contributors-podium__card:hover .contributors-podium__name,
+.contributors-rest__card:hover .contributors-rest__name {
+  letter-spacing: 0.065em;
+  text-shadow: 0 0 16px var(--color-shadow);
 }
 
 .contributors-podium__badge {
@@ -54,12 +151,11 @@
 }
 
 .contributors-podium__card--champion {
-  transform: scale(1.04);
-  border-width: 2px;
+  transform: scale(1.02);
 }
 
 .contributors-podium__card--champion:hover {
-  transform: scale(1.04) translateY(-4px);
+  transform: scale(1.02) translateY(-2px);
 }
 
 .contributors-podium__profile {
@@ -73,6 +169,13 @@
   height: 120px;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
+}
+
+.contributors-podium__card:hover .contributors-podium__avatar,
+.contributors-rest__card:hover img {
+  transform: scale(1.04);
+  box-shadow: 0 0 24px var(--color-shadow);
 }
 
 .contributors-podium__card--champion .contributors-podium__avatar {
@@ -100,23 +203,26 @@
 }
 
 .contributors-rest__card {
+  position: relative;
   display: grid;
   gap: 0.7rem;
-  padding: 1rem;
-  border: 1px solid var(--line-soft);
-  background: rgba(255, 255, 255, 0.02);
-  transition: transform var(--duration-fast) var(--ease-spring), border-color var(--duration-fast) ease;
+  padding: 1rem 0.2rem 0.9rem;
+  border: 0;
+  background:
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02) 55%, transparent);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
 }
 
 .contributors-rest__card:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: none;
 }
 
 .contributors-rest__card img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
 }
 
 .contributors-rest__name {
@@ -149,6 +255,16 @@
   padding: 1rem;
   border: 1px solid var(--line-soft);
   background: rgba(255, 255, 255, 0.02);
+  transition:
+    transform var(--duration-fast) var(--ease-spring),
+    border-color var(--duration-fast) ease,
+    background var(--duration-fast) ease;
+}
+
+.contributors-how__step:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-secondary);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .contributors-how__num {
@@ -169,6 +285,15 @@
 }
 
 @media (max-width: 840px) {
+  .contributors-hero__inner {
+    padding-top: 0.8rem;
+  }
+
+  .contributors-podium__card,
+  .contributors-rest__card {
+    padding-inline: 0;
+  }
+
   .contributors-how__steps {
     grid-template-columns: 1fr;
   }

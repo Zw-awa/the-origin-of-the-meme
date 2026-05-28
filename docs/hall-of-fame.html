@@ -839,6 +839,9 @@ html.theme-contrasted .theme-hover-orbit--moon { display: none; }
 .site-intro .sb-logo .sb__path {
   opacity: 0 !important; /* 隐藏原拼字，但保留 DOM 元素给 GSAP timeline */
 }
+.site-intro {
+  pointer-events: none;
+}
 /* QR 用 mask 跟随主题色（夜粉/昼蓝）*/
 .sb-qr-code img {
   visibility: hidden;
@@ -1225,6 +1228,44 @@ setInterval(attach, 2000);
     });
   }
   observe();
+})();
+</script>
+<script id="hall-nav-fix">
+(function () {
+  function bindRealNavigation() {
+    var selectors = [
+      '.site-head .sb-logo a',
+      '.site-head .sb-menu a',
+      '.site-foot a'
+    ];
+    var links = document.querySelectorAll(selectors.join(', '));
+
+    links.forEach(function (link) {
+      if (link.dataset.hallNavFixed === 'true') return;
+      link.dataset.hallNavFixed = 'true';
+
+      link.addEventListener('click', function (event) {
+        var href = link.getAttribute('href') || '';
+        if (!href || href.charAt(0) === '#') return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        if (link.target === '_blank') {
+          window.open(link.href, '_blank', 'noopener');
+          return;
+        }
+
+        window.location.assign(link.href);
+      }, true);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindRealNavigation, { once: true });
+  } else {
+    bindRealNavigation();
+  }
 })();
 </script>
 </body></html>

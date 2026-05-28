@@ -10,6 +10,27 @@
         page: 1
     };
 
+    function syncFilterTelemetry() {
+        var root = document.querySelector('.memes-toolbar');
+        var hero = document.querySelector('.memes-hero');
+        if (!root && !hero) return;
+
+        var ratio = state.allMemes.length
+            ? (state.filteredMemes.length / state.allMemes.length)
+            : 0;
+
+        if (root) {
+            root.style.setProperty('--filter-ratio', ratio.toFixed(4));
+            root.dataset.filterState = state.query || state.tag || state.tier !== 'all' || state.sort !== 'rank'
+                ? 'active'
+                : 'idle';
+        }
+
+        if (hero) {
+            hero.style.setProperty('--filter-ratio', ratio.toFixed(4));
+        }
+    }
+
     function debounce(fn, wait) {
         var timer = null;
         return function () {
@@ -150,6 +171,7 @@
         if (!grid || !empty) return;
 
         applyFilters();
+        syncFilterTelemetry();
 
         document.getElementById('memes-total-count').textContent = window.formatNumber(state.allMemes.length);
         document.getElementById('memes-results-count').textContent = window.formatNumber(state.filteredMemes.length);
@@ -197,7 +219,10 @@
             });
         }, { threshold: 0.15 });
 
-        grid.querySelectorAll('.meme-card').forEach(function (card) { observer.observe(card); });
+        grid.querySelectorAll('.meme-card').forEach(function (card, index) {
+            card.style.transitionDelay = (index % 8) * 28 + 'ms';
+            observer.observe(card);
+        });
     }
 
     function renderPagination() {
