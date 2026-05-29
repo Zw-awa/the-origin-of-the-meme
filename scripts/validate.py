@@ -20,7 +20,7 @@ COMPUTED_PATH = str(PROJECT_ROOT / "_data" / "computed.json")
 REPORT_PATH = str(PROJECT_ROOT / "validation-report.md")
 
 BVID_REGEX = re.compile(r"^BV[a-zA-Z0-9]{10}$")
-FILENAME_STEM_REGEX = re.compile(r"^[\u4e00-\u9fff\w\-]+$", re.ASCII)
+FILENAME_STEM_REGEX = re.compile(r"^[\u4e00-\u9fff\w\-！~♂]+$", re.ASCII)
 BASE_BRANCH = os.environ.get("GITHUB_BASE_REF", "main")
 if BASE_BRANCH and not BASE_BRANCH.startswith("origin/"):
     BASE_BRANCH = "origin/" + BASE_BRANCH
@@ -66,7 +66,7 @@ def validate_filename(filepath):
         errors.append("文件名不能为空")
     elif not FILENAME_STEM_REGEX.match(stem):
         errors.append(
-            "文件名只能包含中文字符、英文字母、数字、下划线和连字符"
+            "文件名只能包含中文字符、英文字母、数字、下划线、连字符，以及 ！ ~ ♂"
         )
     return errors
 
